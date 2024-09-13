@@ -13,6 +13,9 @@ const DAMAGE_AMTS := {
 	4: 10
 }
 
+# Test Comment
+# abasfgja;lskdfj;alskdfj CODE HERE
+
 @onready var background_layer: TileMapLayer = $Background
 @onready var attack_layer: TileMapLayer = $Attack
 @onready var base_layer: TileMapLayer = $Base
