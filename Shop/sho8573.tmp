@@ -1,0 +1,263 @@
+[gd_scene load_steps=6 format=4 uid="uid://cs8oonut0l0yb"]
+
+[ext_resource type="Script" path="res://Shop/shop.gd" id="1_swwhu"]
+[ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Resources/piece_tileset.tres" id="2_khg2u"]
+[ext_resource type="PackedScene" uid="uid://bvcwtv6baarij" path="res://Shop/UI Elements/effect_description.tscn" id="3_f1bv0"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="4_n4bp3"]
+[ext_resource type="Texture2D" uid="uid://bxcdxyfku6s71" path="res://Player/coin.png" id="6_syp5b"]
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 432.0
+offset_bottom = 208.0
+script = ExtResource("1_swwhu")
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+anchor_mode = 0
+zoom = Vector2(5.192, 5.192)
+
+[node name="TilemapContainer" type="SubViewportContainer" parent="."]
+layout_mode = 2
+offset_right = 176.0
+offset_bottom = 208.0
+
+[node name="SubViewport" type="SubViewport" parent="TilemapContainer"]
+handle_input_locally = false
+size = Vector2i(176, 208)
+render_target_update_mode = 4
+
+[node name="Background" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
+tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAAAAAAAAAIAAAAEAAAAAAAAAAMAAAAEAAAAAAAAAAQAAAAEAAAAAAAAAAUAAAAEAAAAAAAAAAYAAAAEAAAAAAAAAAcAAAAEAAAAAAAAAAgAAAAEAAAAAAAAAAkAAAAEAAAAAAAAAAoAAAAEAAAAAAAAAAsAAAAEAAAAAAAAAAwAAAAEAAAAAAABAAwAAAAEAAAAAAACAAwAAAAEAAAAAAADAAwAAAAEAAAAAAAEAAwAAAAEAAAAAAAFAAwAAAAEAAAAAAAGAAwAAAAEAAAAAAAHAAwAAAAEAAAAAAAIAAwAAAAEAAAAAAAJAAwAAAAEAAAAAAAKAAwAAAAEAAAAAAAKAAsAAAAEAAAAAAAKAAoAAAAEAAAAAAAKAAkAAAAEAAAAAAAKAAgAAAAEAAAAAAAKAAcAAAAEAAAAAAAKAAYAAAAEAAAAAAAKAAUAAAAEAAAAAAAKAAQAAAAEAAAAAAAKAAMAAAAEAAAAAAAKAAIAAAAEAAAAAAAKAAEAAAAEAAAAAAAKAAAAAAAEAAAAAAAJAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAHAAAAAAAEAAAAAAAGAAAAAAAEAAAAAAAFAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAADAAAAAAAEAAAAAAACAAAAAAAEAAAAAAABAAAAAAAEAAAAAAABAAcAAAAEAAAAAAACAAcAAAAEAAAAAAADAAcAAAAEAAAAAAAEAAcAAAAEAAAAAAAFAAcAAAAEAAAAAAAGAAcAAAAEAAAAAAAHAAcAAAAEAAAAAAAIAAcAAAAEAAAAAAAJAAcAAAAEAAAAAAAFAAgAAAAEAAAAAAAFAAkAAAAEAAAAAAAFAAoAAAAEAAAAAAAFAAsAAAAEAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAFAAMAAAABAAAAAAAGAAMAAAABAAAAAAAGAAIAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAHAAEAAAACAAAAAAAHAAIAAAACAAAAAAAHAAMAAAACAAAAAAAIAAMAAAACAAAAAAAJAAMAAAACAAAAAAAJAAIAAAACAAAAAAAJAAEAAAACAAAAAAAIAAEAAAACAAAAAAAHAAQAAAAAAAEAAAAHAAUAAAAAAAEAAAAHAAYAAAAAAAEAAAAIAAYAAAAAAAEAAAAJAAYAAAAAAAEAAAAJAAUAAAAAAAEAAAAJAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAEAAYAAAABAAEAAAAFAAYAAAABAAEAAAAGAAYAAAABAAEAAAAGAAUAAAABAAEAAAAGAAQAAAABAAEAAAAFAAQAAAABAAEAAAABAAQAAAACAAEAAAABAAUAAAACAAEAAAABAAYAAAACAAEAAAACAAYAAAACAAEAAAADAAYAAAACAAEAAAADAAUAAAACAAEAAAADAAQAAAACAAEAAAACAAQAAAACAAEAAAABAAgAAAAEAAEAAAABAAkAAAAEAAEAAAABAAoAAAAEAAEAAAABAAsAAAAEAAEAAAACAAsAAAAEAAEAAAADAAsAAAAEAAEAAAAEAAsAAAAEAAEAAAAEAAoAAAAEAAEAAAAEAAkAAAAEAAEAAAAEAAgAAAAEAAEAAAADAAgAAAAEAAEAAAACAAgAAAAEAAEAAAACAAkAAAAEAAEAAAACAAoAAAAEAAEAAAADAAoAAAAEAAEAAAADAAkAAAAEAAEAAAAGAAgAAAAEAAEAAAAGAAkAAAAEAAEAAAAGAAoAAAAEAAEAAAAGAAsAAAAEAAEAAAAHAAsAAAAEAAEAAAAIAAsAAAAEAAEAAAAJAAsAAAAEAAEAAAAJAAoAAAAEAAEAAAAIAAoAAAAEAAEAAAAHAAoAAAAEAAEAAAAHAAkAAAAEAAEAAAAIAAkAAAAEAAEAAAAJAAkAAAAEAAEAAAAJAAgAAAAEAAEAAAAIAAgAAAAEAAEAAAAHAAgAAAAEAAEAAAACAAIAAAAEAAEAAAAFAAIAAAAEAAEAAAAIAAIAAAAEAAEAAAAIAAUAAAAEAAEAAAAFAAUAAAAEAAEAAAACAAUAAAAEAAEAAAA=")
+tile_set = ExtResource("2_khg2u")
+
+[node name="Base" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
+tile_set = ExtResource("2_khg2u")
+
+[node name="Effect" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
+tile_set = ExtResource("2_khg2u")
+
+[node name="PlayerPosition" type="Control" parent="."]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 180.0
+offset_right = 190.0
+offset_bottom = 208.0
+grow_horizontal = 0
+
+[node name="EffectPrices" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 49.0
+offset_right = 160.0
+offset_bottom = 109.0
+theme = ExtResource("4_n4bp3")
+
+[node name="Row1" type="HBoxContainer" parent="EffectPrices"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="PriceBox" type="HBoxContainer" parent="EffectPrices/Row1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price1" type="RichTextLabel" parent="EffectPrices/Row1/PriceBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]4"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row1/PriceBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="PriceBox2" type="HBoxContainer" parent="EffectPrices/Row1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price2" type="RichTextLabel" parent="EffectPrices/Row1/PriceBox2"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]4"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row1/PriceBox2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="PriceBox3" type="HBoxContainer" parent="EffectPrices/Row1"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price3" type="RichTextLabel" parent="EffectPrices/Row1/PriceBox3"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]4"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row1/PriceBox3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="EffectPrices"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="PriceBox" type="HBoxContainer" parent="EffectPrices/Row2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price1" type="RichTextLabel" parent="EffectPrices/Row2/PriceBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]6"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row2/PriceBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="PriceBox2" type="HBoxContainer" parent="EffectPrices/Row2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price2" type="RichTextLabel" parent="EffectPrices/Row2/PriceBox2"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]6"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row2/PriceBox2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="PriceBox3" type="HBoxContainer" parent="EffectPrices/Row2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price3" type="RichTextLabel" parent="EffectPrices/Row2/PriceBox3"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]10
+"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row2/PriceBox3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="PiecePrices" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 40.0
+offset_top = 193.0
+offset_right = 145.0
+offset_bottom = 211.0
+theme = ExtResource("4_n4bp3")
+
+[node name="PriceBox" type="HBoxContainer" parent="PiecePrices"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price1" type="RichTextLabel" parent="PiecePrices/PriceBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]10"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="PiecePrices/PriceBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="PriceBox2" type="HBoxContainer" parent="PiecePrices"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Price2" type="RichTextLabel" parent="PiecePrices/PriceBox2"]
+layout_mode = 2
+size_flags_horizontal = 8
+bbcode_enabled = true
+text = "[center]10"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="CoinIcon" type="TextureRect" parent="PiecePrices/PriceBox2"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("6_syp5b")
+stretch_mode = 2
+
+[node name="EffectDescription" parent="." instance=ExtResource("3_f1bv0")]
+position = Vector2(-209, 25)
+
+[node name="Pieces" type="Node" parent="."]
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+offset_left = 217.0
+offset_top = 81.0
+offset_right = 333.0
+offset_bottom = 128.0
+text = "Switch Scenes"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

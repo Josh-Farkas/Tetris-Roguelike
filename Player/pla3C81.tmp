@@ -1,0 +1,135 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7ok5rrx2yw6l"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_7yjx8"]
+[ext_resource type="PackedScene" uid="uid://b3mjpfl6gtykk" path="res://Piece/piece.tscn" id="1_epqda"]
+
+[node name="Player" type="Node"]
+script = ExtResource("1_7yjx8")
+
+[node name="Deck" type="Node" parent="."]
+
+[node name="I1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = null
+color = null
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="I2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = null
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="I3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = null
+color = 3
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="O1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = null
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="O2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="O3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = 3
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="T1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = null
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="T2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="T3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = 3
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="J1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = null
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="J2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="J3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = 3
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="L1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = null
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="L2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="L3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = 3
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="S1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+color = null
+coords = Vector2i(4, 0)
+rotation = 1
+
+[node name="S2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="S3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+color = 3
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="Z1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+color = null
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="Z2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+color = 1
+coords = Vector2i(4, 0)
+rotation = null
+
+[node name="Z3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+color = 3
+coords = Vector2i(4, 0)
+rotation = null

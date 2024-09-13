@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bows8v7c6n8sm"]
+
+[ext_resource type="Texture2D" uid="uid://cro4yfgh0wcxx" path="res://Enemy/enemy_attack_spritesheet.png" id="1_m2sg6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8klk"]
+texture = ExtResource("1_m2sg6")
+1:0/0 = 0
+1:0/0/custom_data_0 = 1
+1:0/0/custom_data_1 = true
+0:0/0 = 0
+
+[resource]
+custom_data_layer_0/name = "damage"
+custom_data_layer_0/type = 2
+custom_data_layer_1/name = "clear_on_place"
+custom_data_layer_1/type = 1
+sources/0 = SubResource("TileSetAtlasSource_k8klk")

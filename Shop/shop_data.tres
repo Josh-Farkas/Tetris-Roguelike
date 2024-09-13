@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShopData" load_steps=2 format=3 uid="uid://cyjr816voubtq"]
+
+[ext_resource type="Script" path="res://Shop/shop_data.gd" id="1_4yx10"]
+
+[resource]
+script = ExtResource("1_4yx10")
+prices = {
+"common": 4,
+"rare": 10,
+"uncommon": 6
+}
+piece_effect_common_odds = 0.1
+piece_effect_uncommon_odds = 0.15
+piece_effect_rare_odds = 0.16
+piece_shape_common_odds = 0.55
+piece_shape_uncommon_odds = 0.85
+piece_shape_rare_odds = 1.0
+piece_shape_rarities = null

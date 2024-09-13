@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv2k6hprc2c6f"]
+
+[sub_resource type="GDScript" id="GDScript_b681r"]
+script/source = "class_name Main extends Node
+"
+
+[node name="Main" type="Node" groups=["main"]]
+script = SubResource("GDScript_b681r")

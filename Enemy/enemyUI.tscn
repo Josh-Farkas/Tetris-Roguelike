@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb4bmklu6vb1g"]
+
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_1y72l"]
+[ext_resource type="PackedScene" uid="uid://donqabth7kcj6" path="res://Components/health_bar_component.tscn" id="2_n87kx"]
+
+[node name="EnemyUI" type="Control" groups=["enemy"]]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_1y72l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Goblin
+"
+
+[node name="StatusEffectsCompont" parent="VBoxContainer/VBoxContainer" instance=ExtResource("2_n87kx")]
+layout_mode = 2

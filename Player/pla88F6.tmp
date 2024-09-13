@@ -1,0 +1,148 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7ok5rrx2yw6l"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_7yjx8"]
+[ext_resource type="PackedScene" uid="uid://b3mjpfl6gtykk" path="res://Piece/piece.tscn" id="1_epqda"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="3_v1ppy"]
+[ext_resource type="PackedScene" uid="uid://donqabth7kcj6" path="res://Components/health_bar_component.tscn" id="4_a2ra6"]
+[ext_resource type="Texture2D" uid="uid://bxcdxyfku6s71" path="res://Player/coin.png" id="6_nycgp"]
+
+[node name="Player" type="PanelContainer"]
+offset_right = 152.0
+offset_bottom = 38.0
+size_flags_horizontal = 6
+size_flags_vertical = 2
+script = ExtResource("1_7yjx8")
+max_health = null
+health = null
+money = null
+block = null
+base_crit_chance = null
+
+[node name="Deck" type="Node" parent="."]
+
+[node name="I1" parent="Deck" instance=ExtResource("1_epqda")]
+coords = Vector2i(4, 0)
+
+[node name="I2" parent="Deck" instance=ExtResource("1_epqda")]
+coords = Vector2i(4, 0)
+
+[node name="I3" parent="Deck" instance=ExtResource("1_epqda")]
+coords = Vector2i(4, 0)
+
+[node name="O1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="O2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="O3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="T1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="T2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="T3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="J1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = 2
+coords = Vector2i(4, 0)
+
+[node name="J2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = 2
+coords = Vector2i(4, 0)
+
+[node name="J3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = 2
+coords = Vector2i(4, 0)
+
+[node name="L1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = 4
+coords = Vector2i(4, 0)
+
+[node name="L2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = 4
+coords = Vector2i(4, 0)
+
+[node name="L3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = 4
+coords = Vector2i(4, 0)
+
+[node name="S1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+color = 5
+coords = Vector2i(4, 0)
+
+[node name="S2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+color = 5
+coords = Vector2i(4, 0)
+
+[node name="S3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+color = 5
+coords = Vector2i(4, 0)
+
+[node name="Z1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+coords = Vector2i(4, 0)
+
+[node name="Z2" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+coords = Vector2i(4, 0)
+
+[node name="Z3" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+coords = Vector2i(4, 0)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_v1ppy")
+
+[node name="HealthBarComponent" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_a2ra6")]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CoinIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_nycgp")
+stretch_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "1
+"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[editable path="MarginContainer/VBoxContainer/HealthBarComponent"]

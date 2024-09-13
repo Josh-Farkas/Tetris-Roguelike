@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs8oonut0l0yb"]
+
+[ext_resource type="Script" path="res://Shop/shop.gd" id="1_swwhu"]
+[ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Resources/piece_tileset.tres" id="2_khg2u"]
+[ext_resource type="PackedScene" uid="uid://bvcwtv6baarij" path="res://Shop/UI Elements/effect_description.tscn" id="3_f1bv0"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="4_n4bp3"]
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_swwhu")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_khg2u")
+format = 2
+layer_0/name = "Background"
+layer_0/navigation_enabled = false
+layer_0/tile_data = PackedInt32Array(-589843, 0, 0, -524307, 0, 0, -458771, 0, 0, -393235, 131072, 1, -327699, 131072, 1, -262163, 131072, 1, -589842, 0, 0, -524306, 262144, 1, -458770, 0, 0, -393234, 131072, 1, -327698, 262144, 1, -262162, 131072, 1, -589841, 0, 0, -524305, 0, 0, -458769, 0, 0, -393233, 131072, 1, -327697, 131072, 1, -262161, 131072, 1, -589840, 65536, 0, -524304, 65536, 0, -458768, 65536, 0, -393232, 65536, 1, -327696, 65536, 1, -262160, 65536, 1, -589839, 65536, 0, -524303, 262144, 1, -458767, 65536, 0, -393231, 65536, 1, -327695, 262144, 1, -262159, 65536, 1, -589838, 65536, 0, -524302, 65536, 0, -458766, 65536, 0, -393230, 65536, 1, -327694, 65536, 1, -262158, 65536, 1, -589837, 131072, 0, -524301, 131072, 0, -458765, 131072, 0, -393229, 0, 1, -327693, 0, 1, -262157, 0, 1, -589836, 131072, 0, -524300, 262144, 1, -458764, 131072, 0, -393228, 0, 1, -327692, 262144, 1, -262156, 0, 1, -589835, 131072, 0, -524299, 131072, 0, -458763, 131072, 0, -393227, 0, 1, -327691, 0, 1, -262155, 0, 1, -65555, 262144, 1, -65554, 262144, 1, -65553, 262144, 1, -65552, 262144, 1, -65550, 262144, 1, -65549, 262144, 1, -65548, 262144, 1, -65547, 262144, 1, -131088, 262144, 1, -131089, 262144, 1, -131090, 262144, 1, -131091, 262144, 1, -19, 262144, 1, 65517, 262144, 1, 65518, 262144, 1, 65519, 262144, 1, 65520, 262144, 1, -16, 262144, 1, -18, 262144, 1, -17, 262144, 1, -131086, 262144, 1, -14, 262144, 1, 65522, 262144, 1, 65523, 262144, 1, 65524, 262144, 1, 65525, 262144, 1, -11, 262144, 1, -131083, 262144, 1, -131084, 262144, 1, -131085, 262144, 1, -13, 262144, 1, -12, 262144, 1, -196627, 262144, 0, -196626, 262144, 0, -196625, 262144, 0, -196624, 262144, 0, -196623, 262144, 0, -196622, 262144, 0, -196621, 262144, 0, -196620, 262144, 0, -196619, 262144, 0, -196618, 262144, 0, -262154, 262144, 0, -327690, 262144, 0, -393226, 262144, 0, -458762, 262144, 0, -524298, 262144, 0, -589834, 262144, 0, -655370, 262144, 0, -655371, 262144, 0, -655372, 262144, 0, -655373, 262144, 0, -655374, 262144, 0, -655375, 262144, 0, -655376, 262144, 0, -655377, 262144, 0, -655378, 262144, 0, -655379, 262144, 0, -655380, 262144, 0, -589844, 262144, 0, -524308, 262144, 0, -458772, 262144, 0, -393236, 262144, 0, -327700, 262144, 0, -262164, 262144, 0, -196628, 262144, 0, -131092, 262144, 0, -65556, 262144, 0, -20, 262144, 0, 65516, 262144, 0, 131052, 262144, 0, 131053, 262144, 0, 131054, 262144, 0, 131055, 262144, 0, 131056, 262144, 0, 131057, 262144, 0, 65521, 262144, 0, -15, 262144, 0, -65551, 262144, 0, -131087, 262144, 0, 131058, 262144, 0, 131059, 262144, 0, 131060, 262144, 0, 131061, 262144, 0, 131062, 262144, 0, 65526, 262144, 0, -10, 262144, 0, -65546, 262144, 0, -131082, 262144, 0)
+layer_1/name = "Base"
+layer_1/z_index = 1
+layer_1/navigation_enabled = false
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = " Icon"
+layer_2/z_index = 2
+layer_2/navigation_enabled = false
+layer_2/tile_data = PackedInt32Array(-524306, 65537, 0, -327698, 131073, 0, -524303, 65537, 0, -327695, 131073, 0, -524300, 131073, 0, -327692, 131073, 0, -65555, 262144, 1, -13, 262144, 1, -11, 262144, 1, -12, 262144, 1, -65554, 262144, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Pieces" type="Node" parent="."]
+
+[node name="EffectDescription" parent="." instance=ExtResource("3_f1bv0")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 928.5
+offset_top = 122.0
+offset_right = 991.5
+offset_bottom = 958.0
+
+[node name="EffectPrices" type="VBoxContainer" parent="."]
+offset_left = -302.0
+offset_top = -128.0
+offset_right = -162.0
+offset_bottom = -65.0
+theme = ExtResource("4_n4bp3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EffectPrices"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Price1" type="RichTextLabel" parent="EffectPrices/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]4"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Price2" type="RichTextLabel" parent="EffectPrices/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]4"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Price3" type="RichTextLabel" parent="EffectPrices/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]4"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EffectPrices"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Price1" type="RichTextLabel" parent="EffectPrices/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]6"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Price2" type="RichTextLabel" parent="EffectPrices/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]6"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Price3" type="RichTextLabel" parent="EffectPrices/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]10"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

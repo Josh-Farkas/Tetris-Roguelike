@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvcwtv6baarij"]
+
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_j2kig"]
+[ext_resource type="Script" path="res://Shop/UI Elements/effect_description.gd" id="2_30s2h"]
+
+[node name="EffectDescription" type="Node2D"]
+script = ExtResource("2_30s2h")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = 10
+custom_minimum_size = Vector2(170, 0)
+offset_right = 216.0
+offset_bottom = 48.0
+size_flags_vertical = 0
+mouse_filter = 2
+theme = ExtResource("1_j2kig")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Name" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_j2kig")
+theme_type_variation = &"RichTextLabelHeader"
+bbcode_enabled = true
+text = "NAME"
+scroll_active = false
+
+[node name="Effect" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Does like 1 damage or something like that"
+fit_content = true
+scroll_active = false

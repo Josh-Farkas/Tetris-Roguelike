@@ -1,0 +1,169 @@
+[gd_scene load_steps=8 format=3 uid="uid://senbltd2wd67"]
+
+[ext_resource type="Script" path="res://Main/main.gd" id="1_pcvrh"]
+[ext_resource type="PackedScene" uid="uid://b3mjpfl6gtykk" path="res://Piece/piece.tscn" id="2_6h1ex"]
+[ext_resource type="Texture2D" uid="uid://ckftn40sng1b6" path="res://Main/pieces_spritesheet.png" id="2_wvm4q"]
+[ext_resource type="Texture2D" uid="uid://yiq2u20la3on" path="res://Main/effects_spritesheet.png" id="3_wh63o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ld0n"]
+texture = ExtResource("2_wvm4q")
+1:1/0 = 0
+2:1/0 = 0
+0:0/0 = 0
+0:1/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smmp2"]
+texture = ExtResource("3_wh63o")
+0:0/0 = 0
+0:0/0/custom_data_0 = "none"
+1:0/0 = 0
+1:0/0/custom_data_0 = "block"
+2:0/0 = 0
+2:0/0/custom_data_0 = "attack"
+
+[sub_resource type="TileSet" id="TileSet_f1igy"]
+custom_data_layer_0/name = "effect"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_4ld0n")
+sources/1 = SubResource("TileSetAtlasSource_smmp2")
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_pcvrh")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(16, 16)
+tile_set = SubResource("TileSet_f1igy")
+format = 2
+layer_0/name = "Background"
+layer_0/z_index = -5
+layer_0/navigation_enabled = false
+layer_0/tile_data = PackedInt32Array(65535, 262144, 0, 983039, 262144, 0, 131071, 262144, 0, 196607, 262144, 0, 262143, 262144, 0, 327679, 262144, 0, 393215, 262144, 0, 458751, 262144, 0, 524287, 262144, 0, 589823, 262144, 0, 655359, 262144, 0, 720895, 262144, 0, 786431, 262144, 0, 851967, 262144, 0, 917503, 262144, 0, 1048575, 262144, 0, 1114111, 262144, 0, 1179647, 262144, 0, 1245183, 262144, 0, 1310719, 262144, 0, 1376255, 262144, 0, 1310720, 262144, 0, 1310721, 262144, 0, 1310722, 262144, 0, 1310723, 262144, 0, 1310724, 262144, 0, 1310725, 262144, 0, 1310726, 262144, 0, 1310727, 262144, 0, 1310728, 262144, 0, 1310729, 262144, 0, 1310730, 262144, 0, 1245194, 262144, 0, 1179658, 262144, 0, 1114122, 262144, 0, 1048586, 262144, 0, 983050, 262144, 0, 917514, 262144, 0, 851978, 262144, 0, 786442, 262144, 0, 720906, 262144, 0, 655370, 262144, 0, 589834, 262144, 0, 524298, 262144, 0, 458762, 262144, 0, 393226, 262144, 0, 327690, 262144, 0, 262154, 262144, 0, 196618, 262144, 0, 131082, 262144, 0, 65546, 262144, 0, 10, 262144, 0, -65526, 262144, 0, -65527, 262144, 0, -65528, 262144, 0, -65529, 262144, 0, -65530, 262144, 0, -65531, 262144, 0, -65532, 262144, 0, -65533, 262144, 0, -65535, 262144, 0, -65536, 262144, 0, -1, 262144, 0, -65534, 262144, 0)
+layer_1/name = "Base"
+layer_1/z_index = 3
+layer_1/navigation_enabled = false
+layer_1/tile_data = PackedInt32Array(-1, 262144, 0, 65535, 262144, 0, 131071, 262144, 0, 196607, 262144, 0, 262143, 262144, 0, 327679, 262144, 0, 393215, 262144, 0, 458751, 262144, 0, 524287, 262144, 0, 589823, 262144, 0, 655359, 262144, 0, 720895, 262144, 0, 786431, 262144, 0, 851967, 262144, 0, 917503, 262144, 0, 983039, 262144, 0, 1048575, 262144, 0, 1114111, 262144, 0, 1179647, 262144, 0, 1245183, 262144, 0, 1310719, 262144, 0, 1376255, 262144, 0, 1310720, 262144, 0, 1310721, 262144, 0, 1310722, 262144, 0, 1310723, 262144, 0, 1310724, 262144, 0, 1310725, 262144, 0, 1310726, 262144, 0, 1310727, 262144, 0, 1310728, 262144, 0, 1310729, 262144, 0, 1310730, 262144, 0, 1245194, 262144, 0, 1179658, 262144, 0, 1114122, 262144, 0, 1048586, 262144, 0, 983050, 262144, 0, 917514, 262144, 0, 851978, 262144, 0, 786442, 262144, 0, 720906, 262144, 0, 655370, 262144, 0, 589834, 262144, 0, 524298, 262144, 0, 458762, 262144, 0, 393226, 262144, 0, 327690, 262144, 0, 262154, 262144, 0, 196618, 262144, 0, 131082, 262144, 0, 65546, 262144, 0, 10, 262144, 0, -65526, 262144, 0, -65527, 262144, 0, -65528, 262144, 0, -65529, 262144, 0, -65530, 262144, 0, -65531, 262144, 0, -65532, 262144, 0, -65533, 262144, 0, -65534, 262144, 0, -65535, 262144, 0, -65536, 262144, 0, 1245188, 0, 0)
+layer_2/name = "Effect"
+layer_2/z_index = 4
+layer_2/navigation_enabled = false
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "GhostBase"
+layer_3/modulate = Color(1, 1, 1, 0.196078)
+layer_3/z_index = 1
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "GhostEffect"
+layer_4/modulate = Color(1, 1, 1, 0.196078)
+layer_4/z_index = 2
+layer_4/navigation_enabled = false
+layer_4/tile_data = PackedInt32Array()
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(100, 174)
+zoom = Vector2(1.75, 1.75)
+
+[node name="FallTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Deck" type="Node" parent="."]
+
+[node name="S1" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 5
+coords = Vector2i(4, 0)
+rotation = 1
+
+[node name="I1" parent="Deck" instance=ExtResource("2_6h1ex")]
+coords = Vector2i(4, 0)
+
+[node name="I2" parent="Deck" instance=ExtResource("2_6h1ex")]
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="I3" parent="Deck" instance=ExtResource("2_6h1ex")]
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="O1" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 1
+coords = Vector2i(4, 0)
+
+[node name="O2" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 1
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="O3" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 1
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="T1" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 2
+coords = Vector2i(4, 0)
+
+[node name="T2" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 2
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="T3" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 2
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="J1" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 3
+coords = Vector2i(4, 0)
+
+[node name="J2" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 3
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="J3" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 3
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="L1" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 4
+coords = Vector2i(4, 0)
+
+[node name="L2" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 4
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="L3" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 4
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="S2" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 5
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="S3" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 5
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="Z1" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 6
+coords = Vector2i(4, 0)
+
+[node name="Z2" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 6
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="Z3" parent="Deck" instance=ExtResource("2_6h1ex")]
+shape = 6
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="Discard" type="Node" parent="."]
+
+[connection signal="timeout" from="FallTimer" to="." method="_on_fall_timer_timeout"]
