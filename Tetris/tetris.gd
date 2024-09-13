@@ -16,6 +16,11 @@ const DAMAGE_AMTS := {
 # Test Comment
 # abasfgja;lskdfj;alskdfj CODE HERE
 
+# TEST COMMIT THIGN HERE
+# TODO
+# BUG
+# coeroasjdf;lkasdj f
+
 @onready var background_layer: TileMapLayer = $Background
 @onready var attack_layer: TileMapLayer = $Attack
 @onready var base_layer: TileMapLayer = $Base
