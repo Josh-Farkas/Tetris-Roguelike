@@ -30,7 +30,7 @@ func _overlay_effect() -> void:
 		if cell == null or cell.get_custom_data("effect") != "none":
 			selected_effect_coords = Vector2i.ZERO
 			return
-				
+
 		selected_effect_coords = coords
 		effect_layer.set_cell(coords, 1, selected_effect)
 
@@ -40,9 +40,14 @@ func _place_effect() -> void:
 	if effect_layer.get_cell_tile_data(coords) == null: return
 	var cell: Cell = deck_display.cell_coords[coords]
 	cell.effect_atlas_coords = selected_effect
+	cell.unexhausted_atlas_coords = selected_effect
+	
+	var source: TileSetAtlasSource = effect_layer.tile_set.get_source(1)
+	cell.unique = source.get_tile_data(selected_effect, 0).get_custom_data("unique")
+	
 	selected_effect = Vector2i.ZERO
 	
 
-
-func _on_button_pressed() -> void:
+signal return_from_apply
+func _on_return_button_pressed() -> void:
 	GameManager.load_old_scene("Shop")

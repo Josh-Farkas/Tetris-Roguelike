@@ -27,7 +27,6 @@ var cell_offset_coords: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$PlayerPosition.add_child(player)
 	_generate_items()
 
 
@@ -186,6 +185,9 @@ func _buy_effect(coords: Vector2i) -> void:
 	GameManager.change_scene(load("res://Shop/Apply Effect/apply_effect.tscn"), true)
 
 
+func _on_return_from_apply_effect():
+	pass
+
 func _buy_piece(piece_num: int) -> void:
 	if player.gold < shop_data.piece_price: return
 	var piece: Piece = pieces[piece_num]
@@ -210,3 +212,7 @@ func _clear_piece(piece_num: int) -> void:
 
 func _on_reroll_pressed() -> void:
 	_reroll()
+
+
+func _on_continue_button_pressed() -> void:
+	GameManager.next_combat()

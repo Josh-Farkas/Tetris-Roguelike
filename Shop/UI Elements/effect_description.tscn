@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvcwtv6baarij"]
 
 [ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_j2kig"]
-[ext_resource type="Script" path="res://Shop/UI Elements/effect_description.gd" id="2_30s2h"]
+[ext_resource type="Script" uid="uid://ca7ootd8xcgso" path="res://Shop/UI Elements/effect_description.gd" id="2_30s2h"]
 
 [node name="EffectDescription" type="Node2D"]
 script = ExtResource("2_30s2h")
@@ -31,7 +31,7 @@ size_flags_vertical = 3
 theme = ExtResource("1_j2kig")
 theme_type_variation = &"RichTextLabelHeader"
 bbcode_enabled = true
-text = "NAME"
+text = "[center]NAME"
 scroll_active = false
 
 [node name="Effect" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -39,6 +39,6 @@ clip_contents = false
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "Does like 1 damage or something like that"
+text = "[center]Does like 1 damage or something like that"
 fit_content = true
 scroll_active = false

@@ -5,7 +5,7 @@ class_name EffectDescription extends Node2D
 @onready var effect_label: RichTextLabel = $PanelContainer/MarginContainer/VBoxContainer/Effect
 
 func set_data(effect_name: StringName, description: String, rarity: StringName = "common") -> void:
-	name_label.text = "[color=%s]%s[/color]" % [Constants.RARITY_COLORS[rarity], effect_name.capitalize()]
+	name_label.text = "[center][color=%s]%s[/color]" % [Constants.RARITY_COLORS[rarity], effect_name.capitalize()]
 	effect_label.text = description
 
 func show_hovered_effect(layer: TileMapLayer) -> bool:

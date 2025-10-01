@@ -75,6 +75,7 @@ func _create_cells() -> void:
 			cell.base_atlas_coords = color_map[color]
 			cell.effect_atlas_coords = Vector2i.ZERO
 			cells.append(cell)
+			$Cells.add_child(cell)
 			cell_matrix[row][col] = cell
 
 
@@ -84,9 +85,9 @@ func rotate(rot: int = 1) -> void:
 	rotation %= 4
 	for __: int in range(abs(rot)):
 		if rot > 0:
-			cell_matrix = rotate_array(cell_matrix)
+			cell_matrix = _rotate_array(cell_matrix)
 		else:
-			cell_matrix = rotate_array_inv(cell_matrix)
+			cell_matrix = _rotate_array_inv(cell_matrix)
 	
 	for row: int in range(len(cell_matrix)):
 		for col: int in range(len(cell_matrix[row])):
@@ -97,7 +98,7 @@ func set_rotation(rot: int) -> void:
 	rotate(rot - rotation)
 
 
-func rotate_array(arr: Array) -> Array:
+func _rotate_array(arr: Array) -> Array:
 	var new_arr: Array = []
 	for i: int in range(len(arr[0])):
 		var row: Array = []
@@ -106,7 +107,7 @@ func rotate_array(arr: Array) -> Array:
 		new_arr.append(row)
 	return new_arr
 
-func rotate_array_inv(arr: Array) -> Array:
+func _rotate_array_inv(arr: Array) -> Array:
 	var new_arr: Array = []
 	for i: int in range(len(arr[0]) - 1, -1, -1):
 		var row: Array = []

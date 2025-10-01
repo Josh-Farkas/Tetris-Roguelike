@@ -1,11 +1,10 @@
 [gd_resource type="Resource" script_class="EnemyResourceBase" load_steps=2 format=3 uid="uid://dulpa3qbawnjs"]
 
-[ext_resource type="Script" path="res://Enemy/EnemyResourceBase.gd" id="1_uq6ne"]
+[ext_resource type="Script" uid="uid://xytusmdp2503" path="res://Enemy/EnemyResourceBase.gd" id="1_uq6ne"]
 
 [resource]
 script = ExtResource("1_uq6ne")
 name = "Goblin"
-max_health = 50
+max_health = 20
 defense = 0
 damage = 1
-attack_speed = 3.0

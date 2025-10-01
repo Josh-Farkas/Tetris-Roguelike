@@ -1,16 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://donqabth7kcj6"]
+[gd_scene load_steps=7 format=3 uid="uid://donqabth7kcj6"]
 
-[ext_resource type="Script" path="res://Components/health_bar_component.gd" id="1_bm4lb"]
+[ext_resource type="Script" uid="uid://dywn1rbtq3v8r" path="res://Components/health_bar_component.gd" id="1_bm4lb"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_h40uw"]
 [ext_resource type="Texture2D" uid="uid://bjh8v1uarq372" path="res://Player/Sprites/healthbar_base.png" id="1_uri8c"]
-[ext_resource type="Texture2D" uid="uid://b56rfnfa64i37" path="res://Player/Sprites/healthbar_progress.png" id="2_7jtid"]
-[ext_resource type="Texture2D" uid="uid://dxq6y6hxt5hpa" path="res://Player/blockbar.png" id="3_3dna6"]
-[ext_resource type="PackedScene" uid="uid://dbgaur6dn3lu3" path="res://Components/StatusEffects/status_effects_component.tscn" id="5_0kc7h"]
+[ext_resource type="Texture2D" uid="uid://dvry24kgtnbeg" path="res://Player/Sprites/healthbar_progress.png" id="2_7jtid"]
+[ext_resource type="Texture2D" uid="uid://dxq6y6hxt5hpa" path="res://Player/Sprites/blockbar.png" id="3_3dna6"]
+[ext_resource type="PackedScene" uid="uid://b26nxkve7vliu" path="res://Components/StatusEffects/status_effects_ui.tscn" id="6_6ca3n"]
 
 [node name="HealthBarComponent" type="VBoxContainer"]
 offset_right = 171.0
 offset_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme = ExtResource("1_h40uw")
 script = ExtResource("1_bm4lb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -28,15 +30,24 @@ texture_progress_offset = Vector2(1, 0)
 layout_mode = 1
 offset_right = 102.0
 offset_bottom = 16.0
-value = 50.0
 texture_progress = ExtResource("3_3dna6")
 texture_progress_offset = Vector2(1, 0)
 
-[node name="HealthLabel" type="Label" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -3
+
+[node name="HealthLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 8
 text = "100/100"
 
-[node name="StatusEffectsComponent" parent="." instance=ExtResource("5_0kc7h")]
+[node name="BlockLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+modulate = Color(0.536213, 0.663381, 0.87201, 1)
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+
+[node name="StatusEffectsUI" parent="." instance=ExtResource("6_6ca3n")]
 layout_mode = 2

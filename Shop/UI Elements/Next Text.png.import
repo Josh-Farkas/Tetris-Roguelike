@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxq6y6hxt5hpa"
-path="res://.godot/imported/blockbar.png-3226c1b5bc39ff5f177a42312ef22aa1.ctex"
+uid="uid://cduxk5vj18wca"
+path="res://.godot/imported/Next Text.png-e06d5315b4443ed9e55dde3fd3193adb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/blockbar.png"
-dest_files=["res://.godot/imported/blockbar.png-3226c1b5bc39ff5f177a42312ef22aa1.ctex"]
+source_file="res://Shop/UI Elements/Next Text.png"
+dest_files=["res://.godot/imported/Next Text.png-e06d5315b4443ed9e55dde3fd3193adb.ctex"]
 
 [params]
 

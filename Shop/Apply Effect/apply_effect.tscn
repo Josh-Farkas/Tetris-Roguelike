@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bneb0pgwbjbnj"]
 
-[ext_resource type="Script" path="res://Shop/Apply Effect/apply_effect.gd" id="1_s36tb"]
+[ext_resource type="Script" uid="uid://me7t8m65gbd8" path="res://Shop/Apply Effect/apply_effect.gd" id="1_s36tb"]
 [ext_resource type="Texture2D" uid="uid://i7y1x3uubu0v" path="res://Piece/Effect Sprites/effects_spritesheet.png" id="2_8aokf"]
 [ext_resource type="PackedScene" uid="uid://cybe7i2m3bh0p" path="res://Shop/Deck Display/deck_display.tscn" id="2_vob2x"]
 
@@ -32,17 +32,20 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_ydc4v")
 stretch_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer"]
+[node name="ReturnButton" type="Button" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Back to Shop"
 
 [node name="DeckDisplay" parent="VBoxContainer" instance=ExtResource("2_vob2x")]
 layout_mode = 2
 
+[node name="SubViewport" parent="VBoxContainer/DeckDisplay/ScrollContainer/SubViewportContainer" index="0"]
+size = Vector2i(632, 360)
+
 [node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
 anchor_mode = 0
 zoom = Vector2(3, 3)
 
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 
 [editable path="VBoxContainer/DeckDisplay"]

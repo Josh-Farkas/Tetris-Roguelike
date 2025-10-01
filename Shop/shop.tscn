@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=4 uid="uid://cs8oonut0l0yb"]
+[gd_scene load_steps=9 format=4 uid="uid://cs8oonut0l0yb"]
 
-[ext_resource type="Script" path="res://Shop/shop.gd" id="1_swwhu"]
+[ext_resource type="Script" uid="uid://m6bcgs1n3foa" path="res://Shop/shop.gd" id="1_swwhu"]
 [ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Resources/piece_tileset.tres" id="2_khg2u"]
 [ext_resource type="PackedScene" uid="uid://bvcwtv6baarij" path="res://Shop/UI Elements/effect_description.tscn" id="3_f1bv0"]
-[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="4_n4bp3"]
-[ext_resource type="Texture2D" uid="uid://bxcdxyfku6s71" path="res://Player/coin.png" id="6_syp5b"]
+[ext_resource type="PackedScene" uid="uid://wl7bb7ny1vxo" path="res://Player/player_ui.tscn" id="3_i7h23"]
+[ext_resource type="Texture2D" uid="uid://b7yyvyv6yun84" path="res://Shop/UI Elements/Refresh Text.png" id="6_5bgtm"]
+[ext_resource type="Texture2D" uid="uid://cduxk5vj18wca" path="res://Shop/UI Elements/Next Text.png" id="7_1iuoq"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_mfqvr"]
+device = -1
+keycode = 82
+unicode = 114
+
+[sub_resource type="Shortcut" id="Shortcut_5h0uv"]
+events = [SubResource("InputEventKey_mfqvr")]
 
 [node name="Shop" type="Control"]
 layout_mode = 3
@@ -13,29 +22,24 @@ offset_right = 440.0
 offset_bottom = 208.0
 script = ExtResource("1_swwhu")
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
-anchor_mode = 0
-zoom = Vector2(5.192, 5.192)
-
 [node name="TilemapContainer" type="SubViewportContainer" parent="."]
 layout_mode = 2
-offset_right = 176.0
-offset_bottom = 208.0
+offset_right = 512.0
+offset_bottom = 512.0
 
 [node name="SubViewport" type="SubViewport" parent="TilemapContainer"]
 handle_input_locally = false
-size = Vector2i(176, 208)
 render_target_update_mode = 4
 
 [node name="Background" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
-tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAAAAAAAAAIAAAAEAAAAAAAAAAMAAAAEAAAAAAAAAAQAAAAEAAAAAAAAAAUAAAAEAAAAAAAAAAYAAAAEAAAAAAAAAAcAAAAEAAAAAAAAAAgAAAAEAAAAAAAAAAkAAAAEAAAAAAAAAAoAAAAEAAAAAAAAAAsAAAAEAAAAAAAAAAwAAAAEAAAAAAABAAwAAAAEAAAAAAACAAwAAAAEAAAAAAADAAwAAAAEAAAAAAAEAAwAAAAEAAAAAAAFAAwAAAAEAAAAAAAGAAwAAAAEAAAAAAAHAAwAAAAEAAAAAAAIAAwAAAAEAAAAAAAJAAwAAAAEAAAAAAAKAAwAAAAEAAAAAAAKAAsAAAAEAAAAAAAKAAoAAAAEAAAAAAAKAAkAAAAEAAAAAAAKAAgAAAAEAAAAAAAKAAcAAAAEAAAAAAAKAAYAAAAEAAAAAAAKAAUAAAAEAAAAAAAKAAQAAAAEAAAAAAAKAAMAAAAEAAAAAAAKAAIAAAAEAAAAAAAKAAEAAAAEAAAAAAAKAAAAAAAEAAAAAAAJAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAHAAAAAAAEAAAAAAAGAAAAAAAEAAAAAAAFAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAADAAAAAAAEAAAAAAACAAAAAAAEAAAAAAABAAAAAAAEAAAAAAABAAcAAAAEAAAAAAACAAcAAAAEAAAAAAADAAcAAAAEAAAAAAAEAAcAAAAEAAAAAAAFAAcAAAAEAAAAAAAGAAcAAAAEAAAAAAAHAAcAAAAEAAAAAAAIAAcAAAAEAAAAAAAJAAcAAAAEAAAAAAAFAAgAAAAEAAAAAAAFAAkAAAAEAAAAAAAFAAoAAAAEAAAAAAAFAAsAAAAEAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAFAAMAAAABAAAAAAAGAAMAAAABAAAAAAAGAAIAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAHAAEAAAACAAAAAAAHAAIAAAACAAAAAAAHAAMAAAACAAAAAAAIAAMAAAACAAAAAAAJAAMAAAACAAAAAAAJAAIAAAACAAAAAAAJAAEAAAACAAAAAAAIAAEAAAACAAAAAAAHAAQAAAAAAAEAAAAHAAUAAAAAAAEAAAAHAAYAAAAAAAEAAAAIAAYAAAAAAAEAAAAJAAYAAAAAAAEAAAAJAAUAAAAAAAEAAAAJAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAEAAYAAAABAAEAAAAFAAYAAAABAAEAAAAGAAYAAAABAAEAAAAGAAUAAAABAAEAAAAGAAQAAAABAAEAAAAFAAQAAAABAAEAAAABAAQAAAACAAEAAAABAAUAAAACAAEAAAABAAYAAAACAAEAAAACAAYAAAACAAEAAAADAAYAAAACAAEAAAADAAUAAAACAAEAAAADAAQAAAACAAEAAAACAAQAAAACAAEAAAABAAgAAAAEAAEAAAABAAkAAAAEAAEAAAABAAoAAAAEAAEAAAABAAsAAAAEAAEAAAACAAsAAAAEAAEAAAADAAsAAAAEAAEAAAAEAAsAAAAEAAEAAAAEAAoAAAAEAAEAAAAEAAkAAAAEAAEAAAAEAAgAAAAEAAEAAAADAAgAAAAEAAEAAAACAAgAAAAEAAEAAAACAAkAAAAEAAEAAAACAAoAAAAEAAEAAAADAAoAAAAEAAEAAAADAAkAAAAEAAEAAAAGAAgAAAAEAAEAAAAGAAkAAAAEAAEAAAAGAAoAAAAEAAEAAAAGAAsAAAAEAAEAAAAHAAsAAAAEAAEAAAAIAAsAAAAEAAEAAAAJAAsAAAAEAAEAAAAJAAoAAAAEAAEAAAAIAAoAAAAEAAEAAAAHAAoAAAAEAAEAAAAHAAkAAAAEAAEAAAAIAAkAAAAEAAEAAAAJAAkAAAAEAAEAAAAJAAgAAAAEAAEAAAAIAAgAAAAEAAEAAAAHAAgAAAAEAAEAAAACAAIAAAAEAAEAAAAFAAIAAAAEAAEAAAAIAAIAAAAEAAEAAAAIAAUAAAAEAAEAAAAFAAUAAAAEAAEAAAACAAUAAAAEAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAAAAAAAAAIAAAAEAAAAAAAAAAMAAAAEAAAAAAAAAAQAAAAEAAAAAAAAAAUAAAAEAAAAAAAAAAYAAAAEAAAAAAAAAAcAAAAEAAAAAAAAAAgAAAAEAAAAAAAAAAkAAAAEAAAAAAAAAAoAAAAEAAAAAAAAAAsAAAAEAAAAAAAAAAwAAAAEAAAAAAABAAwAAAAEAAAAAAACAAwAAAAEAAAAAAADAAwAAAAEAAAAAAAEAAwAAAAEAAAAAAAFAAwAAAAEAAAAAAAGAAwAAAAEAAAAAAAHAAwAAAAEAAAAAAAIAAwAAAAEAAAAAAAJAAwAAAAEAAAAAAAKAAwAAAAEAAAAAAAKAAsAAAAEAAAAAAAKAAoAAAAEAAAAAAAKAAkAAAAEAAAAAAAKAAgAAAAEAAAAAAAKAAcAAAAEAAAAAAAKAAYAAAAEAAAAAAAKAAUAAAAEAAAAAAAKAAQAAAAEAAAAAAAKAAMAAAAEAAAAAAAKAAIAAAAEAAAAAAAKAAEAAAAEAAAAAAAKAAAAAAAEAAAAAAAJAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAHAAAAAAAEAAAAAAAGAAAAAAAEAAAAAAAFAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAADAAAAAAAEAAAAAAACAAAAAAAEAAAAAAABAAAAAAAEAAAAAAABAAcAAAAEAAAAAAACAAcAAAAEAAAAAAADAAcAAAAEAAAAAAAEAAcAAAAEAAAAAAAFAAcAAAAEAAAAAAAGAAcAAAAEAAAAAAAHAAcAAAAEAAAAAAAIAAcAAAAEAAAAAAAJAAcAAAAEAAAAAAAFAAgAAAAEAAAAAAAFAAkAAAAEAAAAAAAFAAoAAAAEAAAAAAAFAAsAAAAEAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAADAAIAAAAAAAAAAAADAAEAAAAAAAAAAAACAAEAAAAAAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAFAAMAAAABAAAAAAAGAAMAAAABAAAAAAAGAAIAAAABAAAAAAAGAAEAAAABAAAAAAAFAAEAAAABAAAAAAAHAAEAAAACAAAAAAAHAAIAAAACAAAAAAAHAAMAAAACAAAAAAAIAAMAAAACAAAAAAAJAAMAAAACAAAAAAAJAAIAAAACAAAAAAAJAAEAAAACAAAAAAAIAAEAAAACAAAAAAAHAAQAAAAAAAEAAAAHAAUAAAAAAAEAAAAHAAYAAAAAAAEAAAAIAAYAAAAAAAEAAAAJAAYAAAAAAAEAAAAJAAUAAAAAAAEAAAAJAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAEAAQAAAABAAEAAAAEAAUAAAABAAEAAAAEAAYAAAABAAEAAAAFAAYAAAABAAEAAAAGAAYAAAABAAEAAAAGAAUAAAABAAEAAAAGAAQAAAABAAEAAAAFAAQAAAABAAEAAAABAAQAAAACAAEAAAABAAUAAAACAAEAAAABAAYAAAACAAEAAAACAAYAAAACAAEAAAADAAYAAAACAAEAAAADAAUAAAACAAEAAAADAAQAAAACAAEAAAACAAQAAAACAAEAAAABAAgAAAAEAAEAAAABAAkAAAAEAAEAAAABAAoAAAAEAAEAAAABAAsAAAAEAAEAAAACAAsAAAAEAAEAAAADAAsAAAAEAAEAAAAEAAsAAAAEAAEAAAAEAAoAAAAEAAEAAAAEAAkAAAAEAAEAAAAEAAgAAAAEAAEAAAADAAgAAAAEAAEAAAACAAgAAAAEAAEAAAACAAkAAAAEAAEAAAACAAoAAAAEAAEAAAADAAoAAAAEAAEAAAADAAkAAAAEAAEAAAAGAAgAAAAEAAEAAAAGAAkAAAAEAAEAAAAGAAoAAAAEAAEAAAAGAAsAAAAEAAEAAAAHAAsAAAAEAAEAAAAIAAsAAAAEAAEAAAAJAAsAAAAEAAEAAAAJAAoAAAAEAAEAAAAIAAoAAAAEAAEAAAAHAAoAAAAEAAEAAAAHAAkAAAAEAAEAAAAIAAkAAAAEAAEAAAAJAAkAAAAEAAEAAAAJAAgAAAAEAAEAAAAIAAgAAAAEAAEAAAAHAAgAAAAEAAEAAAACAAIAAAAEAAEAAAAFAAIAAAAEAAEAAAAIAAIAAAAEAAEAAAAIAAUAAAAEAAEAAAAFAAUAAAAEAAEAAAACAAUAAAAEAAEAAAALAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAANAAAAAAAEAAAAAAAOAAAAAAAEAAAAAAAPAAAAAAAEAAAAAAAQAAAAAAAEAAAAAAARAAAAAAAEAAAAAAASAAAAAAAEAAAAAAATAAAAAAAEAAAAAAAUAAAAAAAEAAAAAAAVAAAAAAAEAAAAAAAWAAAAAAAEAAAAAAAWAAEAAAAEAAEAAAAWAAIAAAAEAAEAAAAWAAMAAAAEAAEAAAAVAAMAAAAEAAEAAAAUAAMAAAAEAAEAAAATAAMAAAAEAAEAAAASAAMAAAAEAAEAAAARAAMAAAAEAAEAAAAQAAMAAAAEAAEAAAAPAAMAAAAEAAEAAAAOAAMAAAAEAAEAAAANAAMAAAAEAAEAAAALAAMAAAAEAAAAAAALAAIAAAAEAAAAAAALAAEAAAAEAAAAAAALAAQAAAAEAAAAAAALAAUAAAAEAAAAAAALAAYAAAAEAAAAAAALAAcAAAAEAAAAAAALAAgAAAAEAAAAAAALAAkAAAAEAAAAAAALAAoAAAAEAAAAAAALAAsAAAAEAAAAAAALAAwAAAAEAAAAAAAMAAcAAAAEAAAAAAANAAcAAAAEAAAAAAAOAAcAAAAEAAAAAAAPAAcAAAAEAAAAAAAQAAcAAAAEAAAAAAARAAcAAAAEAAAAAAASAAcAAAAEAAAAAAATAAcAAAAEAAAAAAAUAAcAAAAEAAAAAAAVAAcAAAAEAAAAAAAWAAcAAAAEAAAAAAAWAAUAAAAEAAAAAAAWAAQAAAAEAAAAAAAWAAYAAAAEAAAAAAAMAAwAAAAEAAAAAAAWAAwAAAAEAAAAAAAVAAwAAAAEAAAAAAAUAAwAAAAEAAAAAAATAAwAAAAEAAAAAAASAAwAAAAEAAAAAAARAAwAAAAEAAAAAAAQAAwAAAAEAAAAAAAPAAwAAAAEAAAAAAAOAAwAAAAEAAAAAAANAAwAAAAEAAAAAAAWAAsAAAAEAAEAAAAWAAoAAAAEAAEAAAAWAAkAAAAEAAAAAAAVAAkAAAAEAAAAAAAWAAgAAAAEAAAAAAAVAAgAAAAEAAAAAAAUAAgAAAAEAAAAAAATAAgAAAAEAAAAAAASAAgAAAAEAAAAAAARAAgAAAAEAAAAAAAQAAgAAAAEAAAAAAAPAAgAAAAEAAAAAAAOAAgAAAAEAAAAAAANAAgAAAAEAAAAAAAMAAgAAAAEAAAAAAAMAAkAAAAEAAAAAAAMAAoAAAAEAAEAAAAMAAsAAAAEAAEAAAANAAsAAAAEAAEAAAAOAAsAAAAEAAEAAAAPAAsAAAAEAAEAAAAQAAsAAAAEAAEAAAAQAAoAAAAEAAEAAAARAAoAAAAEAAAAAAARAAsAAAAEAAAAAAARAAkAAAAEAAAAAAAQAAkAAAAEAAAAAAAPAAkAAAAEAAAAAAAOAAkAAAAEAAAAAAANAAkAAAAEAAAAAAANAAoAAAAEAAEAAAAOAAoAAAAEAAEAAAAPAAoAAAAEAAEAAAAUAAUAAAAEAAEAAAANAAUAAAABAAAAAAAOAAUAAAAEAAEAAAAPAAUAAAABAAAAAAARAAUAAAAEAAEAAAASAAUAAAAAAAAAAAANAAQAAAABAAAAAAAOAAQAAAABAAAAAAAPAAQAAAABAAAAAAAQAAQAAAAAAAAAAAARAAQAAAAAAAAAAAASAAQAAAAAAAAAAAATAAQAAAACAAEAAAATAAUAAAACAAEAAAATAAYAAAACAAEAAAASAAYAAAAAAAAAAAARAAYAAAAAAAAAAAAMAAUAAAAEAAAAAAAUAAQAAAACAAEAAAAVAAQAAAACAAEAAAAVAAUAAAACAAEAAAAVAAYAAAACAAEAAAAUAAYAAAACAAEAAAAVAAIAAAAEAAEAAAAVAAEAAAAEAAEAAAAUAAEAAAAEAAEAAAATAAEAAAAEAAEAAAASAAEAAAAEAAEAAAARAAEAAAAEAAEAAAAQAAEAAAAEAAEAAAAPAAEAAAAEAAEAAAAOAAEAAAAEAAEAAAANAAEAAAAEAAEAAAANAAIAAAAEAAEAAAAOAAIAAAAEAAEAAAAPAAIAAAAEAAEAAAAQAAIAAAAEAAEAAAARAAIAAAAEAAEAAAASAAIAAAAEAAEAAAAUAAIAAAAEAAEAAAATAAIAAAAEAAEAAAASAAsAAAAEAAEAAAATAAsAAAAEAAEAAAAUAAsAAAAEAAEAAAAUAAoAAAAEAAEAAAAVAAoAAAAEAAEAAAAVAAsAAAAEAAEAAAATAAoAAAAEAAEAAAATAAkAAAAEAAAAAAAUAAkAAAAEAAAAAAASAAoAAAAEAAEAAAASAAkAAAAEAAAAAAAQAAUAAAAAAAAAAAAMAAYAAAAEAAAAAAANAAYAAAABAAAAAAAOAAYAAAABAAAAAAAPAAYAAAABAAAAAAAQAAYAAAAAAAAAAAAXAAAAAAAEAAAAAAAXAAEAAAAEAAAAAAAXAAIAAAAEAAAAAAAXAAMAAAAEAAAAAAAXAAQAAAAEAAAAAAAXAAUAAAAEAAAAAAAXAAYAAAAEAAAAAAAXAAcAAAAEAAAAAAAXAAgAAAAEAAAAAAAXAAkAAAAEAAAAAAAXAAoAAAAEAAAAAAAXAAsAAAAEAAAAAAAXAAwAAAAEAAAAAAAAAA0AAAAEAAAAAAABAA0AAAAEAAAAAAACAA0AAAAEAAAAAAADAA0AAAAEAAAAAAAEAA0AAAAEAAAAAAAFAA0AAAAEAAAAAAAGAA0AAAAEAAAAAAAHAA0AAAAEAAAAAAAIAA0AAAAEAAAAAAAJAA0AAAAEAAAAAAAKAA0AAAAEAAAAAAALAA0AAAAEAAAAAAAMAA0AAAAEAAAAAAANAA0AAAAEAAAAAAAOAA0AAAAEAAAAAAAPAA0AAAAEAAAAAAAQAA0AAAAEAAAAAAARAA0AAAAEAAAAAAASAA0AAAAEAAAAAAATAA0AAAAEAAAAAAAUAA0AAAAEAAAAAAAVAA0AAAAEAAAAAAAWAA0AAAAEAAAAAAAXAA0AAAAEAAAAAAAMAAEAAAAEAAEAAAAMAAIAAAAEAAEAAAAMAAMAAAAEAAEAAAAMAAQAAAAEAAAAAAA=")
 tile_set = ExtResource("2_khg2u")
 
 [node name="Base" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
-tile_map_data = PackedByteArray("AAAFAAMAAgAEAAAAAAAIAAMAAgAEAAAAAAACAAMAAgAEAAAAAAACAAYAAgAGAAAAAAAFAAYAAgAGAAAAAAAIAAYAAgAAAAEAAAACAAwAAgABAAAAAAADAAwAAgAAAAAAAAAHAAwAAgABAAAAAAAIAAwAAgAFAAAAAAA=")
 tile_set = ExtResource("2_khg2u")
 
 [node name="Effect" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
+tile_map_data = PackedByteArray("AAACAAMAAgAEAAAAAAAFAAMAAgAEAAAAAAAIAAMAAgAEAAAAAAACAAYAAgAGAAAAAAAFAAYAAgAGAAAAAAAIAAYAAgAAAAEAAAAHAAwAAgABAAAAAAACAAwAAgABAAAAAAAIAAwAAgAFAAAAAAADAAwAAgAAAAAAAAAOAAwAAgAFAAAAAAAOAAYAAgAFAAEAAAARAAYAAgAFAAEAAAAUAAYAAgAFAAEAAAA=")
 tile_set = ExtResource("2_khg2u")
 
 [node name="BaseOffset" type="TileMapLayer" parent="TilemapContainer/SubViewport"]
@@ -46,253 +50,43 @@ tile_set = ExtResource("2_khg2u")
 position = Vector2(8, 0)
 tile_set = ExtResource("2_khg2u")
 
-[node name="PlayerPosition" type="Control" parent="."]
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 2
-anchors_preset = 0
-offset_left = 182.0
-offset_top = 50.0
-offset_right = 201.0
-offset_bottom = 204.0
-grow_horizontal = 0
+[node name="PlayerUI" parent="." instance=ExtResource("3_i7h23")]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 18.0
+offset_right = 355.0
+offset_bottom = 60.0
 
-[node name="EffectPrices" type="VBoxContainer" parent="."]
-visible = false
+[node name="RefreshButton" type="TextureButton" parent="."]
 layout_mode = 2
-offset_left = 24.0
-offset_top = 50.0
-offset_right = 159.0
-offset_bottom = 112.0
-theme = ExtResource("4_n4bp3")
-
-[node name="Row1" type="HBoxContainer" parent="EffectPrices"]
-layout_mode = 2
-size_flags_vertical = 2
-
-[node name="PriceBox" type="HBoxContainer" parent="EffectPrices/Row1"]
-layout_mode = 2
+offset_left = 192.0
+offset_top = 160.0
+offset_right = 272.0
+offset_bottom = 192.0
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
+shortcut = SubResource("Shortcut_5h0uv")
+texture_normal = ExtResource("6_5bgtm")
+stretch_mode = 3
 
-[node name="Price1" type="RichTextLabel" parent="EffectPrices/Row1/PriceBox"]
+[node name="ContinueButton" type="TextureButton" parent="."]
 layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]4"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row1/PriceBox"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="PriceBox2" type="HBoxContainer" parent="EffectPrices/Row1"]
-layout_mode = 2
+offset_left = 288.0
+offset_top = 160.0
+offset_right = 368.0
+offset_bottom = 192.0
 size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price2" type="RichTextLabel" parent="EffectPrices/Row1/PriceBox2"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]4"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row1/PriceBox2"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="PriceBox3" type="HBoxContainer" parent="EffectPrices/Row1"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price3" type="RichTextLabel" parent="EffectPrices/Row1/PriceBox3"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]4"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row1/PriceBox3"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="Row2" type="HBoxContainer" parent="EffectPrices"]
-layout_mode = 2
-size_flags_vertical = 10
-
-[node name="PriceBox" type="HBoxContainer" parent="EffectPrices/Row2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price1" type="RichTextLabel" parent="EffectPrices/Row2/PriceBox"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]6"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row2/PriceBox"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="PriceBox2" type="HBoxContainer" parent="EffectPrices/Row2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price2" type="RichTextLabel" parent="EffectPrices/Row2/PriceBox2"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]6"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row2/PriceBox2"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="PriceBox3" type="HBoxContainer" parent="EffectPrices/Row2"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price3" type="RichTextLabel" parent="EffectPrices/Row2/PriceBox3"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]10
-"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="EffectPrices/Row2/PriceBox3"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="PiecePrices" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 2
-offset_left = 41.0
-offset_top = 194.0
-offset_right = 143.0
-offset_bottom = 209.0
-theme = ExtResource("4_n4bp3")
-
-[node name="PriceBox" type="HBoxContainer" parent="PiecePrices"]
-layout_mode = 2
-size_flags_horizontal = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price1" type="RichTextLabel" parent="PiecePrices/PriceBox"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]10"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="PiecePrices/PriceBox"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[node name="PriceBox2" type="HBoxContainer" parent="PiecePrices"]
-layout_mode = 2
-size_flags_horizontal = 10
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="Price2" type="RichTextLabel" parent="PiecePrices/PriceBox2"]
-layout_mode = 2
-size_flags_horizontal = 8
-bbcode_enabled = true
-text = "[center]10"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="PiecePrices/PriceBox2"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
+shortcut = SubResource("Shortcut_5h0uv")
+texture_normal = ExtResource("7_1iuoq")
+stretch_mode = 3
 
 [node name="EffectDescription" parent="." instance=ExtResource("3_f1bv0")]
-position = Vector2(-209, 25)
+position = Vector2(-251, 24)
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+anchor_mode = 0
+zoom = Vector2(5.192, 5.192)
 
 [node name="Pieces" type="Node" parent="."]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-offset_left = 178.0
-offset_top = 7.0
-offset_right = 367.0
-offset_bottom = 38.0
-theme_override_constants/separation = 1
-
-[node name="Button" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Refresh"
-
-[node name="Price1" type="RichTextLabel" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-bbcode_enabled = true
-text = "[center]5"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-
-[node name="CoinIcon" type="TextureRect" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("6_syp5b")
-stretch_mode = 2
-
-[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_reroll_pressed"]
+[connection signal="pressed" from="RefreshButton" to="." method="_on_reroll_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

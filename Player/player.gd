@@ -1,45 +1,47 @@
-class_name Player extends Control
+class_name Player extends Node
 
-signal piece_placed
+signal piece_placed(amount_placed: int)
 signal damaged
+signal health_changed
+signal max_health_changed
+signal gold_changed
+signal block_changed
 
 var piggy_bank_stored: int = 0
-
 var full_deck: Array[Piece]
-
-@onready var health_bar: HealthBarComponent = $MarginContainer/VBoxContainer/HealthBarComponent
-@onready var status_effects: StatusEffectsComponent = health_bar.get_node("StatusEffectsComponent")
-@onready var gold_label: Label = $MarginContainer/VBoxContainer/HBoxContainer2/MoneyLabel
 
 @export var max_health: int = 100:
 	set(value):
 		max_health = value
-		health_bar.set_max_health(value)
+		max_health_changed.emit()
 @export var health: int = 100:
 	set(value): 
 		health = value
-		health_bar.set_health(value)
+		health_changed.emit()
 @export var gold: int = 999:
 	set(value):
 		gold = value
-		_update_ui()
+		gold_changed.emit()
 @export var block: int = 0:
 	set(value):
 		block = value
-		health_bar.set_block(value)
+		block_changed.emit()
 
 @export_range(0, 1) var base_crit_chance: float = .01
 
+@onready var status_effects: StatusEffectsComponent = $StatusEffectsComponent
+
 func _ready() -> void:
 	full_deck.append_array($Deck.get_children() as Array[Piece])
-	_update_ui()
 
 
 func take_damage(amount: int) -> void:
-	health -= amount
+	var blocked_dmg: int = min(amount, block)
+	var health_dmg: int = amount - blocked_dmg
+	block -= blocked_dmg
+	health -= health_dmg
 	if health < 0:
 		die()
-	_update_ui()
 
 
 func heal(amount: int) -> void:
@@ -55,11 +57,9 @@ func gain_block(amount: int) -> void:
 func lose_block(amount: int) -> void:
 	block -= amount
 	block = max(block, 0)
-
-
-func _update_ui() -> void:
-	#health_label.text = "%s/%s" % [health, max_health]
-	gold_label.text = str(gold)
+	
+func set_block(amount: int) -> void:
+	block = amount
 
 
 func die() -> void:
@@ -69,7 +69,6 @@ func die() -> void:
 func add_piece(piece: Piece) -> void:
 	full_deck.append(piece)
 	$Deck.add_child(piece)
-
 
 
 func reset_status_effects() -> void:

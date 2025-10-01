@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvry24kgtnbeg"
-path="res://.godot/imported/healthbar_progress.png-f20a4476f11de38e54e714ced2a524e1.ctex"
+uid="uid://ba2rkuuqvo7p6"
+path="res://.godot/imported/coin-export.png-bdf5aea5e022d0a65a69ef541034f5cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/healthbar_progress.png"
-dest_files=["res://.godot/imported/healthbar_progress.png-f20a4476f11de38e54e714ced2a524e1.ctex"]
+source_file="res://Player/Sprites/coin-export.png"
+dest_files=["res://.godot/imported/coin-export.png-bdf5aea5e022d0a65a69ef541034f5cd.ctex"]
 
 [params]
 

@@ -17,6 +17,7 @@ const effect_coords: Array[Vector2i] = [
 
 static var effect_type_colors: Dictionary = {
 	"RANGED": "Green",
+	"ARROW": "Darkgreen",
 	"MELEE": "Darkred",
 	"SHIELD": "Mediumturquoise",
 	"SUPPORT": "Peachpuff",
@@ -79,14 +80,19 @@ static func _generate_effects() -> void:
 		var tile_data := source.get_tile_data(coords, 0)
 		var tile_effect: StringName = tile_data.get_custom_data("effect")
 		var effect_type: Array = tile_data.get_custom_data("effect type")
+		var unique: bool = tile_data.get_custom_data("unique")
 		if tile_effect == "none": continue
 		effect_types[tile_effect] = effect_type
 		if tile_effect in effect_descriptions:
+			effect_descriptions[tile_effect] = effect_descriptions[tile_effect].insert(0, "[center]")
+			if unique: effect_descriptions[tile_effect] += "\n[center][color=efd10e]Unique[/color]"
 			effect_descriptions[tile_effect] += "\n" + " ".join(effect_type)
 			for type: StringName in effect_type_colors:
 				effect_descriptions[tile_effect] = effect_descriptions[tile_effect] \
 						.replace(type, "[color=%s][%s][/color]" % [effect_type_colors[type], type])
-				
+		else:
+			effect_descriptions[tile_effect] = ""
+			
 		effect_atlas_coords[tile_effect] = coords
 		var tile_rarity: String = tile_data.get_custom_data("rarity")
 		effects[tile_rarity].append(tile_effect)

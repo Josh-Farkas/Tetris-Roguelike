@@ -1,8 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv2k6hprc2c6f"]
+[gd_scene load_steps=3 format=3 uid="uid://dv2k6hprc2c6f"]
+
+[ext_resource type="PackedScene" uid="uid://cag86ra4kfvp1" path="res://UI/PauseMenu/pause_menu.tscn" id="1_ig7tw"]
 
 [sub_resource type="GDScript" id="GDScript_b681r"]
 script/source = "class_name Main extends Node
 "
 
 [node name="Main" type="Node" groups=["main"]]
+process_mode = 1
 script = SubResource("GDScript_b681r")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="UILayer" instance=ExtResource("1_ig7tw")]
+visible = false
+z_index = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -86.5
+offset_right = 55.0
+offset_bottom = 86.5

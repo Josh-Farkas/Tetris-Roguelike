@@ -13,13 +13,6 @@ const DAMAGE_AMTS := {
 	4: 10
 }
 
-# Test Comment
-# abasfgja;lskdfj;alskdfj CODE HERE
-
-# TEST COMMIT THIGN HERE
-# TODO
-# BUG
-# coeroasjdf;lkasdj f
 
 @onready var background_layer: TileMapLayer = $Background
 @onready var attack_layer: TileMapLayer = $Attack
@@ -48,14 +41,27 @@ var up_next: Array[Piece] = []
 
 var active_piece: Piece = null
 var fall_speed: float = 1
-var num_up_next: int = 2
+var num_up_next: int = 1
 var cells_to_clear: Dictionary # row: [col1, col2, col3]
-var effect_queue: Array[Vector2i]
-
+var effect_queue: Dictionary[Vector2i, StringName]
 var damage: int
 
 var effect_counts: Dictionary = {}
-var type_counts: Dictionary = {}
+var type_counts: Dictionary = {
+	"RANGED": 0,
+	"MELEE": 0,
+	"SHIELD": 0,
+	"SUPPORT": 0,
+	"BUILDING": 0,
+	"ECONOMY": 0,
+	"SCIENCE": 0,
+	"ARMOR": 0,
+	"EXPLOSIVE": 0,
+	"INSTRUMENT": 0,
+	"MISC": 0,
+}
+
+var pieces_placed: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,8 +69,8 @@ func _ready() -> void:
 	#player.status_effects.tranquility_gained.connect(_on_tranquility_gained)
 	for row in HEIGHT:
 		cells_to_clear[row] = {}
-	add_child(player) # jank to call _ready() in player TODO: find better solution
-	remove_child(player)
+	#add_child(player) # jank to call _ready() in player TODO: find better solution
+	#remove_child(player)
 	full_deck = player.full_deck.duplicate()
 	deck = full_deck.duplicate()
 	shuffle()
@@ -127,7 +133,6 @@ func erase_cell(layer: TileMapLayer, coords: Vector2i, trigger_effects: bool = f
 				type_counts[type] -= 1
 			
 			effect_layer.erase_cell(coords)
-			_trigger_on_clear_effect(effect, coords)
 	layer.erase_cell(coords)
 	effect_layers[layer].erase_cell(coords)
 
@@ -222,7 +227,7 @@ func check_collision(piece: Piece, dir: Vector2i = Vector2i.ZERO, rot: int = 0, 
 
 
 func place_piece(piece: Piece) -> void:
-	for cell in piece.cells:
+	for cell: Cell in piece.cells:
 		var coords: Vector2i = piece.coords + cell.offset
 		
 		# Cell effects
@@ -254,7 +259,8 @@ func place_piece(piece: Piece) -> void:
 	piece.set_rotation(0)
 	clear_lines()
 	spawn_piece()
-	player.piece_placed.emit()
+	pieces_placed += 1
+	player.piece_placed.emit(pieces_placed)
 	
 	
 func spawn_piece() -> void:
@@ -266,11 +272,15 @@ func spawn_piece() -> void:
 	# Coins
 	var coin_chance := 0.1
 	for cell in up_next[-1].cells:
+		if cell.exhausted:
+			cell.effect_atlas_coords = Vector2i.ZERO
 		if cell.effect_atlas_coords == Vector2i(0, 1):
 			cell.effect_atlas_coords = Vector2i.ZERO
 		if cell.effect_atlas_coords == Vector2i.ZERO:
 			if randf() < coin_chance:
 				cell.effect_atlas_coords = Vector2i(0, 1)
+		if cell.unique:
+			cell.exhausted = true
 	draw_next()
 	
 	piece.coords = Vector2i(4, 0)
@@ -294,7 +304,7 @@ func draw_next() -> void:
 
 
 func check_line(row: int) -> bool:
-	for col in range(WIDTH):
+	for col in WIDTH:
 		if base_layer.get_cell_tile_data(Vector2i(col, row)) == null:
 			return false
 	return true
@@ -302,7 +312,7 @@ func check_line(row: int) -> bool:
 
 func clear_lines() -> void:
 	var rows := []
-	for row in range(HEIGHT):
+	for row in HEIGHT:
 		if check_line(row):
 			rows.append(row)
 	if rows.is_empty(): return
@@ -311,11 +321,10 @@ func clear_lines() -> void:
 	var base_damage: int = DAMAGE_AMTS[num_cleared]
 	damage = base_damage
 	for row: int in rows: # goes top down
-		for col: int in range(WIDTH):
+		for col: int in WIDTH:
 			_clear_cell(row, col)
 			_queue_effect(row, col)
 			var cell_effect: String = _get_effect(Vector2i(col, row))
-			_trigger_on_clear_effect(cell_effect, Vector2i(col, row))
 
 	_trigger_effects()
 	deal_damage(damage)
@@ -324,7 +333,7 @@ func clear_lines() -> void:
 
 func lower_rows_above(start_row: int) -> void:
 	for row: int in range(start_row, 0, -1):
-		for col: int in range(WIDTH):
+		for col: int in WIDTH:
 			set_cell(base_layer, Vector2i(col, row), base_layer.get_cell_atlas_coords(Vector2i(col, row - 1)), effect_layer.get_cell_atlas_coords(Vector2i(col, row - 1)))
 
 
@@ -334,7 +343,7 @@ func lower_column_above(start_row: int, col: int) -> void:
 
 
 func _erase_cleared_cells() -> void:
-	for row: int in range(HEIGHT):
+	for row: int in HEIGHT:
 		for col: int in cells_to_clear[row].keys():
 			erase_cell(base_layer, Vector2i(col, row), false)
 			lower_column_above(row, col)
@@ -342,12 +351,17 @@ func _erase_cleared_cells() -> void:
 		
 
 func deal_damage(damage: float) -> void:
-	enemy.take_damage(damage)
+	enemy.take_damage(damage + player.status_effects.get_status("strength"))
 
 
 func lose() -> void:
 	pass
 
+
+func _get_effect_count(effect: String) -> int:
+	if effect not in effect_counts:
+		effect_counts[effect] = 0
+	return effect_counts[effect]
 
 # PIECE EFFECT FUNCTIONS
 func explode(coords: Vector2i, radius: int) -> void:
@@ -358,25 +372,28 @@ func explode(coords: Vector2i, radius: int) -> void:
 			_clear_cell(row, col)
 
 
-func _on_tranquility_gained() -> void:
-	# TODO drums count
+func _on_tranquility_changed(amount: int) -> void:
+	if amount > 0:
+		for __ in _get_effect_count("drums"):
+			deal_damage(1)
 	tick_timer.wait_time = enemy.base_tick_rate + 0.1 * player.status_effects.get_effect("tranquility")
 
 
 func _queue_effect(row: int, col: int) -> void:
 	var effect: String = _get_effect(Vector2i(col, row))
 	if effect == "none" or effect == "": return
+	# Bomb explosion
+	# TODO: Make work for any effect that breaks tiles
 	if _get_effect(Vector2i(col, row)) == "bomb":
-		for x in range(-1, 2):
-			for y in range(-1 ,2):
-				_queue_effect(row, col)
+		for neighbor in NEIGHBORS:
+			_queue_effect(neighbor.y, neighbor.x)
 			
-	effect_queue.append(Vector2i(col, row))
+	effect_queue[Vector2i(col, row)] = effect
 
 
 func _trigger_effects() -> void:
-	for coords in effect_queue:
-		var effect: String = _get_effect(coords)
+	for coords: Vector2i in effect_queue:
+		var effect: StringName = effect_queue[coords]
 		_trigger_on_clear_effect(effect, coords)
 	effect_queue.clear()
 
@@ -386,12 +403,12 @@ func _trigger_on_clear_effect(effect: String, coords: Vector2i) -> void:
 		"none":
 			return
 		"coin":
-			if effect_counts["piggy bank"] > 0:
+			if _get_effect_count("piggy bank") > 0:
 				player.piggy_bank_stored += effect_counts["piggy bank"]
 			else:
 				player.gold += 1
 		"permanent coin":
-			if effect_counts["piggy bank"] > 0:
+			if _get_effect_count("piggy bank") > 0:
 				player.piggy_bank_stored += effect_counts["piggy bank"]
 			else:
 				player.gold += 1
@@ -447,6 +464,8 @@ func _trigger_on_clear_effect(effect: String, coords: Vector2i) -> void:
 			player.status_effects.gain_effect("tranquility", effect_counts["music note"])
 		"flute":
 			player.status_effects.gain_effect("tranquility", 2)
+		"fishie":
+			player.heal(2)
 		
 
 
@@ -478,7 +497,7 @@ func _trigger_adjacent_place_effects(effect_placed: StringName, coords: Vector2i
 		var effect: StringName = _get_effect(coords + neighbor)
 		match effect:
 			"landmine":
-				if neighbor != Vector2i.UP: # UP bc 0 is top
+				if neighbor != Vector2i.UP:
 					break
 				_clear_cell(coords.y, coords.x)
 				_queue_effect(coords.y, coords.x)

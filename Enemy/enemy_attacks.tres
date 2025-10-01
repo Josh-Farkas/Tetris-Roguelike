@@ -8,10 +8,14 @@ texture = ExtResource("1_m2sg6")
 1:0/0/custom_data_0 = 1
 1:0/0/custom_data_1 = true
 0:0/0 = 0
+2:0/0 = 0
+2:0/0/custom_data_1 = true
 
 [resource]
 custom_data_layer_0/name = "damage"
 custom_data_layer_0/type = 2
 custom_data_layer_1/name = "clear_on_place"
 custom_data_layer_1/type = 1
+custom_data_layer_2/name = "description"
+custom_data_layer_2/type = 21
 sources/0 = SubResource("TileSetAtlasSource_k8klk")

@@ -1,0 +1,228 @@
+[gd_scene load_steps=13 format=3 uid="uid://b26nxkve7vliu"]
+
+[ext_resource type="Script" uid="uid://cuqmsw0r1fdj5" path="res://Components/StatusEffects/status_effects_ui.gd" id="1_xhgcg"]
+[ext_resource type="Texture2D" uid="uid://cxgns3d5s4kc8" path="res://Components/effects_spritesheet.png" id="2_hlc4f"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="3_jd4bx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc38l"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(0, 0, 8, 8)
+margin = Rect2(0, 0, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcory"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(9, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtict"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(18, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5n46"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(27, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5r4y"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(36, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lptyr"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(45, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjn4e"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(54, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8v3ly"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(63, 0, 9, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbywd"]
+atlas = ExtResource("2_hlc4f")
+region = Rect2(72, 0, 9, 9)
+
+[node name="StatusEffectsUI" type="HBoxContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 3
+script = ExtResource("1_xhgcg")
+
+[node name="Strength" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Strength"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_nc38l")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Strength"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Weakness" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Weakness"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_gcory")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Weakness"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Blindness" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Blindness"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_vtict")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Blindness"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Accuracy" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Accuracy"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_u5n46")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Accuracy"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Poison" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Poison"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_b5r4y")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Poison"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Confusion" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Confusion"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_lptyr")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Confusion"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Tranquility" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Tranquility"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_jjn4e")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Tranquility"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Panic" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Panic"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_8v3ly")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Panic"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Prayer" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Prayer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_vbywd")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Prayer"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
