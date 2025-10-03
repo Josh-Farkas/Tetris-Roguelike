@@ -4,8 +4,8 @@ enum Shape {
 	I, O, T, J, L, S, Z
 }
 
-enum COLOR {
-	GREEN, BLUE, LIGHT_BLUE, RED, ORANGE, PURPLE
+enum PieceColor {
+	GREEN, BLUE, LIGHT_BLUE, RED, ORANGE, PURPLE, YELLOW
 }
 
 var shape_map: Dictionary = {
@@ -18,23 +18,24 @@ var shape_map: Dictionary = {
 	Shape.Z: Shapes.Z,
 }
 
-const color_map: Dictionary = {
-	COLOR.GREEN: Vector2i(0, 0),
-	COLOR.PURPLE: Vector2i(1, 0),
-	COLOR.BLUE: Vector2i(2, 0),
-	COLOR.ORANGE: Vector2i(0, 1),
-	COLOR.LIGHT_BLUE: Vector2i(1, 1),
-	COLOR.RED: Vector2i(2, 1),
+const color_map: Dictionary[PieceColor, Vector2i] = {
+	PieceColor.GREEN: Vector2i(0, 0),
+	PieceColor.PURPLE: Vector2i(1, 0),
+	PieceColor.BLUE: Vector2i(2, 0),
+	PieceColor.ORANGE: Vector2i(0, 1),
+	PieceColor.LIGHT_BLUE: Vector2i(1, 1),
+	PieceColor.RED: Vector2i(2, 1),
+	PieceColor.YELLOW: Vector2i(3, 0)
 }
 
-const shape_colors: Dictionary = {
-	Shape.I: COLOR.GREEN,
-	Shape.O: COLOR.BLUE,
-	Shape.T: COLOR.RED,
-	Shape.J: COLOR.LIGHT_BLUE,
-	Shape.L: COLOR.ORANGE,
-	Shape.S: COLOR.PURPLE,
-	Shape.Z: COLOR.GREEN,
+const shape_colors: Dictionary[Shape, PieceColor] = {
+	Shape.I: PieceColor.LIGHT_BLUE,
+	Shape.O: PieceColor.YELLOW,
+	Shape.T: PieceColor.PURPLE,
+	Shape.J: PieceColor.LIGHT_BLUE,
+	Shape.L: PieceColor.ORANGE,
+	Shape.S: PieceColor.GREEN,
+	Shape.Z: PieceColor.RED,
 }
 
 enum EffectType {
@@ -47,7 +48,7 @@ enum EffectType {
 }
 
 @export var shape: Shape
-@export var color: COLOR
+@export var color: PieceColor
 @export var coords: Vector2i
 @export var rotation: int = 0
 @export var cells: Array[Cell] = []
@@ -93,6 +94,7 @@ func rotate(rot: int = 1) -> void:
 		for col: int in range(len(cell_matrix[row])):
 			if cell_matrix[row][col] == null: continue
 			cell_matrix[row][col].offset = Vector2i(col, row)
+
 
 func set_rotation(rot: int) -> void:
 	rotate(rot - rotation)

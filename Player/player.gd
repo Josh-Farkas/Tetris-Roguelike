@@ -1,6 +1,5 @@
 class_name Player extends Node
 
-signal piece_placed(amount_placed: int)
 signal damaged
 signal health_changed
 signal max_health_changed
@@ -18,7 +17,7 @@ var full_deck: Array[Piece]
 	set(value): 
 		health = value
 		health_changed.emit()
-@export var gold: int = 999:
+@export var gold: int = 99999:
 	set(value):
 		gold = value
 		gold_changed.emit()
@@ -64,6 +63,15 @@ func set_block(amount: int) -> void:
 
 func die() -> void:
 	pass
+
+
+func gain_gold(amount: int) -> void:
+	gold += amount
+
+
+func lose_gold(amount: int) -> void:
+	gold -= amount
+	gold = max(0, gold)
 
 
 func add_piece(piece: Piece) -> void:

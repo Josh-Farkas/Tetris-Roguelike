@@ -8,8 +8,12 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1644.0
+offset_bottom = -929.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_n5y13")
 resource = ExtResource("2_olx3y")
 

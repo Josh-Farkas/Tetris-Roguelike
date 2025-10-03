@@ -1,15 +1,16 @@
 @abstract
 class_name Enemy
 extends MarginContainer
+## Base class for all enemy types
 
 signal killed
 
 # UI Elements
-@onready var name_label: Label = $EnemyBase/VBoxContainer/VBoxContainer/Name
-@onready var health_bar: HealthBarComponent = $EnemyBase/VBoxContainer/VBoxContainer/HealthBarComponent
+@onready var name_label: Label = $EnemyBase/HBoxContainer/Name
+@onready var health_bar: HealthBarComponent = $EnemyBase/HBoxContainer/HealthBarComponent
 @onready var status_effects_ui: StatusEffectsUI = health_bar.get_node("StatusEffectsUI")
 @onready var status_effects: StatusEffectsComponent = $EnemyBase/StatusEffectsComponent
-@onready var sprite: TextureRect = $EnemyBase/VBoxContainer/Background/Sprite
+@onready var sprite: TextureRect = $EnemyBase/Background/Sprite
 @onready var player: Player = GameManager.player
 
 @export var resource: EnemyResourceBase
@@ -38,7 +39,7 @@ func _ready() -> void:
 	_set_data()
 	_update_ui()
 	killed.connect(GameManager.on_enemy_killed)
-	GameManager.player.piece_placed.connect(_on_piece_placed)
+	SignalBus.piece_placed.connect(_on_piece_placed)
 	status_effects.status_changed.connect(status_effects_ui.update_ui)
 
 
@@ -70,20 +71,20 @@ func die() -> void:
 @abstract
 func attack() -> void
 
-func _place_attack_randomly(attack: Attack) -> void:
-	for __ in range(20):
+func _place_attack_randomly(attack_atlas: Vector2i) -> void:
+	for __ in range(2, GameManager.board_height):
 		var coords: Vector2i = Vector2i(randi_range(0, 10), randi_range(0, 20))
-		if _place_attack(attack, coords): break
+		if _place_attack(attack_atlas, coords): break
 	
-func _place_attack(attack: Attack, coords: Vector2i) -> bool:
+func _place_attack(attack_atlas: Vector2i, coords: Vector2i) -> bool:
 	if base_layer.get_cell_tile_data(coords) != null or attack_layer.get_cell_tile_data(coords) != null: return false # failed to place
-	attack_layer.set_cell(coords, 0, attack_atlas_coords[attack])
+	attack_layer.set_cell(coords, 0, attack_atlas)
 	return true
 
 # Signals
 func _on_piece_placed(pieces_placed: int) -> void:
 	take_damage(status_effects.status_effects.poison)
-
+	
 
 
 func _input(event: InputEvent) -> void:

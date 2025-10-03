@@ -1,7 +1,7 @@
 class_name TetrisGame extends Node2D
 
 const WIDTH: int = 10
-const HEIGHT: int = 20
+const HEIGHT: int = 22
 const WALLKICKS = preload("res://Tetris/wallkicks.gd").WALLKICKS
 const WALLKICKS_I = preload("res://Tetris/wallkicks.gd").WALLKICKS_I
 const NEIGHBORS: Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
@@ -45,11 +45,14 @@ var num_up_next: int = 1
 var cells_to_clear: Dictionary # row: [col1, col2, col3]
 var effect_queue: Dictionary[Vector2i, StringName]
 var damage: int
+var pieces_placed: int = 0
+
 
 var effect_counts: Dictionary = {}
 var type_counts: Dictionary = {
 	"RANGED": 0,
 	"MELEE": 0,
+	"ARROW": 0,
 	"SHIELD": 0,
 	"SUPPORT": 0,
 	"BUILDING": 0,
@@ -60,8 +63,6 @@ var type_counts: Dictionary = {
 	"INSTRUMENT": 0,
 	"MISC": 0,
 }
-
-var pieces_placed: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -247,10 +248,13 @@ func place_piece(piece: Piece) -> void:
 		# Enemy Attacks
 		var data: TileData = attack_layer.get_cell_tile_data(coords)
 		if data == null: continue
-		var damage: int = data.get_custom_data("damage")
-		player.take_damage(damage * enemy.damage)
-		if data.get_custom_data("clear_on_place"):
-			attack_layer.erase_cell(coords)
+		var attack: EnemyAttack = data.get_custom_data("attack_resource")
+		if attack == null: continue
+		attack.trigger()
+		#var damage: int = data.get_custom_data("damage")
+		#player.take_damage(damage * enemy.damage)
+		#if data.get_custom_data("clear_on_place"):
+			#attack_layer.erase_cell(coords)
 	
 	_trigger_effects()
 	_erase_cleared_cells()
@@ -260,7 +264,7 @@ func place_piece(piece: Piece) -> void:
 	clear_lines()
 	spawn_piece()
 	pieces_placed += 1
-	player.piece_placed.emit(pieces_placed)
+	SignalBus.piece_placed.emit(pieces_placed)
 	
 	
 func spawn_piece() -> void:
@@ -281,25 +285,27 @@ func spawn_piece() -> void:
 				cell.effect_atlas_coords = Vector2i(0, 1)
 		if cell.unique:
 			cell.exhausted = true
-	draw_next()
+	_draw_next()
 	
-	piece.coords = Vector2i(4, 0)
 	active_piece = piece
+	piece.coords = Vector2i(4, 1)
 	if check_collision(piece, Vector2i.ZERO, 0, base_layer):
-		lose()
-		return
+		piece.coords += Vector2i.UP
+		if check_collision(piece, Vector2i.ZERO, 0, base_layer):
+			lose()
+			return
 	draw_piece(piece, true)
 
 
-func draw_next() -> void:
+func _draw_next() -> void:
 	# Clear up next
 	for x in range(11, 15):
-		for y in range(0, 8):
+		for y in range(2, 10):
 			erase_cell(base_layer, Vector2i(x, y))
 	
 	# Draw up next
 	for n in num_up_next:
-		up_next[n].coords = Vector2i(11, 5 * n)
+		up_next[n].coords = Vector2i(11, 5 * n + 2)
 		draw_piece(up_next[n], false)
 
 
@@ -352,10 +358,12 @@ func _erase_cleared_cells() -> void:
 
 func deal_damage(damage: float) -> void:
 	enemy.take_damage(damage + player.status_effects.get_status("strength"))
+	if damage >= 3:
+		GameManager.camera.screenshake(5 * min(damage, 8), .5)
 
 
 func lose() -> void:
-	pass
+	print("YOU LOST")
 
 
 func _get_effect_count(effect: String) -> int:

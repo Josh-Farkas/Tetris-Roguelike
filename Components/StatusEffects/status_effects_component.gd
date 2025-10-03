@@ -19,7 +19,7 @@ var status_effects: Dictionary = {
 		status_changed.emit(value)
 
 func _ready() -> void:
-	GameManager.player.piece_placed.connect(_on_piece_placed)
+	SignalBus.piece_placed.connect(_on_piece_placed)
 
 
 func get_status(status: StringName) -> int:

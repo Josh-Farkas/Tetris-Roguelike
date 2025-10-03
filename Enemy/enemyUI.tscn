@@ -6,21 +6,20 @@
 [ext_resource type="Texture2D" uid="uid://w53pnmbr0xts" path="res://Enemy/Types/Goblin/Goblin.png" id="3_jdq2f"]
 [ext_resource type="PackedScene" uid="uid://dbgaur6dn3lu3" path="res://Components/StatusEffects/status_effects_component.tscn" id="5_quc1g"]
 
-[node name="EnemyBase" type="Control" groups=["enemy"]]
-layout_mode = 3
-anchors_preset = 0
+[node name="EnemyBase" type="VBoxContainer" groups=["enemy"]]
+offset_right = 276.0
+offset_bottom = 151.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource("1_1y72l")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="StatusEffectsComponent" parent="." instance=ExtResource("5_quc1g")]
 
-[node name="Background" type="TextureRect" parent="VBoxContainer"]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_3555w")
 
-[node name="Sprite" type="TextureRect" parent="VBoxContainer/Background"]
+[node name="Sprite" type="TextureRect" parent="Background"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
 anchors_preset = 2
@@ -34,16 +33,14 @@ grow_vertical = 0
 texture = ExtResource("3_jdq2f")
 stretch_mode = 2
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
 
-[node name="Name" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="Name" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "Goblin
 "
 
-[node name="HealthBarComponent" parent="VBoxContainer/VBoxContainer" instance=ExtResource("2_n87kx")]
+[node name="HealthBarComponent" parent="HBoxContainer" instance=ExtResource("2_n87kx")]
 layout_mode = 2
-
-[node name="StatusEffectsComponent" parent="." instance=ExtResource("5_quc1g")]

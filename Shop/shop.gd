@@ -175,18 +175,17 @@ func _draw_piece(piece: Piece, offset: bool = false) -> void:
 func _buy_effect(coords: Vector2i) -> void:
 	var cell: TileData = effect_layer.get_cell_tile_data(coords)
 	if cell == null: return
+	
 	var rarity: String = cell.get_custom_data("rarity")
 	var price: int = shop_data.prices[rarity]
+	
 	if player.gold < price: return
 	player.gold -= price
 	bought_effects.append(coords)
 	GameManager.bought_effect = effect_layer.get_cell_atlas_coords(coords)
 	effect_layer.erase_cell(coords)
-	GameManager.change_scene(load("res://Shop/Apply Effect/apply_effect.tscn"), true)
+	GameManager.change_scene("ApplyEffectMenu")
 
-
-func _on_return_from_apply_effect():
-	pass
 
 func _buy_piece(piece_num: int) -> void:
 	if player.gold < shop_data.piece_price: return

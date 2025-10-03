@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvcwtv6baarij"]
 
 [ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_j2kig"]
-[ext_resource type="Script" uid="uid://ca7ootd8xcgso" path="res://Shop/UI Elements/effect_description.gd" id="2_30s2h"]
+[ext_resource type="Script" uid="uid://ca7ootd8xcgso" path="res://Shop/UIElements/effect_description.gd" id="2_30s2h"]
 
 [node name="EffectDescription" type="Node2D"]
 script = ExtResource("2_30s2h")

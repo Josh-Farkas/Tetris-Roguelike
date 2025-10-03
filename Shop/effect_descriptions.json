@@ -17,7 +17,7 @@
 	"cloud": "On Clear: Deals 0.5 damage for each line below this",
 	"greatsword": "On Clear: Deals 4 damage",
 	"tower": "On Place: Deals 1 damage for each other Building you have",
-	"bricks": "On Place: Gain 2 block\nOn Clear: Lose 2 block",
+	"bricks": "On Place: Gain 2 block\nOn Clear: Lose 1 block",
 	"helmet": "On Clear: Equip a helmet",
 	"chestplate": "On Clear: Equip a chestplate",
 	"leggings": "On Clear: Equip leggings",
@@ -61,5 +61,7 @@
 	"fishie": "On Clear: heal 2 hp",
 	"witch's hut": "Something to do with poison",
 	"medkit": "On Clear: heal 5 hp",
-	"glass sword": "On Clear: Deal 10 damage"
+	"glass sword": "On Clear: Deal 10 damage",
+	"rapier": "On Clear: Deal 1 damage 3 times",
+	"lance": "TODO"
 }

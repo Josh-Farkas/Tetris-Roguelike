@@ -8,9 +8,15 @@ extends Control
 var prev_coords: Vector2i
 var can_place: bool = false
 
+#func _ready() -> void:
+	#SignalBus.scene_changed.connect(_on_scene_changed)
+	#
+#func _on_scene_changed()
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_overlay_effect()
+		
 	
 	if event.is_action_pressed("click") and can_place:
 		_place_effect()
@@ -48,6 +54,5 @@ func _place_effect() -> void:
 	selected_effect = Vector2i.ZERO
 	
 
-signal return_from_apply
 func _on_return_button_pressed() -> void:
-	GameManager.load_old_scene("Shop")
+	GameManager.change_scene("Shop", false)

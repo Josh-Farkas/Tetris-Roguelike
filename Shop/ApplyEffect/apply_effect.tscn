@@ -1,18 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bneb0pgwbjbnj"]
+[gd_scene load_steps=6 format=3 uid="uid://bneb0pgwbjbnj"]
 
-[ext_resource type="Script" uid="uid://me7t8m65gbd8" path="res://Shop/Apply Effect/apply_effect.gd" id="1_s36tb"]
+[ext_resource type="Script" uid="uid://me7t8m65gbd8" path="res://Shop/ApplyEffect/apply_effect.gd" id="1_s36tb"]
 [ext_resource type="Texture2D" uid="uid://i7y1x3uubu0v" path="res://Piece/Effect Sprites/effects_spritesheet.png" id="2_8aokf"]
-[ext_resource type="PackedScene" uid="uid://cybe7i2m3bh0p" path="res://Shop/Deck Display/deck_display.tscn" id="2_vob2x"]
+[ext_resource type="PackedScene" uid="uid://cybe7i2m3bh0p" path="res://Shop/DeckDisplay/deck_display.tscn" id="2_vob2x"]
+[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Tetris/camera.gd" id="4_yfwvt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydc4v"]
 atlas = ExtResource("2_8aokf")
 region = Rect2(16, 0, 16, 16)
 
-[node name="ApplyEffect" type="Control"]
+[node name="ApplyEffectMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -1261.0
+offset_bottom = -718.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s36tb")
@@ -42,9 +45,11 @@ layout_mode = 2
 [node name="SubViewport" parent="VBoxContainer/DeckDisplay/ScrollContainer/SubViewportContainer" index="0"]
 size = Vector2i(632, 360)
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+[node name="Camera" type="Camera2D" parent="." groups=["camera"]]
 anchor_mode = 0
 zoom = Vector2(3, 3)
+script = ExtResource("4_yfwvt")
+metadata/_custom_type_script = "uid://ds6sxtjyd1ip3"
 
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 
