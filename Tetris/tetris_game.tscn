@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dx3x35npvhm7v" path="res://Tetris/tetris.gd" id="1_lao27"]
 [ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Resources/piece_tileset.tres" id="2_t3u6k"]
-[ext_resource type="TileSet" uid="uid://bows8v7c6n8sm" path="res://Enemy/enemy_attacks.tres" id="3_0n1mj"]
+[ext_resource type="TileSet" uid="uid://bows8v7c6n8sm" path="res://Enemy/Attacks/enemy_attacks.tres" id="3_0n1mj"]
 
 [node name="TetrisGame" type="Node2D"]
 script = ExtResource("1_lao27")

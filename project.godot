@@ -13,13 +13,12 @@ config_version=5
 config/name="Tetris Roguelike"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
-Constants="*res://constants.gd"
-GameManager="*res://game_manager.gd"
-SignalBus="*res://signal_bus.gd"
+Constants="*res://Autoloads/constants.gd"
+GameManager="*res://Autoloads/game_manager.gd"
+SignalBus="*res://Autoloads/signal_bus.gd"
 
 [debug]
 

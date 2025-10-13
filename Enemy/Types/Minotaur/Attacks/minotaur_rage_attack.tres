@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RageAttack" load_steps=2 format=3 uid="uid://b3fkipxoia4hd"]
+
+[ext_resource type="Script" uid="uid://dibkxg050po0y" path="res://Enemy/Types/Minotaur/Attacks/rage_attack.gd" id="1_oc3ir"]
+
+[resource]
+script = ExtResource("1_oc3ir")
+name = &"Rage"
+description = "Increases the Minotaur's attack speed"
+atlas_coords = Vector2i(2, 2)
+metadata/_custom_type_script = "uid://dibkxg050po0y"

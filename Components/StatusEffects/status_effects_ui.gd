@@ -10,6 +10,7 @@ class_name StatusEffectsUI extends HBoxContainer
 	"confusion": $Tranquility,
 	"blindness": $Panic,
 	"panic": $Prayer,
+	"rage": $Rage, # TODO: Make Icon
 }
 
 

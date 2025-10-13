@@ -66,7 +66,7 @@ var type_counts: Dictionary = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	GameManager.start_combat.connect(_on_start_combat)
+	SignalBus.start_combat.connect(_on_start_combat)
 	#player.status_effects.tranquility_gained.connect(_on_tranquility_gained)
 	for row in HEIGHT:
 		cells_to_clear[row] = {}
@@ -357,7 +357,7 @@ func _erase_cleared_cells() -> void:
 		
 
 func deal_damage(damage: float) -> void:
-	enemy.take_damage(damage + player.status_effects.get_status("strength"))
+	enemy.take_damage(damage + player.status_effects.get_status_effect("strength"))
 	if damage >= 3:
 		GameManager.camera.screenshake(5 * min(damage, 8), .5)
 

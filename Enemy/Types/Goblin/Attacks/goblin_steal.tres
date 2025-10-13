@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StealAttack" load_steps=2 format=3 uid="uid://bsil3df6fxv0t"]
+
+[ext_resource type="Script" uid="uid://dpd2ymns6vk18" path="res://Enemy/Attacks/steal_attack.gd" id="1_w0x6n"]
+
+[resource]
+script = ExtResource("1_w0x6n")
+name = &"Goblin Steal"
+description = "Steals 1 gold from you"
+atlas_coords = Vector2i(0, 2)
+metadata/_custom_type_script = "uid://dpd2ymns6vk18"

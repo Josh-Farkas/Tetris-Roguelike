@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b26nxkve7vliu"]
 
 [ext_resource type="Script" uid="uid://cuqmsw0r1fdj5" path="res://Components/StatusEffects/status_effects_ui.gd" id="1_xhgcg"]
-[ext_resource type="Texture2D" uid="uid://cxgns3d5s4kc8" path="res://Components/effects_spritesheet.png" id="2_hlc4f"]
+[ext_resource type="Texture2D" uid="uid://cxgns3d5s4kc8" path="res://Piece/effects_spritesheet.png" id="2_hlc4f"]
 [ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="3_jd4bx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nc38l"]
@@ -222,6 +222,26 @@ texture = SubResource("AtlasTexture_vbywd")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="Prayer"]
+layout_mode = 2
+theme = ExtResource("3_jd4bx")
+theme_type_variation = &"SmallTextLabel"
+text = "0"
+
+[node name="Rage" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 1
+
+[node name="Icon" type="TextureRect" parent="Rage"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+texture = SubResource("AtlasTexture_vbywd")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="Rage"]
 layout_mode = 2
 theme = ExtResource("3_jd4bx")
 theme_type_variation = &"SmallTextLabel"

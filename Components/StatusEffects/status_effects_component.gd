@@ -6,46 +6,50 @@ signal status_changed(new_status: Dictionary)
 var status_effects: Dictionary = {
 	"strength": 0, # flat damage increase to attacks
 	"weakness": 0, # flat damage reduction to attacks ?
-	"prayer": 0, #
 	"accuracy": 0, # flat damage increase to RANGED attacks
-	"tranquility": 0, # 
 	"poison": 0, # Take damage every time a piece is placed, then reduced by 1
 	"confusion": 0, # Piece rotation is randomized and spinning ?
 	"blindness": 0, # Can't see board? can't see up next?
-	"panic": 0 # 
+	"tranquility": 0, # makes the game tick slower, -1 per piece placed
+	"panic": 0, # makes the game tick faster, -1 per piece placed
+	"rage": 0, # makes time based enemies attack faster
 }:
 	set(value):
 		status_effects = value
 		status_changed.emit(value)
 
+
 func _ready() -> void:
 	SignalBus.piece_placed.connect(_on_piece_placed)
 
 
-func get_status(status: StringName) -> int:
+func get_status_effect(status: StringName) -> int:
 	return status_effects[status]
 
 
-func gain_effect(status: StringName, amount: int) -> void:
+func gain_status_effect(status: StringName, amount: int) -> void:
 	status_effects[status] += amount
 	if status == "tranquility":
 		tranquility_changed.emit(amount)
+	status_changed.emit()
 
 
-func lose_effect(status: StringName, amount: int) -> void:
-	gain_effect(status, -amount)
-	
-	
+func lose_status_effect(status: StringName, amount: int) -> void:
+	gain_status_effect(status, -amount)
+
+
 func set_effect(status: StringName, value: int) -> void:
 	if status == "tranquility":
 		tranquility_changed.emit(value - status_effects[status])
 	status_effects[status] = value
+	status_changed.emit()
 
-	
-func mult_effect(status: StringName, value: int) -> void:
+
+func mult_status_effect(status: StringName, value: int) -> void:
 	if status == "tranquility":
 		tranquility_changed.emit(status_effects[status] * value - status_effects[status])
 	status_effects[status] *= value
+	status_changed.emit()
 
 
 func reset() -> void:
@@ -60,9 +64,10 @@ func reset() -> void:
 		"blindness": 0,
 		"panic": 0
 	}
+	status_changed.emit()
 
 
 func _on_piece_placed(amount_placed: int) -> void:
 	if status_effects.poison > 0:
-		status_effects.poison -= 1
-	status_effects.tranquility = int(status_effects.tranquility/2)
+		lose_status_effect("poison", 1)
+	mult_status_effect("tranquility", .5)

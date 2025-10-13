@@ -32,7 +32,7 @@ const shape_colors: Dictionary[Shape, PieceColor] = {
 	Shape.I: PieceColor.LIGHT_BLUE,
 	Shape.O: PieceColor.YELLOW,
 	Shape.T: PieceColor.PURPLE,
-	Shape.J: PieceColor.LIGHT_BLUE,
+	Shape.J: PieceColor.BLUE,
 	Shape.L: PieceColor.ORANGE,
 	Shape.S: PieceColor.GREEN,
 	Shape.Z: PieceColor.RED,

@@ -11,21 +11,22 @@ gold = 1000
 [node name="Deck" type="Node" parent="."]
 
 [node name="I1" parent="Deck" instance=ExtResource("1_epqda")]
+color = 2
 coords = Vector2i(4, 0)
 
 [node name="O1" parent="Deck" instance=ExtResource("1_epqda")]
 shape = 1
-color = 1
+color = 6
 coords = Vector2i(4, 0)
 
 [node name="T1" parent="Deck" instance=ExtResource("1_epqda")]
 shape = 2
-color = 3
+color = 5
 coords = Vector2i(4, 0)
 
 [node name="J1" parent="Deck" instance=ExtResource("1_epqda")]
 shape = 3
-color = 2
+color = 1
 coords = Vector2i(4, 0)
 
 [node name="L1" parent="Deck" instance=ExtResource("1_epqda")]
@@ -35,11 +36,11 @@ coords = Vector2i(4, 0)
 
 [node name="S1" parent="Deck" instance=ExtResource("1_epqda")]
 shape = 5
-color = 5
 coords = Vector2i(4, 0)
 
 [node name="Z1" parent="Deck" instance=ExtResource("1_epqda")]
 shape = 6
+color = 3
 coords = Vector2i(4, 0)
 
 [node name="StatusEffectsComponent" parent="." instance=ExtResource("3_x2uet")]

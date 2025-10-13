@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://sj0tqjb7rbek"]
 
 [ext_resource type="PackedScene" uid="uid://ctyh7adfur1qa" path="res://Enemy/Types/Goblin/goblin.tscn" id="2_0ud55"]
-[ext_resource type="Texture2D" uid="uid://cro4yfgh0wcxx" path="res://Enemy/enemy_attack_spritesheet.png" id="2_s64x8"]
+[ext_resource type="Texture2D" uid="uid://cro4yfgh0wcxx" path="res://Enemy/Attacks/enemy_attack_spritesheet.png" id="2_s64x8"]
 [ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Tetris/camera.gd" id="3_0ud55"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ud55"]

@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="GoblinAttack" load_steps=2 format=3 uid="uid://bjc6mk54054xj"]
+[gd_resource type="Resource" script_class="BasicAttack" load_steps=2 format=3 uid="uid://bjc6mk54054xj"]
 
-[ext_resource type="Script" uid="uid://dbpcyowhb7a5l" path="res://Enemy/basic_attack.gd" id="1_savdl"]
+[ext_resource type="Script" uid="uid://dbpcyowhb7a5l" path="res://Enemy/Attacks/basic_attack.gd" id="1_16udt"]
 
 [resource]
-script = ExtResource("1_savdl")
-name = "Goblin Attack"
+script = ExtResource("1_16udt")
+name = &"Goblin Attack"
 damage = 2
+description = "A simple attack that does 2 damage"
 metadata/_custom_type_script = "uid://dbpcyowhb7a5l"

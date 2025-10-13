@@ -3,7 +3,7 @@ class_name HealthBarComponent extends VBoxContainer
 @onready var health_label: Label = $HBoxContainer/VBoxContainer/HealthLabel
 @onready var block_label: Label = $HBoxContainer/VBoxContainer/BlockLabel
 
-var max_health: int = 1
+var max_health: int
 var health: int = max_health
 var block: int = 0
 

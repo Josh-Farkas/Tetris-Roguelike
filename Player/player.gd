@@ -39,6 +39,7 @@ func take_damage(amount: int) -> void:
 	var health_dmg: int = amount - blocked_dmg
 	block -= blocked_dmg
 	health -= health_dmg
+	print("Player took %s damage" % health_dmg)
 	if health < 0:
 		die()
 

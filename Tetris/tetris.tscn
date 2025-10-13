@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://senbltd2wd67"]
+[gd_scene load_steps=6 format=3 uid="uid://senbltd2wd67"]
 
 [ext_resource type="PackedScene" uid="uid://bbrd54v64ej37" path="res://Tetris/tetris_game.tscn" id="1_3glsc"]
 [ext_resource type="Texture2D" uid="uid://mh0bu0gsc528" path="res://Resources/Border.png" id="2_geatn"]
-[ext_resource type="PackedScene" uid="uid://ctyh7adfur1qa" path="res://Enemy/Types/Goblin/goblin.tscn" id="4_7vx4i"]
 [ext_resource type="PackedScene" uid="uid://wl7bb7ny1vxo" path="res://Player/player_ui.tscn" id="5_w5yr4"]
 [ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Tetris/camera.gd" id="6_e4ng2"]
 
@@ -83,10 +82,6 @@ layout_mode = 2
 [node name="EnemyPosition" type="Control" parent="HBoxContainer/VBoxContainer" groups=["enemy_position"]]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Goblin" parent="HBoxContainer/VBoxContainer/EnemyPosition" instance=ExtResource("4_7vx4i")]
-layout_mode = 0
-anchors_preset = 0
 
 [node name="Camera" type="Camera2D" parent="." groups=["camera"]]
 process_mode = 3

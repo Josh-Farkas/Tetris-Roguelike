@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://donqabth7kcj6"]
 
-[ext_resource type="Script" uid="uid://dywn1rbtq3v8r" path="res://Components/health_bar_component.gd" id="1_bm4lb"]
+[ext_resource type="Script" uid="uid://dywn1rbtq3v8r" path="res://Components/HealthBar/health_bar_component.gd" id="1_bm4lb"]
 [ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_h40uw"]
 [ext_resource type="Texture2D" uid="uid://bjh8v1uarq372" path="res://Player/Sprites/healthbar_base.png" id="1_uri8c"]
 [ext_resource type="Texture2D" uid="uid://dvry24kgtnbeg" path="res://Player/Sprites/healthbar_progress.png" id="2_7jtid"]

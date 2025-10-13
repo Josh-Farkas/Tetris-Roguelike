@@ -1,15 +1,14 @@
 extends Node
 
-signal start_combat
 
-const enemy_pools = {
-	"easy": [
-		preload("res://Enemy/Types/Goblin/goblin.gd"),
-	],
-	"hard": [],
-	"elite": [],
-	"boss": [],
-}
+const easy_pool: Array[PackedScene] = [
+	#preload("res://Enemy/Types/Goblin/goblin.tscn"),
+	preload("res://Enemy/Types/Minotaur/minotaur.tscn"),
+]
+const hard_pool: Array[PackedScene] = []
+
+const elite_pool: Array[PackedScene] = []
+const boss_pool: Array[PackedScene] = []
 
 const scenes: Dictionary[StringName, PackedScene] = {
 	"Shop": preload("res://Shop/shop.tscn"),
@@ -28,14 +27,16 @@ var loaded_scenes: Dictionary[StringName, Node] = {}
 var board_height := 22 # two hidden rows above for pieces to spawn
 var board_width := 10
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	SignalBus.enemy_killed.connect(_on_enemy_killed)
 	add_child(player)
 	main = get_tree().get_first_node_in_group("main")
 	if main != null:
 		change_scene("Shop")
 	else:
 		push_error("Failed to load main scene")
+
 
 func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:
 	if active_scene != null:
@@ -64,7 +65,7 @@ func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:
 	SignalBus.changed_scenes.emit(old_scene, active_scene)
 
 
-func on_enemy_killed() -> void:
+func _on_enemy_killed() -> void:
 	level_num += 1
 	player.get_tree().call_group("cell", "unexhaust")
 	player.set_block(0)
@@ -73,16 +74,20 @@ func on_enemy_killed() -> void:
 	
 func next_combat() -> void:
 	# Choose Enemy
-	var pool: Array
+	var pool: Array[PackedScene]
 	if level_num in [1, 2]:
-		pool = enemy_pools.easy
+		pool = easy_pool
 	elif level_num in [3, 4]:
-		pool = enemy_pools.hard
-	elif level_num >= 5:
-		pool = enemy_pools.bossc
+		pool = hard_pool
+	else:
+		pool = boss_pool
 		
+	if pool != []:
+		enemy = pool.pick_random().instantiate()
+	else:
+		enemy = load("res://Enemy/Types/Goblin/goblin.tscn").instantiate()
+	
 	change_scene("TetrisMain", false)
-	enemy = load("res://Enemy/Types/Goblin/goblin.tscn").instantiate()
-	GameManager.enemy = enemy
 	get_tree().get_first_node_in_group("enemy_position").add_child(enemy)
-	start_combat.emit()
+	GameManager.enemy = enemy
+	SignalBus.start_combat.emit()

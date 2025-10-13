@@ -1,23 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctyh7adfur1qa"]
+[gd_scene load_steps=7 format=3 uid="uid://ctyh7adfur1qa"]
 
 [ext_resource type="Script" uid="uid://cp0aafuqyoep4" path="res://Enemy/Types/Goblin/goblin.gd" id="1_n5y13"]
 [ext_resource type="PackedScene" uid="uid://cb4bmklu6vb1g" path="res://Enemy/enemyUI.tscn" id="1_psk8t"]
-[ext_resource type="Resource" uid="uid://dulpa3qbawnjs" path="res://Enemy/Types/Goblin/GoblinResource.tres" id="2_olx3y"]
+[ext_resource type="Script" uid="uid://b6xtf2cvkspru" path="res://Enemy/Attacks/enemy_attack.gd" id="2_hul14"]
+[ext_resource type="Resource" uid="uid://bjc6mk54054xj" path="res://Enemy/Types/Goblin/Attacks/goblin_attack.tres" id="3_xp7mt"]
+[ext_resource type="Resource" uid="uid://bsil3df6fxv0t" path="res://Enemy/Types/Goblin/Attacks/goblin_steal.tres" id="4_kounr"]
+[ext_resource type="Texture2D" uid="uid://w53pnmbr0xts" path="res://Enemy/Types/Goblin/Goblin.png" id="6_hul14"]
 
 [node name="Goblin" type="MarginContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1644.0
-offset_bottom = -929.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 276.0
+offset_bottom = 151.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_n5y13")
-resource = ExtResource("2_olx3y")
+attack_list = Array[ExtResource("2_hul14")]([ExtResource("3_xp7mt"), ExtResource("4_kounr")])
+max_health = 50.0
 
 [node name="EnemyBase" parent="." instance=ExtResource("1_psk8t")]
 layout_mode = 2
+
+[node name="Sprite" parent="EnemyBase/Background" index="0"]
+texture = ExtResource("6_hul14")
 
 [editable path="EnemyBase"]

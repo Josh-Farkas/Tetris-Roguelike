@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BasicAttack" load_steps=2 format=3 uid="uid://dmnfvcfb8awnx"]
+
+[ext_resource type="Script" uid="uid://dbpcyowhb7a5l" path="res://Enemy/Attacks/basic_attack.gd" id="1_54v8u"]
+
+[resource]
+script = ExtResource("1_54v8u")
+damage = 5
+name = &"Minotaur Attack"
+description = "Charges in a line and does 5 damage"
+atlas_coords = Vector2i(1, 0)
+metadata/_custom_type_script = "uid://dbpcyowhb7a5l"
