@@ -60,7 +60,7 @@ var type_counts: Dictionary = {
 	"SCIENCE": 0,
 	"ARMOR": 0,
 	"EXPLOSIVE": 0,
-	"INSTRUMENT": 0,
+	"MUSIC": 0,
 	"MISC": 0,
 }
 
@@ -283,7 +283,7 @@ func spawn_piece() -> void:
 		if cell.effect_atlas_coords == Vector2i.ZERO:
 			if randf() < coin_chance:
 				cell.effect_atlas_coords = Vector2i(0, 1)
-		if cell.unique:
+		if cell.fragile:
 			cell.exhausted = true
 	_draw_next()
 	

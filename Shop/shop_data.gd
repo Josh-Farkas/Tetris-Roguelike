@@ -1,6 +1,6 @@
 class_name ShopData extends Resource
 
-const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
+const tileset: TileSet = preload("res://Piece/piece_tileset.tres")
 
 @export_category("Effects")
 @export var prices: Dictionary = {
@@ -80,12 +80,12 @@ static func _generate_effects() -> void:
 		var tile_data := source.get_tile_data(coords, 0)
 		var tile_effect: StringName = tile_data.get_custom_data("effect")
 		var effect_type: Array = tile_data.get_custom_data("effect type")
-		var unique: bool = tile_data.get_custom_data("unique")
+		var fragile: bool = tile_data.get_custom_data("fragile")
 		if tile_effect == "none": continue
 		effect_types[tile_effect] = effect_type
 		if tile_effect in effect_descriptions:
 			effect_descriptions[tile_effect] = effect_descriptions[tile_effect].insert(0, "[center]")
-			if unique: effect_descriptions[tile_effect] += "\n[center][color=efd10e]Unique[/color]"
+			if fragile: effect_descriptions[tile_effect] += "\n[center][color=efd10e]Fragile[/color]"
 			effect_descriptions[tile_effect] += "\n" + " ".join(effect_type)
 			for type: StringName in effect_type_colors:
 				effect_descriptions[tile_effect] = effect_descriptions[tile_effect] \

@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=4 uid="uid://cs8oonut0l0yb"]
 
 [ext_resource type="Script" uid="uid://m6bcgs1n3foa" path="res://Shop/shop.gd" id="1_swwhu"]
-[ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Resources/piece_tileset.tres" id="2_khg2u"]
+[ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Piece/piece_tileset.tres" id="2_khg2u"]
 [ext_resource type="PackedScene" uid="uid://bvcwtv6baarij" path="res://Shop/UIElements/effect_description.tscn" id="3_f1bv0"]
 [ext_resource type="PackedScene" uid="uid://wl7bb7ny1vxo" path="res://Player/player_ui.tscn" id="3_i7h23"]
 [ext_resource type="Texture2D" uid="uid://b7yyvyv6yun84" path="res://Shop/UIElements/Refresh Text.png" id="6_5bgtm"]
 [ext_resource type="Texture2D" uid="uid://cduxk5vj18wca" path="res://Shop/UIElements/Next Text.png" id="7_1iuoq"]
-[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Tetris/camera.gd" id="7_so0yi"]
+[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Components/camera.gd" id="7_so0yi"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_mfqvr"]
 device = -1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3mjpfl6gtykk"]
 
 [ext_resource type="Script" uid="uid://d3hgf7nhmdj8j" path="res://Piece/piece.gd" id="1_o8it0"]
-[ext_resource type="Texture2D" uid="uid://ckftn40sng1b6" path="res://Tetris/Sprites/pieces_spritesheet.png" id="2_cn2wq"]
+[ext_resource type="Texture2D" uid="uid://ckftn40sng1b6" path="res://Piece/Sprites/pieces_spritesheet.png" id="2_cn2wq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1kabt"]
 texture = ExtResource("2_cn2wq")

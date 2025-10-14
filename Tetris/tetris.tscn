@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://senbltd2wd67"]
 
 [ext_resource type="PackedScene" uid="uid://bbrd54v64ej37" path="res://Tetris/tetris_game.tscn" id="1_3glsc"]
-[ext_resource type="Texture2D" uid="uid://mh0bu0gsc528" path="res://Resources/Border.png" id="2_geatn"]
+[ext_resource type="Texture2D" uid="uid://mh0bu0gsc528" path="res://Assets/Border.png" id="2_geatn"]
 [ext_resource type="PackedScene" uid="uid://wl7bb7ny1vxo" path="res://Player/player_ui.tscn" id="5_w5yr4"]
-[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Tetris/camera.gd" id="6_e4ng2"]
+[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Components/camera.gd" id="6_e4ng2"]
 
 [sub_resource type="GDScript" id="GDScript_cnbue"]
 script/source = "extends Control

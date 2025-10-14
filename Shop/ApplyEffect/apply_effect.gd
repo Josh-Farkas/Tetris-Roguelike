@@ -49,7 +49,7 @@ func _place_effect() -> void:
 	cell.unexhausted_atlas_coords = selected_effect
 	
 	var source: TileSetAtlasSource = effect_layer.tile_set.get_source(1)
-	cell.unique = source.get_tile_data(selected_effect, 0).get_custom_data("unique")
+	cell.fragile = source.get_tile_data(selected_effect, 0).get_custom_data("fragile")
 	
 	selected_effect = Vector2i.ZERO
 	

@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://bjhbdxnegran2"]
 
-[ext_resource type="FontFile" uid="uid://k6pwleas5w61" path="res://Resources/Minecraftia-Regular.ttf" id="2_cch3w"]
+[ext_resource type="FontFile" uid="uid://k6pwleas5w61" path="res://Assets/Minecraftia-Regular.ttf" id="2_cch3w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f0ekb"]
 bg_color = Color(0.1, 0.1, 0.1, 0.8)

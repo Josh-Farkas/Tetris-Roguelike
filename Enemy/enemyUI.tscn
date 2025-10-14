@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cb4bmklu6vb1g"]
 
-[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="1_1y72l"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Assets/ui_theme.tres" id="1_1y72l"]
 [ext_resource type="Texture2D" uid="uid://dhcbdid3s2px3" path="res://Tetris/Sprites/Background1.png" id="2_3555w"]
 [ext_resource type="PackedScene" uid="uid://donqabth7kcj6" path="res://Components/HealthBar/health_bar_component.tscn" id="2_n87kx"]
 [ext_resource type="PackedScene" uid="uid://dbgaur6dn3lu3" path="res://Components/StatusEffects/status_effects_component.tscn" id="5_quc1g"]

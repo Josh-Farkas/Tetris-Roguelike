@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c8ni1m32xy6tb"
-path="res://.godot/imported/FFFFORWA.TTF-e23416ba60efa95e8cea014ddef613bf.fontdata"
+uid="uid://k6pwleas5w61"
+path="res://.godot/imported/Minecraftia-Regular.ttf-7812a2b8a0cddf53b57b9d4508e15cd9.fontdata"
 
 [deps]
 
-source_file="res://Resources/FFFFORWA.TTF"
-dest_files=["res://.godot/imported/FFFFORWA.TTF-e23416ba60efa95e8cea014ddef613bf.fontdata"]
+source_file="res://Assets/Minecraftia-Regular.ttf"
+dest_files=["res://.godot/imported/Minecraftia-Regular.ttf-7812a2b8a0cddf53b57b9d4508e15cd9.fontdata"]
 
 [params]
 
@@ -21,6 +21,7 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
+modulate_color_glyphs=false
 hinting=1
 subpixel_positioning=1
 keep_rounding_remainders=true

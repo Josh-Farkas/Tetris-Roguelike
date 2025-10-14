@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=4 uid="uid://cybe7i2m3bh0p"]
 
 [ext_resource type="Script" uid="uid://dy6cd1s7h7c5f" path="res://Shop/DeckDisplay/deck_display.gd" id="1_2m1x6"]
-[ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Resources/piece_tileset.tres" id="1_gaxhg"]
+[ext_resource type="TileSet" uid="uid://dg1aoxqb72r4p" path="res://Piece/piece_tileset.tres" id="1_gaxhg"]
 [ext_resource type="PackedScene" uid="uid://bvcwtv6baarij" path="res://Shop/UIElements/effect_description.tscn" id="3_icqlq"]
 
 [node name="DeckDisplay" type="MarginContainer"]

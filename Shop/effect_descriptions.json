@@ -59,9 +59,10 @@
 	"horus' eye (down)": "Copies the effect of the cell below this",
 	"horus' eye (up)": "Copies the effect of the cell above this",
 	"fishie": "On Clear: heal 2 hp",
-	"witch's hut": "Something to do with poison",
+	"witch hut": "Something to do with poison",
 	"medkit": "On Clear: heal 5 hp",
 	"glass sword": "On Clear: Deal 10 damage",
 	"rapier": "On Clear: Deal 1 damage 3 times",
-	"lance": "TODO"
+	"lance": "TODO",
+	"scythe": "TODO",
 }

@@ -2,7 +2,7 @@ class_name PlayerUI extends PanelContainer
 
 @onready var player: Player = GameManager.player
 @onready var health_bar: HealthBarComponent = $MarginContainer/VBoxContainer/HealthBarComponent
-@onready var status_effects_ui: StatusEffectsUI = $MarginContainer/VBoxContainer/HealthBarComponent/StatusEffectsUI
+@onready var status_effects_ui: StatusEffectsUI = health_bar.get_node("StatusEffectsUI")
 
 func _ready() -> void:
 	player.max_health_changed.connect(_update_ui)

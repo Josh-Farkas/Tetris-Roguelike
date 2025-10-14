@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bm7duwu311mfl"
-path="res://.godot/imported/Early GameBoy.ttf-b7618ef2bbf227afe1d8ae878e032b6d.fontdata"
+uid="uid://c8ni1m32xy6tb"
+path="res://.godot/imported/FFFFORWA.TTF-a4bfd0d14c49695dad3664032623e596.fontdata"
 
 [deps]
 
-source_file="res://Resources/Early GameBoy.ttf"
-dest_files=["res://.godot/imported/Early GameBoy.ttf-b7618ef2bbf227afe1d8ae878e032b6d.fontdata"]
+source_file="res://Assets/FFFFORWA.TTF"
+dest_files=["res://.godot/imported/FFFFORWA.TTF-a4bfd0d14c49695dad3664032623e596.fontdata"]
 
 [params]
 
@@ -21,6 +21,7 @@ msdf_pixel_range=8
 msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
+modulate_color_glyphs=false
 hinting=1
 subpixel_positioning=1
 keep_rounding_remainders=true

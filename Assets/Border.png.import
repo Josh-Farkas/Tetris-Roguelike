@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxgns3d5s4kc8"
-path="res://.godot/imported/effects_spritesheet.png-c884e4cc8a87ba00fbdb71fd49481bc6.ctex"
+uid="uid://mh0bu0gsc528"
+path="res://.godot/imported/Border.png-a28cad03bbcf48870e769e774d8aa370.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Piece/effects_spritesheet.png"
-dest_files=["res://.godot/imported/effects_spritesheet.png-c884e4cc8a87ba00fbdb71fd49481bc6.ctex"]
+source_file="res://Assets/Border.png"
+dest_files=["res://.godot/imported/Border.png-a28cad03bbcf48870e769e774d8aa370.ctex"]
 
 [params]
 
