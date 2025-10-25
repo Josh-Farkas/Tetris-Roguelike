@@ -78,8 +78,9 @@ static func _generate_effects() -> void:
 	for tile_index in source.get_tiles_count():
 		var coords: Vector2i = source.get_tile_id(tile_index)
 		var tile_data := source.get_tile_data(coords, 0)
-		var tile_effect: StringName = tile_data.get_custom_data("effect")
+		var tile_effect_name: StringName = tile_data.get_custom_data("effect name")
 		var effect_type: Array = tile_data.get_custom_data("effect type")
+<<<<<<< Updated upstream
 		var unique: bool = tile_data.get_custom_data("unique")
 		if tile_effect == "none": continue
 		effect_types[tile_effect] = effect_type
@@ -87,15 +88,24 @@ static func _generate_effects() -> void:
 			effect_descriptions[tile_effect] = effect_descriptions[tile_effect].insert(0, "[center]")
 			if unique: effect_descriptions[tile_effect] += "\n[center][color=efd10e]Unique[/color]"
 			effect_descriptions[tile_effect] += "\n" + " ".join(effect_type)
+=======
+		var fragile: bool = tile_data.get_custom_data("fragile")
+		if tile_effect_name == "none": continue
+		effect_types[tile_effect_name] = effect_type
+		if tile_effect_name in effect_descriptions:
+			effect_descriptions[tile_effect_name] = effect_descriptions[tile_effect_name].insert(0, "[center]")
+			if fragile: effect_descriptions[tile_effect_name] += "\n[center][color=efd10e]Fragile[/color]"
+			effect_descriptions[tile_effect_name] += "\n" + " ".join(effect_type)
+>>>>>>> Stashed changes
 			for type: StringName in effect_type_colors:
-				effect_descriptions[tile_effect] = effect_descriptions[tile_effect] \
+				effect_descriptions[tile_effect_name] = effect_descriptions[tile_effect_name] \
 						.replace(type, "[color=%s][%s][/color]" % [effect_type_colors[type], type])
 		else:
-			effect_descriptions[tile_effect] = ""
+			effect_descriptions[tile_effect_name] = ""
 			
-		effect_atlas_coords[tile_effect] = coords
+		effect_atlas_coords[tile_effect_name] = coords
 		var tile_rarity: String = tile_data.get_custom_data("rarity")
-		effects[tile_rarity].append(tile_effect)
+		effects[tile_rarity].append(tile_effect_name)
 
 
 static func _format_effect_descriptions() -> void:

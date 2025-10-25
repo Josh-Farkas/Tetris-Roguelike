@@ -43,6 +43,13 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 32
 text = "Exit"
 
+[node name="TestSettings" type="TextEdit" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Test Setting"
+
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/TestSettings" to="." method="_on_test_settings_text_changed"]

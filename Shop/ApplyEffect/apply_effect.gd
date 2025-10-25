@@ -31,9 +31,9 @@ func _overlay_effect() -> void:
 		if effect_layer.get_cell_tile_data(selected_effect_coords) != null:
 			effect_layer.set_cell(selected_effect_coords, 1, Constants.EFFECT_COORDS.NONE)
 		var cell := effect_layer.get_cell_tile_data(coords)
-		can_place = cell != null and cell.get_custom_data("effect") == "none"
+		can_place = cell != null and cell.get_custom_data("effect") == null
 	
-		if cell == null or cell.get_custom_data("effect") != "none":
+		if cell == null or cell.get_custom_data("effect") != null:
 			selected_effect_coords = Vector2i.ZERO
 			return
 
@@ -45,11 +45,18 @@ func _place_effect() -> void:
 	var coords: Vector2i = effect_layer.local_to_map(effect_layer.get_local_mouse_position())
 	if effect_layer.get_cell_tile_data(coords) == null: return
 	var cell: Cell = deck_display.cell_coords[coords]
+	var source: TileSetAtlasSource = effect_layer.tile_set.get_source(1)
+	cell.set_effect(source.get_tile_data(selected_effect, 0).get_custom_data("effect").new())
 	cell.effect_atlas_coords = selected_effect
 	cell.unexhausted_atlas_coords = selected_effect
 	
+<<<<<<< Updated upstream
 	var source: TileSetAtlasSource = effect_layer.tile_set.get_source(1)
 	cell.unique = source.get_tile_data(selected_effect, 0).get_custom_data("unique")
+=======
+	cell.fragile = source.get_tile_data(selected_effect, 0).get_custom_data("fragile")
+>>>>>>> Stashed changes
+	
 	
 	selected_effect = Vector2i.ZERO
 	

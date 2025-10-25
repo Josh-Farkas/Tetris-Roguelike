@@ -152,8 +152,8 @@ func _get_effect_tilemap_coords(effect: String) -> Vector2i:
 	for tile_index in source.get_tiles_count():
 		var coords: Vector2i = source.get_tile_id(tile_index)
 		var tile_data := source.get_tile_data(coords, 0)
-		var tile_effect: StringName = tile_data.get_custom_data("effect")
-		if tile_effect == effect:
+		var tile_effect_name: StringName = tile_data.get_custom_data("effect name")
+		if tile_effect_name == effect:
 			return coords
 	push_error("Effect %s Not Found" % effect)
 	return Vector2i.ZERO

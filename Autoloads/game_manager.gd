@@ -3,7 +3,7 @@ extends Node
 
 const easy_pool: Array[PackedScene] = [
 	#preload("res://Enemy/Types/Goblin/goblin.tscn"),
-	preload("res://Enemy/Types/Minotaur/minotaur.tscn"),
+	#preload("res://Enemy/Types/Minotaur/minotaur.tscn"),
 ]
 const hard_pool: Array[PackedScene] = []
 
@@ -16,7 +16,11 @@ const scenes: Dictionary[StringName, PackedScene] = {
 	"ApplyEffectMenu": preload("res://Shop/ApplyEffect/apply_effect.tscn"),
 }
 
-var player: Player = preload("res://Player/player.tscn").instantiate()
+# Settings/Save data
+var settings: Settings
+
+# Game Variables
+@onready var player: Player = preload("res://Player/player.tscn").instantiate()
 var main: Node
 var enemy: Enemy
 var active_scene: Node
@@ -28,8 +32,19 @@ var board_height := 22 # two hidden rows above for pieces to spawn
 var board_width := 10
 
 
+func _init() -> void:
+	settings = Settings.load_settings()
+	if settings == null:
+		settings = Settings.new()
+		settings.save_settings()
+
 func _ready() -> void:
+	Effect.register_effects()
+	
+	# Signals
 	SignalBus.enemy_killed.connect(_on_enemy_killed)
+	
+	# Init Scene Tree
 	add_child(player)
 	main = get_tree().get_first_node_in_group("main")
 	if main != null:

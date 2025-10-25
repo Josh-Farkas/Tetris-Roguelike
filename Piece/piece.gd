@@ -49,16 +49,23 @@ enum EffectType {
 
 @export var shape: Shape
 @export var color: PieceColor
-@export var coords: Vector2i
+var cells: Array[Cell] = []
+var coords: Vector2i:
+	set(value):
+		# move all cells when this moves
+		for cell: Cell in cells:
+			cell.coords += value - coords
+		coords = value
 @export var rotation: int = 0
-@export var cells: Array[Cell] = []
 
-var cell_matrix: Array = []
-var shadow_y: int = coords.y
+var cell_matrix: Array # Array[Array[Cell]]
+var shadow_offset: Vector2i = Vector2i(0, coords.y)
 var display_offset: bool = false
+var active := false
 
 func _ready() -> void:
 	display_offset = shape in [Piece.Shape.T, Piece.Shape.L, Piece.Shape.J, Piece.Shape.S, Piece.Shape.Z]
+	#if cells == []:
 	_create_cells()
 
 
@@ -79,6 +86,21 @@ func _create_cells() -> void:
 			$Cells.add_child(cell)
 			cell_matrix[row][col] = cell
 
+func copy() -> Piece:
+	var copy: Piece = duplicate()
+	# copy cell matrix with copied cells
+	for i in range(len(cell_matrix)):
+		for j in range(len(cell_matrix[i])):
+			var cell: Cell = cell_matrix[i][j]
+			if cell != null:
+				var c: Cell = cell.copy()
+				copy.cells.append(c)
+				copy.cell_matrix[i][j] = c
+	copy.coords = coords
+	return copy
+
+func move(dir: Vector2i) -> void:
+	coords += dir
 
 func rotate(rot: int = 1) -> void:
 	if rot == 0: return
@@ -92,8 +114,12 @@ func rotate(rot: int = 1) -> void:
 	
 	for row: int in range(len(cell_matrix)):
 		for col: int in range(len(cell_matrix[row])):
-			if cell_matrix[row][col] == null: continue
-			cell_matrix[row][col].offset = Vector2i(col, row)
+			var cell: Cell = cell_matrix[row][col]
+			if cell == null: continue
+			# move cell coords based on change in offset
+			cell.coords -= cell.offset
+			cell.offset = Vector2i(col, row)
+			cell.coords += cell.offset
 
 
 func set_rotation(rot: int) -> void:
@@ -108,6 +134,7 @@ func _rotate_array(arr: Array) -> Array:
 			row.append(arr[len(arr) - j - 1][i])
 		new_arr.append(row)
 	return new_arr
+
 
 func _rotate_array_inv(arr: Array) -> Array:
 	var new_arr: Array = []

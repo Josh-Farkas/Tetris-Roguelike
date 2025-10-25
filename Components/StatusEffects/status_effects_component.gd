@@ -1,7 +1,7 @@
 class_name StatusEffectsComponent extends Node
 
 signal tranquility_changed(amount: int)
-signal status_changed(new_status: Dictionary)
+signal status_changed
 
 var status_effects: Dictionary = {
 	"strength": 0, # flat damage increase to attacks
@@ -64,7 +64,7 @@ func reset() -> void:
 		"blindness": 0,
 		"panic": 0
 	}
-	status_changed.emit()
+	status_changed.emit(status_effects)
 
 
 func _on_piece_placed(amount_placed: int) -> void:

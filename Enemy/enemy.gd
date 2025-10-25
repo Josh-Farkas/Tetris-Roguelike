@@ -9,7 +9,6 @@ extends MarginContainer
 @onready var status_effects_ui: StatusEffectsUI = health_bar.get_node("StatusEffectsUI")
 @onready var status_effects: StatusEffectsComponent = $EnemyBase/StatusEffectsComponent
 @onready var sprite: TextureRect = $EnemyBase/Background/Sprite
-@onready var player: Player = GameManager.player
 @export var attack_list: Array[EnemyAttack]
 var attacks: Dictionary[StringName, EnemyAttack]
 
@@ -37,7 +36,6 @@ var base_layer: TileMapLayer
 	
 func _ready() -> void:
 	# Signals
-	print("ENEMY READY")
 	SignalBus.start_combat.connect(_start_combat)
 	SignalBus.piece_placed.connect(_on_piece_placed)
 	status_effects.status_changed.connect(_on_status_changed)
@@ -92,9 +90,8 @@ func _on_piece_placed(pieces_placed: int) -> void:
 	take_damage(status_effects.status_effects.poison)
 
 
-func _on_status_changed(new_status: Dictionary[StringName, int]) -> void:
-	print("status changed")
-	status_effects_ui.update_ui(new_status)
+func _on_status_changed() -> void:
+	status_effects_ui.update_ui(status_effects.status_effects)
 		
 	
 

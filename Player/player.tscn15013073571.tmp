@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7ok5rrx2yw6l"]
+
+[ext_resource type="Script" uid="uid://ba2dldqlhtn8e" path="res://Player/player.gd" id="1_7yjx8"]
+[ext_resource type="PackedScene" uid="uid://b3mjpfl6gtykk" path="res://Piece/piece.tscn" id="1_epqda"]
+[ext_resource type="PackedScene" uid="uid://dbgaur6dn3lu3" path="res://Components/StatusEffects/status_effects_component.tscn" id="3_x2uet"]
+
+[node name="Player" type="Node"]
+script = ExtResource("1_7yjx8")
+gold = 1000
+
+[node name="Deck" type="Node" parent="."]
+
+[node name="I1" parent="Deck" instance=ExtResource("1_epqda")]
+color = 2
+coords = Vector2i(4, 0)
+
+[node name="O1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 1
+color = 6
+coords = Vector2i(4, 0)
+
+[node name="T1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 2
+color = 5
+coords = Vector2i(4, 0)
+
+[node name="J1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 3
+color = 1
+coords = Vector2i(4, 0)
+
+[node name="L1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 4
+color = 4
+coords = Vector2i(4, 0)
+
+[node name="S1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 5
+coords = Vector2i(4, 0)
+
+[node name="Z1" parent="Deck" instance=ExtResource("1_epqda")]
+shape = 6
+color = 3
+coords = Vector2i(4, 0)
+
+[node name="StatusEffectsComponent" parent="." instance=ExtResource("3_x2uet")]

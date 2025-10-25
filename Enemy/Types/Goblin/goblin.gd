@@ -13,7 +13,7 @@ func _on_piece_placed(pieces_placed: int) -> void:
 	super(pieces_placed)
 	attack()
 
-
+@warning_ignore("integer_division")
 func die() -> void:
 	super()
-	player.gold += int(gold_stolen / 2)
+	GameManager.player.gold += ceil(gold_stolen / 2)

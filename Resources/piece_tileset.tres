@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://dg1aoxqb72r4p"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://dg1aoxqb72r4p"]
 
 [ext_resource type="Texture2D" uid="uid://b44un27d5iyc6" path="res://Tetris/pieces_spritesheet.png" id="1_m1k0o"]
 [ext_resource type="Texture2D" uid="uid://herq6ckya4ky" path="res://Tetris/effects_spritesheet.png" id="2_2v833"]
 [ext_resource type="Texture2D" uid="uid://dmcj2kvtshycl" path="res://Tetris/numbers_spritesheet.png" id="3_sax5j"]
+[ext_resource type="PackedScene" uid="uid://8yeqyyrl3gfx" path="res://Piece/Cell/cell.tscn" id="4_mxn88"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_exv1j"]
 tile_data = PackedInt32Array(0, 262144, 1, 65536, 262144, 1, 131072, 262144, 1, 196608, 262144, 1, 1, 262144, 1, 65537, 262144, 1, 131073, 262144, 1, 196609, 262144, 1, 2, 262144, 1, 65538, 262144, 1, 131074, 262144, 1, 196610, 262144, 1, 3, 262144, 1, 65539, 262144, 1, 131075, 262144, 1, 196611, 262144, 1)
@@ -64,6 +65,25 @@ texture = ExtResource("2_2v833")
 4:0/0/custom_data_0 = &"bomb"
 4:0/0/custom_data_1 = &"rare"
 4:0/0/custom_data_2 = [&"EXPLOSIVE"]
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
+=======
+5:0/0 = 0
+5:0/0/custom_data_0 = &"poison vial"
+5:0/0/custom_data_1 = &"common"
+5:0/0/custom_data_2 = [&"SCIENCE"]
+6:0/0 = 0
+6:0/0/custom_data_0 = &"piggy bank"
+6:0/0/custom_data_1 = &"rare"
+6:0/0/custom_data_2 = [&"ECONOMY"]
+7:0/0 = 0
+7:0/0/custom_data_0 = &"cloud"
+7:0/0/custom_data_1 = &"rare"
+7:0/0/custom_data_2 = [&"MISC"]
+8:0/0 = 0
+8:0/0/custom_data_0 = &"mystery"
+8:0/0/custom_data_1 = &"rare"
+8:0/0/custom_data_2 = [&"MISC"]
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 0:1/0 = 0
 0:1/0/custom_data_0 = &"coin"
 0:1/0/custom_data_1 = &"none"
@@ -110,7 +130,41 @@ texture = ExtResource("2_2v833")
 3:1/0 = 0
 3:1/0/custom_data_0 = &"target"
 3:1/0/custom_data_1 = &"uncommon"
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
 3:1/0/custom_data_2 = [&"SUPPORT", &"RANGED"]
+=======
+3:1/0/custom_data_2 = [&"EXPLOSIVE"]
+4:1/0 = 0
+4:1/0/custom_data_0 = &"grenade"
+4:1/0/custom_data_1 = &"uncommon"
+4:1/0/custom_data_2 = [&"EXPLOSIVE"]
+5:1/0 = 0
+5:1/0/custom_data_1 = &"common"
+5:1/0/custom_data_2 = [&"SCIENCE"]
+6:1/0 = 0
+6:1/0/custom_data_1 = &"rare"
+6:1/0/custom_data_2 = [&"SCIENCE"]
+7:1/0 = 0
+7:1/0/custom_data_0 = &"horus\' eye (down)"
+7:1/0/custom_data_1 = &"rare"
+7:1/0/custom_data_2 = [&"MISC"]
+8:1/0 = 0
+8:1/0/custom_data_0 = &"witch hut"
+8:1/0/custom_data_1 = &"rare"
+8:1/0/custom_data_2 = [&"SHIELD", &"SCIENCE"]
+0:2/0 = 0
+0:2/0/custom_data_0 = &"permanent coin"
+0:2/0/custom_data_1 = &"common"
+0:2/0/custom_data_2 = [&"ECONOMY"]
+1:2/0 = 0
+1:2/0/custom_data_0 = &"helmet"
+1:2/0/custom_data_1 = &"uncommon"
+1:2/0/custom_data_2 = [&"SHIELD"]
+2:2/0 = 0
+2:2/0/custom_data_0 = &"tower"
+2:2/0/custom_data_1 = &"uncommon"
+2:2/0/custom_data_2 = [&"BUILDING"]
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 3:2/0 = 0
 3:2/0/custom_data_0 = &"armor plate"
 3:2/0/custom_data_1 = &"common"
@@ -118,6 +172,7 @@ texture = ExtResource("2_2v833")
 4:2/0 = 0
 4:2/0/custom_data_0 = &"landmine"
 4:2/0/custom_data_1 = &"uncommon"
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
 4:2/0/custom_data_2 = [&"SUPPORT", &"EXPLOSIVE"]
 4:1/0 = 0
 4:1/0/custom_data_0 = &"grenade"
@@ -132,10 +187,46 @@ texture = ExtResource("2_2v833")
 5:2/0/custom_data_0 = &"syringe"
 5:2/0/custom_data_1 = &"uncommon"
 5:2/0/custom_data_2 = [&"SUPPORT"]
+=======
+4:2/0/custom_data_2 = [&"EXPLOSIVE"]
+5:2/0 = 0
+5:2/0/custom_data_0 = &"syringe"
+5:2/0/custom_data_1 = &"common"
+5:2/0/custom_data_2 = [&"SUPPORT"]
+6:2/0 = 0
+6:2/0/custom_data_0 = &"bubbles"
+6:2/0/custom_data_1 = &"rare"
+6:2/0/custom_data_2 = [&"MISC"]
+7:2/0 = 0
+7:2/0/custom_data_0 = &"horus\' eye (up)"
+7:2/0/custom_data_1 = &"rare"
+7:2/0/custom_data_2 = [&"MISC"]
+0:3/0 = 0
+0:3/0/custom_data_0 = &"house"
+0:3/0/custom_data_1 = &"uncommon"
+0:3/0/custom_data_2 = [&"BUILDING", &"SUPPORT"]
+1:3/0 = 0
+1:3/0/custom_data_0 = &"chestplate"
+1:3/0/custom_data_1 = &"rare"
+1:3/0/custom_data_2 = [&"SHIELD"]
+2:3/0 = 0
+2:3/0/custom_data_0 = &"round shield"
+2:3/0/custom_data_1 = &"common"
+2:3/0/custom_data_2 = [&"SHIELD"]
+3:3/0 = 0
+3:3/0/custom_data_0 = &"war flag"
+3:3/0/custom_data_1 = &"rare"
+3:3/0/custom_data_2 = [&"SUPPORT"]
+4:3/0 = 0
+4:3/0/custom_data_0 = &"holy water"
+4:3/0/custom_data_1 = &"rare"
+4:3/0/custom_data_2 = [&"SUPPORT"]
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 5:3/0 = 0
 5:3/0/custom_data_0 = &"skull"
 5:3/0/custom_data_1 = &"rare"
 5:3/0/custom_data_2 = [&"SCIENCE"]
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
 5:0/0 = 0
 5:0/0/custom_data_0 = &"poison vial"
 5:0/0/custom_data_1 = &"common"
@@ -172,6 +263,30 @@ texture = ExtResource("2_2v833")
 6:2/0/custom_data_1 = &"rare"
 6:2/0/custom_data_2 = [&"MISC"]
 6:2/0/custom_data_3 = true
+=======
+6:3/0 = 0
+6:3/0/custom_data_1 = &"uncommon"
+6:3/0/custom_data_2 = [&"SCIENCE"]
+7:3/0 = 0
+7:3/0/custom_data_1 = &"rare"
+7:3/0/custom_data_2 = [&"SCIENCE"]
+0:4/0 = 0
+0:4/0/custom_data_0 = &"shovel"
+0:4/0/custom_data_1 = &"rare"
+0:4/0/custom_data_2 = [&"ECONOMY", &"SUPPORT"]
+1:4/0 = 0
+1:4/0/custom_data_0 = &"leggings"
+1:4/0/custom_data_1 = &"uncommon"
+1:4/0/custom_data_2 = [&"SHIELD"]
+2:4/0 = 0
+2:4/0/custom_data_0 = &"wooden shield"
+2:4/0/custom_data_1 = &"uncommon"
+2:4/0/custom_data_2 = [&"SHIELD"]
+3:4/0 = 0
+3:4/0/custom_data_0 = &"sword and shield"
+3:4/0/custom_data_1 = &"common"
+3:4/0/custom_data_2 = [&"MELEE", &""]
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 4:4/0 = 0
 4:4/0/custom_data_0 = &"basic bow"
 4:4/0/custom_data_1 = &"common"
@@ -179,15 +294,24 @@ texture = ExtResource("2_2v833")
 5:4/0 = 0
 5:4/0/custom_data_0 = &"arrow"
 5:4/0/custom_data_1 = &"common"
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
 5:4/0/custom_data_2 = [&"RANGED", &"ARROW"]
 6:4/0 = 0
 6:4/0/custom_data_0 = &"volley"
 6:4/0/custom_data_1 = &"rare"
 6:4/0/custom_data_2 = [&"RANGED", &"ARROW"]
+=======
+5:4/0/custom_data_2 = [&"ARROW"]
+6:4/0 = 0
+6:4/0/custom_data_0 = &"volley"
+6:4/0/custom_data_1 = &"rare"
+6:4/0/custom_data_2 = [&"ARROW"]
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 7:4/0 = 0
 7:4/0/custom_data_0 = &"dagger storm"
 7:4/0/custom_data_1 = &"rare"
 7:4/0/custom_data_2 = [&"RANGED"]
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
 6:5/0 = 0
 6:5/0/custom_data_0 = &"flaming arrow"
 6:5/0/custom_data_1 = &"uncommon"
@@ -254,6 +378,100 @@ texture = ExtResource("2_2v833")
 7:7/0 = 0
 7:7/0/custom_data_0 = &"war hammer"
 7:7/0/custom_data_1 = &"uncommon"
+=======
+0:5/0 = 0
+0:5/0/custom_data_0 = &"weights"
+0:5/0/custom_data_1 = &"uncommon"
+0:5/0/custom_data_2 = [&"SUPPORT"]
+1:5/0 = 0
+1:5/0/custom_data_0 = &"boots"
+1:5/0/custom_data_1 = &"common"
+1:5/0/custom_data_2 = [&"SHIELD"]
+2:5/0 = 0
+2:5/0/custom_data_0 = &"spiked shield"
+2:5/0/custom_data_1 = &"uncommon"
+2:5/0/custom_data_2 = [&"", &"MELEE"]
+3:5/0 = 0
+3:5/0/custom_data_1 = &"rare"
+3:5/0/custom_data_2 = [&"MUSIC"]
+4:5/0 = 0
+4:5/0/custom_data_0 = &"quiver"
+4:5/0/custom_data_1 = &"rare"
+5:5/0 = 0
+5:5/0/custom_data_0 = &"barbed arrow"
+5:5/0/custom_data_1 = &"uncommon"
+5:5/0/custom_data_2 = [&"ARROW"]
+6:5/0 = 0
+6:5/0/custom_data_2 = [&"ARROW"]
+7:5/0 = 0
+7:5/0/custom_data_0 = &"compound bow"
+7:5/0/custom_data_2 = [&"RANGED"]
+0:6/0 = 0
+0:6/0/custom_data_0 = &"guitar"
+0:6/0/custom_data_1 = &"rare"
+0:6/0/custom_data_2 = [&"MUSIC"]
+1:6/0 = 0
+1:6/0/custom_data_0 = &"flute"
+1:6/0/custom_data_1 = &"common"
+1:6/0/custom_data_2 = [&"MUSIC"]
+2:6/0 = 0
+2:6/0/custom_data_0 = &"piano"
+2:6/0/custom_data_1 = &"rare"
+2:6/0/custom_data_2 = [&"MUSIC"]
+3:6/0 = 0
+3:6/0/custom_data_0 = &"speakers"
+3:6/0/custom_data_1 = &"uncommon"
+3:6/0/custom_data_2 = [&"MUSIC"]
+4:6/0 = 0
+4:6/0/custom_data_0 = &"slingshot"
+4:6/0/custom_data_1 = &"common"
+4:6/0/custom_data_2 = [&"RANGED"]
+5:6/0 = 0
+5:6/0/custom_data_0 = &"obsidian arrow"
+5:6/0/custom_data_1 = &"common"
+5:6/0/custom_data_2 = [&"ARROW"]
+6:6/0 = 0
+6:6/0/custom_data_1 = &"uncommon"
+7:6/0 = 0
+7:6/0/custom_data_0 = &"poisoned arrow"
+7:6/0/custom_data_1 = &"uncommon"
+7:6/0/custom_data_2 = [&"ARROW"]
+9:6/0 = 0
+9:6/0/custom_data_0 = &"scythe"
+9:6/0/custom_data_1 = &"rare"
+9:6/0/custom_data_2 = [&"MELEE"]
+0:7/0 = 0
+0:7/0/custom_data_0 = &"drums"
+0:7/0/custom_data_1 = &"uncommon"
+0:7/0/custom_data_2 = [&"MUSIC"]
+1:7/0 = 0
+1:7/0/custom_data_0 = &"trumpet"
+1:7/0/custom_data_1 = &"uncommon"
+1:7/0/custom_data_2 = [&"MUSIC"]
+2:7/0 = 0
+2:7/0/custom_data_0 = &"trombone"
+2:7/0/custom_data_1 = &"uncommon"
+2:7/0/custom_data_2 = [&"MUSIC"]
+3:7/0 = 0
+3:7/0/custom_data_0 = &"music note"
+3:7/0/custom_data_1 = &"common"
+3:7/0/custom_data_2 = [&"SHIELD", &"SUPPORT"]
+4:7/0 = 0
+4:7/0/custom_data_0 = &"glissando"
+4:7/0/custom_data_1 = &"uncommon"
+4:7/0/custom_data_2 = [&"SHIELD", &"SUPPORT"]
+5:7/0 = 0
+5:7/0/custom_data_0 = &"office building"
+5:7/0/custom_data_1 = &"uncommon"
+5:7/0/custom_data_2 = [&"RANGED", &"ECONOMY"]
+6:7/0 = 0
+6:7/0/custom_data_0 = &"war axe"
+6:7/0/custom_data_1 = &"rare"
+6:7/0/custom_data_2 = [&"MELEE"]
+7:7/0 = 0
+7:7/0/custom_data_0 = &"war hammer"
+7:7/0/custom_data_1 = &"rare"
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 7:7/0/custom_data_2 = [&"MELEE"]
 6:7/0 = 0
 6:7/0/custom_data_0 = &"war axe"
@@ -327,7 +545,13 @@ texture = ExtResource("2_2v833")
 10:7/0/custom_data_0 = &"glass sword"
 10:7/0/custom_data_1 = &"uncommon"
 10:7/0/custom_data_2 = [&"MELEE"]
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
 10:7/0/custom_data_3 = true
+=======
+0:0/0 = 0
+0:0/0/custom_data_0 = &"none"
+0:0/0/custom_data_1 = &"none"
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4m8e"]
 texture = ExtResource("3_sax5j")
@@ -432,8 +656,11 @@ texture = ExtResource("3_sax5j")
 8:9/0 = 0
 9:9/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_a101m"]
+scenes/0/scene = ExtResource("4_mxn88")
+
 [resource]
-custom_data_layer_0/name = "effect"
+custom_data_layer_0/name = "effect name"
 custom_data_layer_0/type = 21
 custom_data_layer_1/name = "rarity"
 custom_data_layer_1/type = 21
@@ -441,7 +668,13 @@ custom_data_layer_2/name = "effect type"
 custom_data_layer_2/type = 28
 custom_data_layer_3/name = "unique"
 custom_data_layer_3/type = 1
+<<<<<<< Updated upstream:Resources/piece_tileset.tres
+=======
+custom_data_layer_4/name = "effect"
+custom_data_layer_4/type = 24
+>>>>>>> Stashed changes:Piece/piece_tileset.tres
 sources/0 = SubResource("TileSetAtlasSource_4ld0n")
 sources/1 = SubResource("TileSetAtlasSource_smmp2")
 sources/2 = SubResource("TileSetAtlasSource_r4m8e")
+sources/3 = SubResource("TileSetScenesCollectionSource_a101m")
 pattern_0 = SubResource("TileMapPattern_exv1j")

@@ -1,0 +1,29 @@
+The options I considered were as follows:
+
+JSON File:
+	Pros:
+		Easy to understand how it would work
+		I've used JSON before and in Godot
+		Godot has JSON saving/parsing built in
+	Cons:
+		Doesn't translate well to Godot's architecture
+		Can be confusing, I might end up with just a giant text file
+
+Custom Save Format:
+	Pros:
+		I can make it work however I want it to
+		Lets me fully understand the save system
+	Cons:
+		Lots of work to implement
+		Higher chance of bugs/errors which is very bad for a save system
+
+Godot ResourceSaver (Custom for the engine):
+	Pros:
+		Built in to the engine
+		Lets me save any resource I already have without any extra work
+		I've used it before so I understand it well
+	Cons:
+		The only thing you can save is a Resource so I need to make sure everything I want to save is a Resource
+
+I ended up using the Godot ResourceSaver which is built in. I chose it because it's the simplest to implement,
+and most of my data is already in a Resource class.
