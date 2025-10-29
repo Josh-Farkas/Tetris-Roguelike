@@ -7,15 +7,9 @@ var piece: Piece
 var offset: Vector2i # offset from piece position
 var base_atlas_coords: Vector2i = Vector2i.ZERO
 var effect_atlas_coords: Vector2i = Vector2i.ZERO
-<<<<<<< Updated upstream
-# atlas coords to revert to after unexhaust
-var unexhausted_atlas_coords: Vector2i = Vector2i.ZERO
-var unique: bool = false
-=======
 var unexhausted_atlas_coords: Vector2i = Vector2i.ZERO # atlas coords to revert to after unexhaust
 var effect: Effect = effect_none
 var fragile: bool = false
->>>>>>> Stashed changes
 var exhausted: bool = false
 
 @onready var coords: Vector2i = offset + piece.coords:

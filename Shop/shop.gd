@@ -1,6 +1,6 @@
 extends Control
 
-const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
+var tileset: TileSet = load("res://Resources/piece_tileset.tres")
 @export var shop_data: ShopData = load("res://Shop/shop_data.gd").new()
 
 var pieces: Array[Piece] = []

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://me7t8m65gbd8" path="res://Shop/ApplyEffect/apply_effect.gd" id="1_s36tb"]
 [ext_resource type="Texture2D" uid="uid://i7y1x3uubu0v" path="res://Piece/Effect Sprites/effects_spritesheet.png" id="2_8aokf"]
 [ext_resource type="PackedScene" uid="uid://cybe7i2m3bh0p" path="res://Shop/DeckDisplay/deck_display.tscn" id="2_vob2x"]
-[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://Tetris/camera.gd" id="4_yfwvt"]
+[ext_resource type="Script" path="res://Tetris/camera.gd" id="4_yfwvt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydc4v"]
 atlas = ExtResource("2_8aokf")

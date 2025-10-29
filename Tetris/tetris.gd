@@ -6,6 +6,7 @@ const WALLKICKS = preload("res://Tetris/wallkicks.gd").WALLKICKS
 const WALLKICKS_I = preload("res://Tetris/wallkicks.gd").WALLKICKS_I
 const NEIGHBORS: Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
 
+# Lines cleared -> damage dealt
 const DAMAGE_AMTS := {
 	1: 1,
 	2: 3,
