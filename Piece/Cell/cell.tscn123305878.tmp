@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://8yeqyyrl3gfx"]
+
+[ext_resource type="Script" uid="uid://dj4chrfs4sbjc" path="res://Piece/Cell/cell.gd" id="1_vc2b4"]
+
+[node name="Cell" type="Node2D" groups=["cell"]]
+script = ExtResource("1_vc2b4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+custom_minimum_size = Vector2(16, 16)
+offset_left = 21.0
+offset_top = -28.0
+offset_right = 37.0
+offset_bottom = -12.0

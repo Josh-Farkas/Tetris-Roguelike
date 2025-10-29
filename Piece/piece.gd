@@ -77,7 +77,7 @@ func _create_cells() -> void:
 		cell_matrix[-1].fill(null)
 		for col: int in range(len(shape_arr[row])):
 			if shape_arr[row][col] == 0: continue
-			var cell: Cell = preload("res://Piece/Cell/cell.tscn").instantiate()
+			var cell: Cell = load("res://Piece/Cell/cell.tscn").instantiate()
 			cell.piece = self
 			cell.offset = Vector2i(col, row)
 			cell.base_atlas_coords = color_map[color]

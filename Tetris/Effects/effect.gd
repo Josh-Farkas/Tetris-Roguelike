@@ -1,6 +1,9 @@
 @abstract
 class_name Effect extends GDScript
 
+const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
+
+
 static var effect_map: Dictionary[StringName, GDScript] = {}
 
 static var atlas_coords: Vector2i
@@ -44,7 +47,6 @@ static func register_effects() -> void:
 			effect_map[pascal_to_name(const_name)] = value
 	
 	# Set Tileset data to Effect classes
-	var tileset: TileSet = load("res://Piece/piece_tileset.tres")
 	var source: TileSetAtlasSource = tileset.get_source(1)
 	for tile_index in source.get_tiles_count():
 		var coords: Vector2i = source.get_tile_id(tile_index)
@@ -100,6 +102,7 @@ class None extends Effect:
 		atlas_coords = Vector2i.ZERO
 
 class Sword extends Effect:
+	var data: Effect
 	func _ready() -> void:
 		name = &"Sword"
 		description = "On Clear: Deals 2 damage"

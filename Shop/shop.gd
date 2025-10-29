@@ -66,6 +66,7 @@ func _generate_items() -> void:
 
 
 func _generate_effects() -> void:
+	return
 	#Slots 1-3 are common, slots 4 and 5 are uncommon, and slot 6 is rare
 	var rarity_pool: Array
 	for n in range(shop_data.num_effects):
