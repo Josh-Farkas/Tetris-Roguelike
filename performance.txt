@@ -1,0 +1,34 @@
+1) One source of performance concerns for games like mine is when you
+have to many items and they chain together to create massive lagspikes
+due to the amount of calculations that need to be done.
+
+One strategy that games do to reduce this is add an opacity setting that
+lets players reduce or remove the amount of effects on their screen to
+improve FPS.
+
+If effects/particles become too big a concern for me I can add a setting
+to reduce or remove them. This would hopefully improve FPS, but slightly
+reduce the graphics and visual feedback.
+
+2) Another source of performance concerns is random generation in roguelikes.
+if random data and levels are generated throughout the run depending on the
+size it might cause lagspikes.
+
+To prevent this some games like Balatro generate all of the random data at
+the start of each run and cache it, letting you quickly look it up whenever
+it's needed. This prevents those lag spikes, but may lead to longer loading
+times.
+
+Depending on if I care more about loading times or mid-game lagspikes I'll
+pre-generate things like the enemy order and shop items.
+
+3) A third concern is memory buildup. If the game keeps track of all of
+the pieces you've placed then it could lead to memory building up without
+ever being cleared.
+
+To solve this, objects that have been cleared will need to be deleted.
+Some languages have this built in with reference counting.
+
+Godot has a RefCounted class which most things inherit from, so as long as
+I don't have a reference to those objects elsewhere in my code they will
+automatically be deleted.
