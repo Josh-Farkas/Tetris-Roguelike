@@ -33,6 +33,7 @@ static var effect_type_colors: Dictionary = {
 
 @export_category("Pieces")
 @export var piece_price: int = 10
+
 @export_subgroup("Piece Effect Rarities")
 @export_range(0, 1) var piece_effect_common_odds: float = 0.10 # 10%
 @export_range(0, 1) var piece_effect_uncommon_odds: float = 0.05 + .10 # 5%
@@ -43,11 +44,12 @@ static var effect_type_colors: Dictionary = {
 @export_range(0, 1) var piece_shape_uncommon_odds: float = .30 + .55 # 30%
 @export_range(0, 1) var piece_shape_rare_odds: float = .15 + .30 + .55 # 15%
 
-@export var piece_shape_rarities: Dictionary = {
-	"common": [Piece.Shape.J, Piece.Shape.L, Piece.Shape.S, Piece.Shape.Z] as Array[Piece.Shape],
-	"uncommon": [Piece.Shape.O, Piece.Shape.T] as Array[Piece.Shape],
-	"rare": [Piece.Shape.I] as Array[Piece.Shape]
+@export var piece_shape_rarities: Dictionary[Constants.Rarity, Array] = {
+	Constants.Rarity.COMMON: [PieceData.Shape.J, PieceData.Shape.L, PieceData.Shape.S, PieceData.Shape.Z],
+	Constants.Rarity.UNCOMMON: [PieceData.Shape.O, PieceData.Shape.T],
+	Constants.Rarity.RARE: [PieceData.Shape.I],
 }
+
 @export_category("Rerolls")
 @export var base_reroll_price: int = 5
 @export var reroll_scaling_amount: int = 2

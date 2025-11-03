@@ -1,4 +1,4 @@
-extends Control
+class_name ApplyEffect extends Control
 
 @onready var deck_display: DeckDisplay = $VBoxContainer/DeckDisplay
 @onready var effect_layer: TileMapLayer = $VBoxContainer/DeckDisplay/ScrollContainer/SubViewportContainer/SubViewport/Effects

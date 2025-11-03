@@ -13,18 +13,16 @@ const TILE_COORDS: Dictionary = {
 	"RED": Vector2i(2, 1)
 }
 
-const EFFECT_COORDS: Dictionary = {
-	"NONE": Vector2i(0, 0),
-	"SHIELD": Vector2i(1, 0),
-	"SWORD": Vector2i(2, 0),
-	"DAGGER": Vector2i(3, 0),
-	"BOMB": Vector2i(4, 0),
-	"COIN": Vector2i(0, 1),
+enum Rarity {
+	COMMON,
+	UNCOMMON,
+	RARE,
+	NONE
 }
 
-
 const RARITY_COLORS: Dictionary = {
-	"common": "#ffffff",
-	"uncommon": "#008000",
-	"rare": "de0a26"
+	Rarity.COMMON: "#ffffff",
+	Rarity.UNCOMMON: "#008000",
+	Rarity.RARE: "de0a26",
+	Rarity.NONE: "#555555"
 }

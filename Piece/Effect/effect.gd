@@ -1,65 +1,32 @@
 @abstract
-class_name Effect extends GDScript
+class_name Effect extends Resource
 
 const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
 
+enum Type {
+	MELEE,
+	SHIELD,
+	MUSIC,
+	RANGED,
+	ARROW,
+	BUILDING,
+	ECONOMY,
+	SCIENCE,
+	MISC,
+}
 
-static var effect_map: Dictionary[StringName, GDScript] = {}
-
-static var atlas_coords: Vector2i
-static var fragile: bool = false
-static var name: StringName
-static var description: String
-static var rarity: StringName
-static var types: Array[StringName]
-
+static var effect_map: Dictionary[StringName, EffectData] = {}
 static var player: Player
 static var enemy: Enemy
 
+var data: EffectData
 var cell: Cell
-
+var exhausted: bool = false
 
 static func get_effect(effect_name: StringName) -> Effect:
 	if effect_name not in effect_map:
 		printerr("Effect ", effect_name, " is not valid.")
 	return effect_map.get(effect_name)
-
-
-static func pascal_to_name(name: String) -> String:
-	# Changes name from PascalCase to name format
-	# SpikedShield -> spiked shield
-	var result := ""
-	for i in name.length():
-		var c := name[i]
-		if i > 0 and c == c.to_upper():
-			result += " "
-		result += c.to_lower()
-	return result
-
-
-static func register_effects() -> void:
-	# Generate dictionary from name -> effect
-	var script: Script = load("res://Tetris/Effects/effect.gd")
-	for const_name: String in script.get_script_constant_map():
-		var map := script.get_script_constant_map()
-		var value: Variant = script.get_script_constant_map().get(const_name)
-		if value is GDScript:
-			effect_map[pascal_to_name(const_name)] = value
-	
-	# Set Tileset data to Effect classes
-	var source: TileSetAtlasSource = tileset.get_source(1)
-	for tile_index in source.get_tiles_count():
-		var coords: Vector2i = source.get_tile_id(tile_index)
-		var tile_data := source.get_tile_data(coords, 0)
-		var effect_name: StringName = tile_data.get_custom_data("effect name")
-		if effect_name not in effect_map: 
-			tile_data.set_custom_data("effect", Effect.Debug)
-			continue
-		var effect: GDScript = effect_map.get(effect_name)
-		tile_data.set_custom_data("effect", effect)
-		effect.atlas_coords = coords
-		effect.rarity = tile_data.get_custom_data("rarity")
-		effect.types.append_array(tile_data.get_custom_data("effect type"))
 
 
 func deal_damage(damage: float) -> void:
@@ -71,7 +38,9 @@ func deal_damage(damage: float) -> void:
 func gain_block(block: int) -> void:
 	player.gain_block(block)
 
+
 # Triggers
+@warning_ignore_start("unused_parameter")
 func on_place() -> void:
 	pass
 
@@ -83,63 +52,6 @@ func on_adjacent_cell_placed(direction: Vector2i) -> void:
 	
 func on_adjacent_cell_cleared(direction: Vector2i) -> void:
 	pass
-
-
-
-# =================================================
-# ==================== Effects ====================
-# =================================================
-
-
-class Debug extends Effect:
-	func on_place() -> void:
-		print_debug("Debug Effect Place")
-
-class None extends Effect:
-	# Effect with no functionality, if a cell has no effect
-	# this is what its effect will be set to
-	func _ready() -> void: 
-		atlas_coords = Vector2i.ZERO
-
-class Sword extends Effect:
-	var data: Effect
-	func _ready() -> void:
-		name = &"Sword"
-		description = "On Clear: Deals 2 damage"
-		rarity = "common"
-		
-	func on_clear() -> void:
-		deal_damage(2)
-
-
-class Shield extends Effect:
-	func _ready() -> void:
-		description = "On Clear: Gain 3 block"
-		
-	func on_clear() -> void:
-		gain_block(3)
-
-
-class WoodenShield extends Effect:
-	func _ready() -> void:
-		description = "On Clear: Deals 0.2 damage for each block you have"
-
-	func on_clear() -> void:
-		deal_damage(0.2 * player.block)
-
-
-class RoundShield extends Effect:
-	func _ready() -> void:
-		description = "On Place: Gain 2 block"
-	func on_place() -> void:
-		gain_block(2)
-
-
-class Dagger extends Effect:
-	func _ready() -> void:
-		description = "When an adjacent cell is cleared: Deals 2 damage"
-	func on_adjacent_cell_cleared(direction: Vector2i) -> void:
-		deal_damage(2)
 
 
 

@@ -6,8 +6,7 @@ signal max_health_changed
 signal gold_changed
 signal block_changed
 
-var piggy_bank_stored: int = 0
-var full_deck: Array[Piece]
+@export var full_deck: Array[PieceData]
 
 @export var max_health: int = 100:
 	set(value):
@@ -31,7 +30,8 @@ var full_deck: Array[Piece]
 @onready var status_effects: StatusEffectsComponent = $StatusEffectsComponent
 
 func _ready() -> void:
-	full_deck.append_array($Deck.get_children() as Array[Piece])
+	#full_deck.append_array($Deck.get_children() as Array[Piece])
+	pass
 
 
 func take_damage(amount: int) -> void:

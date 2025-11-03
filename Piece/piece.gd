@@ -1,54 +1,6 @@
 class_name Piece extends Node
 
-enum Shape {
-	I, O, T, J, L, S, Z
-}
-
-enum PieceColor {
-	GREEN, BLUE, LIGHT_BLUE, RED, ORANGE, PURPLE, YELLOW
-}
-
-var shape_map: Dictionary = {
-	Shape.I: Shapes.I,
-	Shape.O: Shapes.O,
-	Shape.T: Shapes.T,
-	Shape.J: Shapes.J,
-	Shape.L: Shapes.L,
-	Shape.S: Shapes.S,
-	Shape.Z: Shapes.Z,
-}
-
-const color_map: Dictionary[PieceColor, Vector2i] = {
-	PieceColor.GREEN: Vector2i(0, 0),
-	PieceColor.PURPLE: Vector2i(1, 0),
-	PieceColor.BLUE: Vector2i(2, 0),
-	PieceColor.ORANGE: Vector2i(0, 1),
-	PieceColor.LIGHT_BLUE: Vector2i(1, 1),
-	PieceColor.RED: Vector2i(2, 1),
-	PieceColor.YELLOW: Vector2i(3, 0)
-}
-
-const shape_colors: Dictionary[Shape, PieceColor] = {
-	Shape.I: PieceColor.LIGHT_BLUE,
-	Shape.O: PieceColor.YELLOW,
-	Shape.T: PieceColor.PURPLE,
-	Shape.J: PieceColor.BLUE,
-	Shape.L: PieceColor.ORANGE,
-	Shape.S: PieceColor.GREEN,
-	Shape.Z: PieceColor.RED,
-}
-
-enum EffectType {
-	BUILDING,
-	MELEE,
-	SHIELD,
-	SPELL,
-	ECONOMY,
-	SCIENCE,
-}
-
-@export var shape: Shape
-@export var color: PieceColor
+@export var data: PieceData
 var cells: Array[Cell] = []
 var coords: Vector2i:
 	set(value):
@@ -56,48 +8,17 @@ var coords: Vector2i:
 		for cell: Cell in cells:
 			cell.coords += value - coords
 		coords = value
-@export var rotation: int = 0
-
-var cell_matrix: Array # Array[Array[Cell]]
+var rotation: int = 0
+var cell_matrix: Array = []
 var shadow_offset: Vector2i = Vector2i(0, coords.y)
 var display_offset: bool = false
 var active := false
 
+
+
 func _ready() -> void:
-	display_offset = shape in [Piece.Shape.T, Piece.Shape.L, Piece.Shape.J, Piece.Shape.S, Piece.Shape.Z]
-	#if cells == []:
-	_create_cells()
+	display_offset = data.shape in [PieceData.Shape.T, PieceData.Shape.L, PieceData.Shape.J, PieceData.Shape.S, PieceData.Shape.Z]
 
-
-func _create_cells() -> void:
-	var shape_arr: Array = shape_map[shape]
-	for row: int in range(len(shape_arr)):
-		cell_matrix.append([])
-		cell_matrix[-1].resize(len(shape_arr[row]))
-		cell_matrix[-1].fill(null)
-		for col: int in range(len(shape_arr[row])):
-			if shape_arr[row][col] == 0: continue
-			var cell: Cell = load("res://Piece/Cell/cell.tscn").instantiate()
-			cell.piece = self
-			cell.offset = Vector2i(col, row)
-			cell.base_atlas_coords = color_map[color]
-			cell.effect_atlas_coords = Vector2i.ZERO
-			cells.append(cell)
-			$Cells.add_child(cell)
-			cell_matrix[row][col] = cell
-
-func copy() -> Piece:
-	var copy: Piece = duplicate()
-	# copy cell matrix with copied cells
-	for i in range(len(cell_matrix)):
-		for j in range(len(cell_matrix[i])):
-			var cell: Cell = cell_matrix[i][j]
-			if cell != null:
-				var c: Cell = cell.copy()
-				copy.cells.append(c)
-				copy.cell_matrix[i][j] = c
-	copy.coords = coords
-	return copy
 
 func move(dir: Vector2i) -> void:
 	coords += dir

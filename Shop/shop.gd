@@ -85,26 +85,25 @@ func _generate_effects() -> void:
 func _generate_pieces() -> void:
 	for n in range(shop_data.num_pieces):
 		if n in bought_pieces: continue
-		var piece: Piece = load("res://Piece/piece.tscn").instantiate()
+		var piece_data: PieceData = load("res://Piece/piece_data.gd").new()
 		# Select piece shape
 		var rand: float = randf()
-		var piece_pool: Array[Piece.Shape]
+		var shape_pool: Array[PieceData.Shape]
 		if rand <= shop_data.piece_shape_common_odds:
-			piece_pool = shop_data.piece_shape_rarities.common
+			shape_pool = shop_data.piece_shape_rarities[Constants.Rarity.COMMON]
 		elif rand <= shop_data.piece_shape_uncommon_odds:
-			piece_pool = shop_data.piece_shape_rarities.uncommon
+			shape_pool = shop_data.piece_shape_rarities[Constants.Rarity.UNCOMMON]
 		else:
-			piece_pool = shop_data.piece_shape_rarities.rare
+			shape_pool = shop_data.piece_shape_rarities[Constants.Rarity.RARE]
 			
-		piece.shape = piece_pool.pick_random()
-		piece.color = Piece.shape_colors[piece.shape]
-		piece.coords = shop_data.piece_coords[n]
+		piece_data.shape = shape_pool.pick_random()
+		piece_data.coords = shop_data.piece_coords[n]
 		# shift O right to center
-		if piece.shape == Piece.Shape.O:
-			piece.coords += Vector2i.RIGHT
+		if piece_data.shape == PieceData.Shape.O:
+			piece_data.spawn_coords += Vector2i.RIGHT
 		
 		# Apply effects
-		for cell in piece.cells:
+		for cell: Cell in piece_data.cells:
 			var rarity_pool: Array
 			rand = randf()
 			if rand <= shop_data.piece_common_odds:
