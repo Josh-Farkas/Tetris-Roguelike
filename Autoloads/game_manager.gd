@@ -24,7 +24,7 @@ var settings: Settings
 var main: Node
 var enemy: Enemy
 var active_scene: Node
-var bought_effect: Vector2i = Vector2i.ZERO
+var bought_effect: EffectData
 var level_num: int = 1
 var camera: Camera
 var loaded_scenes: Dictionary[StringName, Node] = {}
@@ -32,14 +32,8 @@ var board_height := 22 # two hidden rows above for pieces to spawn
 var board_width := 10
 
 
-func _init() -> void:
-	settings = Settings.load_settings()
-	if settings == null:
-		settings = Settings.new()
-		settings.save_settings()
-
 func _ready() -> void:
-	Effect.register_effects()
+	#Effect.register_effects()
 	
 	# Signals
 	SignalBus.enemy_killed.connect(_on_enemy_killed)

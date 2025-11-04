@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://d12sdwfrhtywi"]
+
+[ext_resource type="Script" uid="uid://c13qnvdlc7n5a" path="res://Piece/Effect/Effects/Shield/shield_effect.gd" id="1_042yu"]
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="2_k8svf"]
+
+[resource]
+script = ExtResource("2_k8svf")
+name = &"Shield"
+description = "On Clear: Gain 3 Block"
+types = Array[int]([1])
+effect_script = ExtResource("1_042yu")
+metadata/_custom_type_script = "uid://bacar626wbev1"

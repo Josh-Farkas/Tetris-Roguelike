@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://mpm6wb0l61v7"]
+
+[ext_resource type="Script" uid="uid://dakctx4blfltf" path="res://Piece/Effect/Effects/_Template/_effect.gd" id="1_mhp7e"]
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="2_d5r1v"]
+
+[resource]
+script = ExtResource("2_d5r1v")
+name = &"Sword"
+description = "On Place: Deal 2 damage"
+types = Array[int]([0])
+fragile = null
+effect_script = ExtResource("1_mhp7e")
+atlas_coords = Vector2i(1, 0)
+metadata/_custom_type_script = "uid://bacar626wbev1"

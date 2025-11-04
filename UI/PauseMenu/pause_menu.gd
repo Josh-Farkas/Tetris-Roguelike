@@ -3,7 +3,8 @@ class_name PauseMenu extends MarginContainer
 var paused: bool = false
 
 func _ready() -> void:
-	$PanelContainer/MarginContainer/VBoxContainer/TestSettings.text = GameManager.settings.test_setting
+	pass
+	#$PanelContainer/MarginContainer/VBoxContainer/TestSettings.text = Settings.test_setting
 
 
 func _toggle() -> void:

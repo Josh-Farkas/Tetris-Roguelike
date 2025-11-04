@@ -1,6 +1,6 @@
 class_name EffectData extends Resource
 
-const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
+const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH)
 static var effect_map: Dictionary[StringName, EffectData] = {}
 
 @export_category("Info")
@@ -13,6 +13,7 @@ static var effect_map: Dictionary[StringName, EffectData] = {}
 @export_category("Data")
 @export var effect_script: GDScript
 @export var atlas_coords: Vector2i
+@export var count: int # number of these placed
 
 
 func create_effect(cell: Cell = null) -> Effect:

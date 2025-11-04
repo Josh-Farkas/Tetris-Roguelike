@@ -45,10 +45,11 @@ const shape_colors: Dictionary[Shape, PieceColor] = {
 	set(value):
 		shape = value
 		color = shape_colors[shape]
-@export var color: PieceColor
+		display_offset = shape in [PieceData.Shape.T, PieceData.Shape.L, PieceData.Shape.J, PieceData.Shape.S, PieceData.Shape.Z]
 @export var cells: Array[CellData]
-@export var matrix: Array[Array] = []
-@export var spawn_coords: Vector2i = Vector2i(4, 0)
+@export var matrix: Array[Array] = [] # Array[Array[CellData]]
+var color: PieceColor
+var display_offset: bool = false
 
 
 func _ready() -> void:
@@ -71,7 +72,7 @@ func _create_cells() -> void:
 			matrix[row][col] = cell_data
 
 
-func create_piece() -> void:
+func create_piece() -> Piece:
 	var piece: Piece = piece_scn.instantiate()
 	piece.data = self
 	piece.cell_matrix = matrix.map(func(row: Array) -> void: row.duplicate().fill(null))
@@ -81,3 +82,4 @@ func create_piece() -> void:
 			var cell: Cell = matrix[i][j].create_cell(piece)
 			piece.cell_matrix[i][j] = cell
 			piece.cells.append(cell)
+	return piece

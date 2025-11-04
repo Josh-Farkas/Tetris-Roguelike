@@ -1,63 +1,53 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7ok5rrx2yw6l"]
+[gd_scene load_steps=14 format=3 uid="uid://c7ok5rrx2yw6l"]
 
 [ext_resource type="Script" uid="uid://ba2dldqlhtn8e" path="res://Player/player.gd" id="1_7yjx8"]
-[ext_resource type="PackedScene" uid="uid://b3mjpfl6gtykk" path="res://Piece/piece.tscn" id="1_epqda"]
 [ext_resource type="Script" uid="uid://d048r70b2jqmh" path="res://Piece/piece_data.gd" id="2_gwnis"]
+[ext_resource type="Script" uid="uid://cct4guv1m3ivr" path="res://Piece/Cell/cell_data.gd" id="3_fhl08"]
+[ext_resource type="Script" uid="uid://dwax30uat0vv0" path="res://Player/deck.gd" id="3_k53q1"]
 [ext_resource type="PackedScene" uid="uid://dbgaur6dn3lu3" path="res://Components/StatusEffects/status_effects_component.tscn" id="3_x2uet"]
-
-[sub_resource type="Resource" id="Resource_gwnis"]
-script = ExtResource("2_gwnis")
-metadata/_custom_type_script = "uid://d048r70b2jqmh"
-
-[sub_resource type="Resource" id="Resource_k53q1"]
-script = ExtResource("2_gwnis")
-shape = 1
-metadata/_custom_type_script = "uid://d048r70b2jqmh"
-
-[sub_resource type="Resource" id="Resource_fhl08"]
-script = ExtResource("2_gwnis")
-shape = 2
-metadata/_custom_type_script = "uid://d048r70b2jqmh"
 
 [sub_resource type="Resource" id="Resource_vtle1"]
 script = ExtResource("2_gwnis")
-shape = 3
 metadata/_custom_type_script = "uid://d048r70b2jqmh"
 
 [sub_resource type="Resource" id="Resource_od3ui"]
 script = ExtResource("2_gwnis")
-shape = 4
+shape = 1
 metadata/_custom_type_script = "uid://d048r70b2jqmh"
 
 [sub_resource type="Resource" id="Resource_00tjw"]
 script = ExtResource("2_gwnis")
-shape = 5
+shape = 2
 metadata/_custom_type_script = "uid://d048r70b2jqmh"
 
 [sub_resource type="Resource" id="Resource_x3vf3"]
 script = ExtResource("2_gwnis")
+shape = 3
+metadata/_custom_type_script = "uid://d048r70b2jqmh"
+
+[sub_resource type="Resource" id="Resource_apopc"]
+script = ExtResource("2_gwnis")
+shape = 4
+metadata/_custom_type_script = "uid://d048r70b2jqmh"
+
+[sub_resource type="Resource" id="Resource_5htga"]
+script = ExtResource("2_gwnis")
+shape = 5
+metadata/_custom_type_script = "uid://d048r70b2jqmh"
+
+[sub_resource type="Resource" id="Resource_p5o4e"]
+script = ExtResource("2_gwnis")
 shape = 6
 metadata/_custom_type_script = "uid://d048r70b2jqmh"
 
+[sub_resource type="Resource" id="Resource_k53q1"]
+script = ExtResource("3_k53q1")
+full_deck = Array[ExtResource("2_gwnis")]([SubResource("Resource_vtle1"), SubResource("Resource_od3ui"), SubResource("Resource_00tjw"), SubResource("Resource_x3vf3"), SubResource("Resource_apopc"), SubResource("Resource_5htga"), SubResource("Resource_p5o4e")])
+metadata/_custom_type_script = "uid://dwax30uat0vv0"
+
 [node name="Player" type="Node"]
 script = ExtResource("1_7yjx8")
-full_deck = Array[ExtResource("2_gwnis")]([SubResource("Resource_gwnis"), SubResource("Resource_k53q1"), SubResource("Resource_fhl08"), SubResource("Resource_vtle1"), SubResource("Resource_od3ui"), SubResource("Resource_00tjw"), SubResource("Resource_x3vf3")])
+full_deck = SubResource("Resource_k53q1")
 gold = 1000
-
-[node name="Deck" type="Node" parent="."]
-
-[node name="I1" parent="Deck" instance=ExtResource("1_epqda")]
-
-[node name="O1" parent="Deck" instance=ExtResource("1_epqda")]
-
-[node name="T1" parent="Deck" instance=ExtResource("1_epqda")]
-
-[node name="J1" parent="Deck" instance=ExtResource("1_epqda")]
-
-[node name="L1" parent="Deck" instance=ExtResource("1_epqda")]
-
-[node name="S1" parent="Deck" instance=ExtResource("1_epqda")]
-
-[node name="Z1" parent="Deck" instance=ExtResource("1_epqda")]
 
 [node name="StatusEffectsComponent" parent="." instance=ExtResource("3_x2uet")]

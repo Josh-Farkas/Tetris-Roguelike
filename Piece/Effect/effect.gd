@@ -1,17 +1,20 @@
 @abstract
 class_name Effect extends Resource
 
-const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
+const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH)
 
 enum Type {
 	MELEE,
 	SHIELD,
 	MUSIC,
 	RANGED,
+	SUPPORT,
 	ARROW,
 	BUILDING,
 	ECONOMY,
 	SCIENCE,
+	ARMOR,
+	EXPLOSIVE,
 	MISC,
 }
 
@@ -23,12 +26,20 @@ var data: EffectData
 var cell: Cell
 var exhausted: bool = false
 
+func _init() -> void:
+	# Get data resource path
+	var path: String = "res://Piece/Effect/Effects/" \
+						+ data.name.to_pascal_case() + "/" \
+						+ data.name.to_snake_case() + ".tres"
+	data = load(path)
+
+
 static func get_effect(effect_name: StringName) -> Effect:
 	if effect_name not in effect_map:
 		printerr("Effect ", effect_name, " is not valid.")
 	return effect_map.get(effect_name)
 
-
+# Functions for Effects to call
 func deal_damage(damage: float) -> void:
 	enemy.take_damage(damage + player.status_effects.get_status_effect("strength"))
 	if damage >= 3:
@@ -38,6 +49,21 @@ func deal_damage(damage: float) -> void:
 func gain_block(block: int) -> void:
 	player.gain_block(block)
 
+# Base Triggers
+func base_on_place() -> void:
+	data.count += 1
+	on_place()
+
+func base_on_clear() -> void:
+	data.count -= 1
+	on_clear()
+	
+func base_on_adjacent_cell_placed(direction: Vector2i) -> void:
+	on_adjacent_cell_placed(direction)
+	
+func base_on_adjacent_cell_cleared(direction: Vector2i) -> void:
+	on_adjacent_cell_cleared(direction)
+	
 
 # Triggers
 @warning_ignore_start("unused_parameter")
@@ -88,7 +114,6 @@ func on_adjacent_cell_cleared(direction: Vector2i) -> void:
 	"weights": "On Clear: Gain 1 Strength",
 	"guitar": "On Clear: Gain 1 Tranquility for each Music Note you have",
 	"flute": "On Clear: Gain 2 Tranquility",
-	
 	"drums": "[u]Whenever you gain Tranquility[/u]: Deals 1 damage",
 	"piano": "On Clear: Gain 1 Tranquility, 1 Strength, and 1 Prayer",
 	"trumpet": "On Clear: Deals 1 damage for each Music Note you have",

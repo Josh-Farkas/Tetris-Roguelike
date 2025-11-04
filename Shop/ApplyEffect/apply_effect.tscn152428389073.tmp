@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bneb0pgwbjbnj"]
+
+[ext_resource type="Script" uid="uid://me7t8m65gbd8" path="res://Shop/ApplyEffect/apply_effect.gd" id="1_s36tb"]
+[ext_resource type="Texture2D" uid="uid://i7y1x3uubu0v" path="res://Piece/Effect/effects_spritesheet.png" id="2_8aokf"]
+[ext_resource type="PackedScene" uid="uid://cybe7i2m3bh0p" path="res://Shop/DeckDisplay/deck_display.tscn" id="2_vob2x"]
+[ext_resource type="Script" uid="uid://ds6sxtjyd1ip3" path="res://camera.gd" id="4_yfwvt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydc4v"]
+atlas = ExtResource("2_8aokf")
+region = Rect2(16, 0, 16, 16)
+
+[node name="ApplyEffectMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1261.0
+offset_bottom = -718.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s36tb")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+theme_override_constants/separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_ydc4v")
+stretch_mode = 2
+
+[node name="ReturnButton" type="Button" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Back to Shop"
+
+[node name="DeckDisplay" parent="VBoxContainer" instance=ExtResource("2_vob2x")]
+layout_mode = 2
+
+[node name="SubViewport" parent="VBoxContainer/DeckDisplay/ScrollContainer/SubViewportContainer" index="0"]
+size = Vector2i(632, 360)
+
+[node name="Camera" type="Camera2D" parent="." groups=["camera"]]
+anchor_mode = 0
+zoom = Vector2(3, 3)
+script = ExtResource("4_yfwvt")
+metadata/_custom_type_script = "uid://ds6sxtjyd1ip3"
+
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+
+[editable path="VBoxContainer/DeckDisplay"]

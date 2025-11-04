@@ -1,33 +1,35 @@
 class_name ShopData extends Resource
 
-const tileset: TileSet = preload("res://Resources/piece_tileset.tres")
+const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH)
 
 @export_category("Effects")
-@export var prices: Dictionary = {
-	"common": 4,
-	"uncommon": 6,
-	"rare": 10
+@export var prices: Dictionary[Constants.Rarity, int] = {
+	Constants.Rarity.NONE: 0,
+	Constants.Rarity.COMMON: 4,
+	Constants.Rarity.UNCOMMON: 6,
+	Constants.Rarity.RARE: 10
 }
 
 const num_effects: int = 6
+# Where effects will spawn in the shop
 const effect_coords: Array[Vector2i] = [
 	Vector2i(2, 2),Vector2i(5, 2),Vector2i(8, 2),
 	Vector2i(2, 5),Vector2i(5, 5),Vector2i(8, 5),
 ]
 
-static var effect_type_colors: Dictionary = {
-	"RANGED": "Green",
-	"ARROW": "Darkgreen",
-	"MELEE": "Darkred",
-	"SHIELD": "Mediumturquoise",
-	"SUPPORT": "Peachpuff",
-	"BUILDING": "Sienna",
-	"ECONOMY": "Goldenrod",
-	"SCIENCE": "Darkviolet",
-	"ARMOR": "Dimgray",
-	"EXPLOSIVE": "Red",
-	"INSTRUMENT": "Aquamarine",
-	"MISC": "White",
+static var effect_type_colors: Dictionary[Effect.Type, StringName] = {
+	Effect.Type.RANGED: "Green",
+	Effect.Type.ARROW: "Darkgreen",
+	Effect.Type.MELEE: "Darkred",
+	Effect.Type.SHIELD: "Mediumturquoise",
+	Effect.Type.SUPPORT: "Peachpuff",
+	Effect.Type.BUILDING: "Sienna",
+	Effect.Type.ECONOMY: "Goldenrod",
+	Effect.Type.SCIENCE: "Darkviolet",
+	Effect.Type.ARMOR: "Dimgray",
+	Effect.Type.EXPLOSIVE: "Red",
+	Effect.Type.MUSIC: "Aquamarine",
+	Effect.Type.MISC: "White",
 }
 
 
@@ -59,11 +61,10 @@ const piece_coords: Array[Vector2i] = [Vector2i(1, 9), Vector2i(6, 9)]
 
 
 static var effects := {
-	"": [],
-	"none": [],
-	"common": [],
-	"uncommon": [],
-	"rare": [],
+	Constants.Rarity.NONE: [],
+	Constants.Rarity.COMMON: [],
+	Constants.Rarity.UNCOMMON: [],
+	Constants.Rarity.RARE: [],
 }
 
 static var effect_types: Dictionary = {}
@@ -87,7 +88,7 @@ static func _generate_effects() -> void:
 			effect_descriptions[effect.name] = effect_descriptions[effect.name].insert(0, "[center]")
 			if effect.fragile: effect_descriptions[effect.name] += "\n[center][color=efd10e]Fragile[/color]"
 			effect_descriptions[effect.name] += "\n" + " ".join(effect.type)
-			for type: StringName in effect_type_colors:
+			for type: Effect.Type in effect_type_colors:
 				effect_descriptions[effect.name] = effect_descriptions[effect.name] \
 						.replace(type, "[color=%s][%s][/color]" % [effect_type_colors[type], type])
 		else:
@@ -104,7 +105,10 @@ static func _format_effect_descriptions() -> void:
 				.replace("On Clear", "[u]On Clear[/u]") \
 				.replace("On Place", "[u]On Place[/u]") \
 				.replace("When you take self damage", "[u]When you take self damage[/u]") \
-				.replace("When you place a piece", "[u]After you place a piece[/u]")
+				.replace("When you place a piece", "[u]After you place a piece[/u]") \
+				.replace("When an adjacent piece is placed", "[u]When an adjacent piece is placed[/u]") \
+				.replace("When an adjacent piece is cleared", "[u]When an adjacent piece is cleared[/u]")
+				
 
 
 static func _parse_effect_descriptions() -> Dictionary:

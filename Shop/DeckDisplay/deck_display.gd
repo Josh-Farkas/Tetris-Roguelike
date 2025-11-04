@@ -5,18 +5,12 @@ const WIDTH = 40
 @onready var background_layer: TileMapLayer = $ScrollContainer/SubViewportContainer/SubViewport/Background
 @onready var base_layer: TileMapLayer = $ScrollContainer/SubViewportContainer/SubViewport/Base
 @onready var effect_layer: TileMapLayer = $ScrollContainer/SubViewportContainer/SubViewport/Effects
-
 @onready var effect_description: EffectDescription = $EffectDescription
-
-var cell_coords: Dictionary = {} # Vector2i: Cell 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	display_deck()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -26,22 +20,22 @@ func _input(event: InputEvent) -> void:
 func display_deck() -> void:
 	var counts: Array[int] = [0, 0, 0, 0, 0, 0, 0]
 	var num_rows: int = 0
-	for piece in GameManager.player.full_deck:
-		var shape: Piece.Shape = piece.shape
-		var row: int = counts[shape] * 5 + 1
-		var col: int = shape as int * 5 + 1
+	for piece_data: PieceData in GameManager.player.full_deck:
+		var row: int = counts[piece_data.shape] * 5 + 1
+		var col: int = piece_data.shape as int * 5 + 1
 		var coords: Vector2i = Vector2i(col, row)
-		if shape == Piece.Shape.O: coords.x += 1
+		if piece_data.shape == PieceData.Shape.O: coords.x += 1
+		var piece: Piece = piece_data.create_piece()
 		piece.coords = coords
-		for cell in piece.cells:
-			cell_coords[coords + cell.offset] = cell
+		for cell: Cell in piece.cells:
+			Cell.cell_coords[coords + cell.offset] = cell
 			base_layer.set_cell(coords + cell.offset, 0, cell.base_atlas_coords)
 			effect_layer.set_cell(coords + cell.offset, 1, cell.effect_atlas_coords)
-		counts[shape] += 1
-		if counts[shape] > num_rows:
+		counts[piece_data.shape] += 1
+		if counts[piece_data.shape] > num_rows:
 			num_rows += 1
 			if num_rows > 3:
-				draw_background(counts[shape])
+				draw_background(counts[piece_data.shape])
 
 
 func draw_background(row: int) -> void:

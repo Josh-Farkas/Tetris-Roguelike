@@ -26,3 +26,6 @@ const RARITY_COLORS: Dictionary = {
 	Rarity.RARE: "de0a26",
 	Rarity.NONE: "#555555"
 }
+
+# ========== File Paths ==========
+const PIECE_TILESET_PATH := "res://Piece/piece_tileset.tres"

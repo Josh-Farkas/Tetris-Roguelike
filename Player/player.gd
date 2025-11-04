@@ -6,8 +6,11 @@ signal max_health_changed
 signal gold_changed
 signal block_changed
 
-@export var full_deck: Array[PieceData]
+@export_category("Deck")
+@export var full_deck: Deck = Deck.new()
+@export var preview_size: int = 3
 
+@export_category("Stats")
 @export var max_health: int = 100:
 	set(value):
 		max_health = value
@@ -30,7 +33,6 @@ signal block_changed
 @onready var status_effects: StatusEffectsComponent = $StatusEffectsComponent
 
 func _ready() -> void:
-	#full_deck.append_array($Deck.get_children() as Array[Piece])
 	pass
 
 

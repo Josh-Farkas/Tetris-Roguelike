@@ -12,3 +12,8 @@ func create_cell(piece: Piece = null) -> Cell:
 	cell.piece = piece
 	cell.effect = effect_data.create_effect(cell)
 	return cell
+
+
+func set_effect(data: EffectData) -> void:
+	""" Sets the effect data of this cell to data """
+	effect_data = data

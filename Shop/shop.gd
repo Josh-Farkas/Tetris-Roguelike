@@ -1,6 +1,6 @@
 extends Control
 
-var tileset: TileSet = load("res://Resources/piece_tileset.tres")
+var tileset: TileSet = preload(Constants.PIECE_TILESET_PATH)
 @export var shop_data: ShopData = load("res://Shop/shop_data.gd").new()
 
 var pieces: Array[Piece] = []
@@ -83,6 +83,7 @@ func _generate_effects() -> void:
 
 
 func _generate_pieces() -> void:
+	return
 	for n in range(shop_data.num_pieces):
 		if n in bought_pieces: continue
 		var piece_data: PieceData = load("res://Piece/piece_data.gd").new()
@@ -103,7 +104,7 @@ func _generate_pieces() -> void:
 			piece_data.spawn_coords += Vector2i.RIGHT
 		
 		# Apply effects
-		for cell: Cell in piece_data.cells:
+		for cell_data: CellData in piece_data.cells:
 			var rarity_pool: Array
 			rand = randf()
 			if rand <= shop_data.piece_common_odds:
@@ -115,9 +116,10 @@ func _generate_pieces() -> void:
 			else:
 				continue # No Effect
 			
-			var effect: String = rarity_pool.pick_random()
-			cell.effect_atlas_coords = _get_effect_tilemap_coords(effect)
+			var effect_data: EffectData = rarity_pool.pick_random()
+			cell_data.effect_atlas_coords = effect_data.atlas_coords
 		
+		var piece: Piece = piece_data.create_piece()
 		$Pieces.add_child(piece)
 		pieces.append(piece)
 		_draw_piece(piece, piece.display_offset)
@@ -173,16 +175,16 @@ func _draw_piece(piece: Piece, offset: bool = false) -> void:
 
 
 func _buy_effect(coords: Vector2i) -> void:
-	var cell: TileData = effect_layer.get_cell_tile_data(coords)
-	if cell == null: return
+	var data: TileData = effect_layer.get_cell_tile_data(coords)
+	if data == null: return
 	
-	var rarity: String = cell.get_custom_data("rarity")
-	var price: int = shop_data.prices[rarity]
+	var effect_data: EffectData = data.get_custom_data("effect")
+	var price: int = shop_data.prices[effect_data.rarity]
 	
 	if player.gold < price: return
 	player.gold -= price
-	bought_effects.append(coords)
-	GameManager.bought_effect = effect_layer.get_cell_atlas_coords(coords)
+	bought_effects.append(effect_data)
+	GameManager.bought_effect = effect_data
 	effect_layer.erase_cell(coords)
 	GameManager.change_scene("ApplyEffectMenu")
 

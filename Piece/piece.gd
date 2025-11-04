@@ -16,10 +16,6 @@ var active := false
 
 
 
-func _ready() -> void:
-	display_offset = data.shape in [PieceData.Shape.T, PieceData.Shape.L, PieceData.Shape.J, PieceData.Shape.S, PieceData.Shape.Z]
-
-
 func move(dir: Vector2i) -> void:
 	coords += dir
 
