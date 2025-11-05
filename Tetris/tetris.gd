@@ -30,42 +30,36 @@ const DAMAGE_AMTS := {
 
 var enemy: Enemy = null
 
-var deck: Deck = Deck.new()
-var deck_idx: int = 0
 var active_piece: Piece = null
-var fall_speed: float = 1
-var preview_size: int = 3
+var preview_size: int = 3 ## number of pieces displayed up next
 var pieces_placed: int = 0
-var type_counts: Dictionary = {
-	Effect.Type.MELEE: 0,
-	Effect.Type.RANGED: 0,
-	Effect.Type.ARROW: 0,
-	Effect.Type.SHIELD: 0,
-	Effect.Type.BUILDING: 0,
-	Effect.Type.ECONOMY: 0,
-	Effect.Type.SCIENCE: 0,
-	Effect.Type.SUPPORT: 0,
-	Effect.Type.ARMOR: 0,
-	Effect.Type.EXPLOSIVE: 0,
-	Effect.Type.MUSIC: 0,
-	Effect.Type.MISC: 0,
+var type_counts: Dictionary = { ## Count of each type of [Effect] placed
+	EffectData.Type.MELEE: 0,
+	EffectData.Type.RANGED: 0,
+	EffectData.Type.ARROW: 0,
+	EffectData.Type.SHIELD: 0,
+	EffectData.Type.BUILDING: 0,
+	EffectData.Type.ECONOMY: 0,
+	EffectData.Type.SCIENCE: 0,
+	EffectData.Type.SUPPORT: 0,
+	EffectData.Type.ARMOR: 0,
+	EffectData.Type.EXPLOSIVE: 0,
+	EffectData.Type.MUSIC: 0,
+	EffectData.Type.MISC: 0,
 }
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.start_combat.connect(_on_start_combat)
-	deck = player.deck
 
 
+## Runs at the start of combat, initializes values
 func _on_start_combat() -> void:
 	enemy = GameManager.enemy
 	tick_timer.wait_time = enemy.base_tick_rate
+	await get_tree().process_frame
 	spawn_piece()
-
-
-func tick() -> void:
-	_move_piece(active_piece, Vector2i.DOWN)
 
 
 func _input(event: InputEvent) -> void:
@@ -94,102 +88,111 @@ func _input(event: InputEvent) -> void:
 		rotate_piece(active_piece, -1)
 
 
+## Core game clock, causes pieces to fall
+func tick() -> void:
+	_move_piece(active_piece, Vector2i.DOWN)
+
+#region Draw Functions
+
+## Returns the cell at [param coords]
 func get_cell(coords: Vector2i) -> Cell:
-	""" Returns the cell at the given coords"""
 	return Cell.cell_coords.get(coords)
 
 
+## Set cell without triggering its [Effect] or [EnemyAttack].[br]
+## Used while cells are falling or for display purposes
 func set_cell(cell: Cell) -> void:
-	""" Set cell without triggering effects/attacks """
 	if cell == null: return
-	# Set tilemap layers
-	base_layer.set_cell(cell.get_coords(), 0, cell.base_atlas_coords)
-	effect_layer.set_cell(cell.get_coords(), 1, cell.effect_atlas_coords)
-	
-	
-func place_cell(cell: Cell) -> void:
-	""" Place and trigger effects/attacks """
-	set_cell(cell)
-	cell.place()
-	
-	# Enemy Attacks
-	var data: TileData = attack_layer.get_cell_tile_data(cell.coords)
-	if data != null:
-		var attack: EnemyAttack = data.get_custom_data("attack_resource")
-		if attack != null:
-			attack.trigger()
-			attack_layer.erase_cell(cell.coords)
+	base_layer.set_cell(cell.get_coords(), 0, cell.data.base_atlas_coords)
+	effect_layer.set_cell(cell.get_coords(), 1, cell.effect.data.atlas_coords)
 
 
+## Removes [param cell] without triggering its [Effect].
 func erase_cell(cell: Cell) -> void:
-	""" Remove cell without triggering effects """
 	if cell == null: return
 	base_layer.erase_cell(cell.get_coords())
 	effect_layer.erase_cell(cell.get_coords())
 
 
-func clear_cell(cell: Cell) -> void:
-	""" Remove cell and trigger effects """
-	if cell == null: return
-	erase_cell(cell)
-	cell.clear()
-
-
+## Draws the shadow of [param cell].
 func set_cell_shadow(cell: Cell) -> void:
-	""" Draws the shadow of a cell """
-	base_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.base_atlas_coords)
-	if cell.effect != null:
-		effect_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.effect.atlas_coords)
+	base_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.data.base_atlas_coords)
+	effect_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.effect.data.atlas_coords)
 
 
-## Erases the shadow of a cell
-func erase_cell_shadow(cell: Cell) -> void:
+## Erases the shadow of [param cell]
+func _erase_cell_shadow(cell: Cell) -> void:
 	base_ghost_layer.erase_cell(cell.get_shadow_coords())
 	effect_ghost_layer.erase_cell(cell.get_shadow_coords())
 
 
-## Draws a piece without triggering effects
-func draw_piece(piece: Piece = active_piece, shadow: bool = true) -> void:
+## Draws [param piece] without triggering effects.
+## Also draws the shadow if [param draw_shadow] is [code]true[/code]
+func _draw_piece(piece: Piece = active_piece, draw_shadow: bool = true) -> void:
 	for cell: Cell in piece.cells:
 		set_cell(cell)
-	if shadow: draw_shadow(piece)
+	if draw_shadow: _draw_shadow(piece)
 
 
-func draw_shadow(piece: Piece = active_piece) -> void:
-	""" Draws a piece's shadow """
+## Draws the shadow of [param piece]
+func _draw_shadow(piece: Piece = active_piece) -> void:
 	var y: int = 1
 	while not check_collision(piece, Vector2i.DOWN * y, 0, base_layer):
 		y += 1
+		if y > 100:
+			printerr("Failed Shadow Draw, No Floor")
+			return
 	y -= 1
 	piece.shadow_offset = Vector2i(0, y)
 	for cell in piece.cells:
 		set_cell_shadow(cell)
 
-
+## Remove [param piece] without triggering effects. 
+## Also removes the shadow if [param remove_shadow] is [code]true[/code].
 func _remove_piece(piece: Piece = active_piece, remove_shadow: bool = true) -> void:
-	""" Remove piece without triggering effects """
-	for cell in piece.cells:
+	for cell: Cell in piece.cells:
 		erase_cell(cell)
 	if remove_shadow:
 		_remove_shadow(piece)
 
 
+## Removes [param piece]'s shadow
 func _remove_shadow(piece: Piece = active_piece) -> void:
-	""" Removes a piece's shadow """
 	for cell in piece.cells:
-		erase_cell_shadow(cell)
+		_erase_cell_shadow(cell)
 
 
+## Draws the [Piece]s upcoming in the preview
+func _draw_preview() -> void:
+	# Clear preview
+	for x in range(11, 15):
+		for y in range(2, 5 * (preview_size - 1) + 2):
+			erase_cell(get_cell(Vector2i(x, y)))
+	
+	# Draw preview
+	for n: int in preview_size:
+		var piece: Piece = player.deck.peek(n).create_piece()
+		piece.coords = Vector2i(11, 5 * n + 2)
+		_draw_piece(piece, false)
+
+#endregion Draw Functions
+
+#region Game Logic
+
+## Moves [param piece] in direction [param dir]. 
+## [br]If [param collision_enabled] is [code]true[/code] it will check for collisions, 
+## and return [code]false[/code] and place the piece if it collides
 func _move_piece(piece: Piece, dir: Vector2i, collision_enabled: bool = true) -> bool:
 	if collision_enabled and check_collision(piece, dir):
 		if dir.y >= 1: place_piece(piece)
 		return false
 	_remove_piece(piece, false)
 	piece.move(dir)
-	draw_piece(piece)
+	_draw_piece(piece)
 	return true
 
 
+## Rotates a piece [param rot] times, negative means reversed rotation
 func rotate_piece(piece: Piece = active_piece, rot: int = 1) -> void:
 	# TODO: If needed you can rotate before collision check and rotate back, but less readable
 	if rot == 0: return
@@ -202,10 +205,12 @@ func rotate_piece(piece: Piece = active_piece, rot: int = 1) -> void:
 			_remove_piece(piece)
 			piece.rotate(rot)
 			piece.move(vec)
-			draw_piece(piece)
+			_draw_piece(piece)
 			return
 	
-	
+
+## Checks if [param piece] will collide with anything on [param layer] when moved in direction [param dir] and rotated by [param rot].
+## [br][br]Returns [code]true[/code] if collided, otherwise [code]false[/code].
 func check_collision(piece: Piece, dir: Vector2i = Vector2i.ZERO, rot: int = 0, layer: TileMapLayer = base_layer) -> bool:
 	_remove_piece(piece, false)
 	piece.rotate(rot)
@@ -217,13 +222,14 @@ func check_collision(piece: Piece, dir: Vector2i = Vector2i.ZERO, rot: int = 0, 
 			break
 			
 	piece.rotate(-rot)
-	draw_piece(piece, false)
+	_draw_piece(piece, false)
 	return collided
+	
 
 
 func place_piece(piece: Piece) -> void:
 	for cell: Cell in piece.cells:
-		set_cell(cell)
+		place_cell(cell)
 	
 	_remove_shadow(piece)
 	clear_lines()
@@ -232,31 +238,31 @@ func place_piece(piece: Piece) -> void:
 	SignalBus.piece_placed.emit(pieces_placed)
 
 
-func spawn_piece() -> void:
-	# TODO BUG: Deal with small decks where there might not be enough pieces
-	if deck.is_empty():
-		_shuffle()
-
-	var piece_data: PieceData = up_next.pop_front()
-	up_next.append(deck.pop_front())
-	discard.append(piece_data)
-	var piece: Piece = piece_data.create_piece()
-	piece.active = true
-	# Coins
-	var coin_chance := 0.1
-	# TODO: Fix coins
-	for cell in up_next[-1].cells:
-		if cell.exhausted:
-			cell.effect_atlas_coords = Vector2i.ZERO
-		if cell.effect_atlas_coords == Vector2i(0, 1): # coin
-			cell.effect_atlas_coords = Vector2i.ZERO
-		if cell.effect_atlas_coords == Vector2i.ZERO:
-			if randf() < coin_chance:
-				cell.effect_atlas_coords = Vector2i(0, 1)
-		if cell.unique:
-			cell.exhausted = true
-	_draw_next()
+## Place [param cell] and trigger its [Effect] and any [EnemyAttack] on that tile.
+func place_cell(cell: Cell) -> void:
+	set_cell(cell)
+	cell.place()
 	
+	# Enemy Attacks
+	var data: TileData = attack_layer.get_cell_tile_data(cell.coords)
+	if data != null:
+		var attack: EnemyAttack = data.get_custom_data("attack_resource")
+		if attack != null:
+			attack.trigger()
+			attack_layer.erase_cell(cell.coords)
+
+
+## Removes [param cell] and triggers its [Effect].
+func clear_cell(cell: Cell) -> void:
+	if cell == null: return
+	erase_cell(cell)
+	cell.clear()
+
+
+func spawn_piece() -> void:
+	var piece: Piece = player.deck.draw().create_piece()
+	piece.active = true
+	_draw_preview()
 	active_piece = piece
 	piece.coords = Vector2i(4, 1)
 	if check_collision(piece, Vector2i.ZERO, 0, base_layer):
@@ -264,29 +270,17 @@ func spawn_piece() -> void:
 		if check_collision(piece, Vector2i.ZERO, 0, base_layer):
 			lose()
 			return
-	draw_piece(piece, true)
+	_draw_piece(piece, true)
 
 
-func _draw_next() -> void:
-	pass
-	## Clear up next
-	#for x in range(11, 15):
-		#for y in range(2, 10):
-			#erase_cell(get_cell(Vector2i(x, y)))
-	#
-	## Draw up next
-	#for n in num_up_next:
-		#up_next[n].coords = Vector2i(11, 5 * n + 2)
-		#draw_piece(up_next[n], false)
-
-
+## Returns [code]true[/code] if [param row] is a full line, otherwise [code]false[/code].
 func check_line(row: int) -> bool:
 	for col in WIDTH:
 		if base_layer.get_cell_tile_data(Vector2i(col, row)) == null:
 			return false
 	return true
 
-
+## Clears all full lines.
 func clear_lines() -> void:
 	var rows := []
 	for row in HEIGHT:
@@ -303,26 +297,17 @@ func clear_lines() -> void:
 			var cell: Cell = get_cell(Vector2i(col, row))
 			clear_cell(cell)
 	for row: int in rows:
-		lower_rows_above(row)
+		_lower_rows_above(row)
 
 
-func lower_rows_above(start_row: int) -> void:
+## Lowers all [Cell]s in the rows above [param start_row].
+func _lower_rows_above(start_row: int) -> void:
 	var cpy := Cell.cell_coords.duplicate()
 	for cell: Cell in cpy.values():
-		#await get_tree().create_timer(.5).timeout
 		if cell.coords.y < start_row:
 			erase_cell(cell)
 			cell.coords += Vector2i.DOWN
 			set_cell(cell)
-		
-	#for row: int in range(start_row, 0, -1): # bottom up
-		#for col: int in WIDTH:
-			#var cell: Cell = get_cell(Vector2i(col, row - 1))
-			#if cell == null:
-				#erase_cell(get_cell(Vector2i(col, row)))
-			#else:
-				#cell.coords += Vector2i.DOWN
-				#set_cell(cell)
 
 
 func deal_damage(damage: float) -> void:
@@ -333,3 +318,6 @@ func deal_damage(damage: float) -> void:
 
 func lose() -> void:
 	print("YOU LOST")
+	return
+	
+#endregion Game Logic

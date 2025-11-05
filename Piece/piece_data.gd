@@ -52,7 +52,7 @@ var color: PieceColor
 var display_offset: bool = false
 
 
-func _ready() -> void:
+func _init() -> void:
 	_create_cells()
 
 
@@ -64,8 +64,8 @@ func _create_cells() -> void:
 		matrix[-1].fill(null)
 		for col: int in range(len(shape_arr[row])):
 			if shape_arr[row][col] == 0: continue
-			var cell_data: CellData = preload("res://Piece/Cell/cell_data.gd").new()
-			cell_data.piece = self
+			var cell_data: CellData = CellData.new()
+			cell_data.piece_data = self
 			cell_data.offset = Vector2i(col, row)
 			cell_data.base_atlas_coords = color_map[color]
 			cells.append(cell_data)
@@ -75,11 +75,15 @@ func _create_cells() -> void:
 func create_piece() -> Piece:
 	var piece: Piece = piece_scn.instantiate()
 	piece.data = self
-	piece.cell_matrix = matrix.map(func(row: Array) -> void: row.duplicate().fill(null))
+	
 	for i in len(matrix):
+		var new_row: Array[Cell] = []
 		for j in len(matrix[i]):
-			if matrix[i][j] == null: continue
-			var cell: Cell = matrix[i][j].create_cell(piece)
-			piece.cell_matrix[i][j] = cell
-			piece.cells.append(cell)
+			if matrix[i][j] == null:
+				new_row.append(null)
+			else:
+				var cell: Cell = matrix[i][j].create_cell(piece)
+				new_row.append(cell)
+				piece.cells.append(cell)
+		piece.cell_matrix.append(new_row)
 	return piece

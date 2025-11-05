@@ -7,7 +7,7 @@ signal gold_changed
 signal block_changed
 
 @export_category("Deck")
-@export var full_deck: Deck = Deck.new()
+@export var deck: Deck
 @export var preview_size: int = 3
 
 @export_category("Stats")
@@ -75,11 +75,6 @@ func gain_gold(amount: int) -> void:
 func lose_gold(amount: int) -> void:
 	gold -= amount
 	gold = max(0, gold)
-
-
-func add_piece(piece: Piece) -> void:
-	full_deck.append(piece)
-	$Deck.add_child(piece)
 
 
 func reset_status_effects() -> void:

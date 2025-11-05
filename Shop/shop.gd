@@ -120,7 +120,6 @@ func _generate_pieces() -> void:
 			cell_data.effect_atlas_coords = effect_data.atlas_coords
 		
 		var piece: Piece = piece_data.create_piece()
-		$Pieces.add_child(piece)
 		pieces.append(piece)
 		_draw_piece(piece, piece.display_offset)
 

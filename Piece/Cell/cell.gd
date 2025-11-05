@@ -2,10 +2,10 @@ class_name Cell extends Node2D
 
 static var cell_coords: Dictionary[Vector2i, Cell] = {}
 
+var data: CellData
 var piece: Piece
 var effect: Effect
 var offset: Vector2i # offset from piece position
-var base_atlas_coords: Vector2i = Vector2i.ZERO
 @onready var coords: Vector2i = offset + piece.coords:
 	set(value):
 		cell_coords.erase(coords)
@@ -29,6 +29,7 @@ func place(trigger_effect: bool = true) -> void:
 		var cell: Cell = Cell.cell_coords[coords + neighbor]
 		if cell == null: continue
 		cell.effect.base_on_adjacent_cell_placed(-neighbor)
+
 
 func clear(trigger_effect: bool = true) -> void:
 	if not trigger_effect: return

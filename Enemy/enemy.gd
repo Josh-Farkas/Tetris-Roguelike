@@ -57,6 +57,8 @@ func _start_combat() -> void:
 func take_damage(amount: float) -> void:
 	if amount == 0: return
 	health -= amount
+	if amount >= Constants.SCREENSHAKE_MIN_DAMAGE:
+		GameManager.camera.screenshake(5 * min(amount, Constants.SCREENSHAKE_MAX_DAMAGE) * GameManager.settings.screenshake_magnitude, .5)
 	if health <= 0:
 		die()
 
@@ -66,6 +68,8 @@ func die() -> void:
 
 
 func _place_attack_randomly(atk: EnemyAttack) -> void:
+	# TODO: Make this efficient and not just random 20 times until fail
+	# Keep track of empty tiles and only randomize from those
 	for __ in range(2, GameManager.board_height):
 		var coords: Vector2i = Vector2i(randi_range(0, 10), randi_range(0, 20))
 		if _place_attack(atk, coords): break
@@ -85,15 +89,15 @@ func _set_tileset_data() -> void:
 		data.set_custom_data("attack_resource", atk)
 
 
-# Signals
+#region Signals
 func _on_piece_placed(pieces_placed: int) -> void:
 	take_damage(status_effects.status_effects.poison)
 
 
 func _on_status_changed() -> void:
 	status_effects_ui.update_ui(status_effects.status_effects)
-		
-	
+#endregion
 
 @abstract
+## Abstract function to be overriden and called by each [Enemy] type.
 func attack() -> void

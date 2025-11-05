@@ -43,10 +43,12 @@ func set_rotation(rot: int) -> void:
 	rotate(rot - rotation)
 
 
-func _rotate_array(arr: Array) -> Array:
-	var new_arr: Array = []
+func _rotate_array(arr: Array[Array]) -> Array[Array]:
+	var new_arr: Array[Array] = []
+	if arr == []:
+		push_error("Failed to Rotate Array.")
 	for i: int in range(len(arr[0])):
-		var row: Array = []
+		var row: Array[CellData] = []
 		for j: int in range(len(arr)):
 			row.append(arr[len(arr) - j - 1][i])
 		new_arr.append(row)

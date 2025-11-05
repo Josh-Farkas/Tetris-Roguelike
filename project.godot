@@ -19,7 +19,6 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 Constants="*res://Autoloads/constants.gd"
 GameManager="*res://Autoloads/game_manager.gd"
 SignalBus="*res://Autoloads/signal_bus.gd"
-Settings="*res://Autoloads/settings.gd"
 
 [debug]
 

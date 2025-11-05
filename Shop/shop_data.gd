@@ -17,19 +17,19 @@ const effect_coords: Array[Vector2i] = [
 	Vector2i(2, 5),Vector2i(5, 5),Vector2i(8, 5),
 ]
 
-static var effect_type_colors: Dictionary[Effect.Type, StringName] = {
-	Effect.Type.RANGED: "Green",
-	Effect.Type.ARROW: "Darkgreen",
-	Effect.Type.MELEE: "Darkred",
-	Effect.Type.SHIELD: "Mediumturquoise",
-	Effect.Type.SUPPORT: "Peachpuff",
-	Effect.Type.BUILDING: "Sienna",
-	Effect.Type.ECONOMY: "Goldenrod",
-	Effect.Type.SCIENCE: "Darkviolet",
-	Effect.Type.ARMOR: "Dimgray",
-	Effect.Type.EXPLOSIVE: "Red",
-	Effect.Type.MUSIC: "Aquamarine",
-	Effect.Type.MISC: "White",
+static var effect_type_colors: Dictionary[EffectData.Type, StringName] = {
+	EffectData.Type.RANGED: "Green",
+	EffectData.Type.ARROW: "Darkgreen",
+	EffectData.Type.MELEE: "Darkred",
+	EffectData.Type.SHIELD: "Mediumturquoise",
+	EffectData.Type.SUPPORT: "Peachpuff",
+	EffectData.Type.BUILDING: "Sienna",
+	EffectData.Type.ECONOMY: "Goldenrod",
+	EffectData.Type.SCIENCE: "Darkviolet",
+	EffectData.Type.ARMOR: "Dimgray",
+	EffectData.Type.EXPLOSIVE: "Red",
+	EffectData.Type.MUSIC: "Aquamarine",
+	EffectData.Type.MISC: "White",
 }
 
 
@@ -82,13 +82,13 @@ static func _generate_effects() -> void:
 		var coords: Vector2i = source.get_tile_id(tile_index)
 		var tile_data := source.get_tile_data(coords, 0)
 		var effect: Effect = tile_data.get_custom_data("effect") as Effect
-		if effect == null or effect.name == "none": continue
+		if effect == null or effect.name == "None": continue
 		effect_types[effect.name] = effect.types
 		if effect.name in effect_descriptions:
 			effect_descriptions[effect.name] = effect_descriptions[effect.name].insert(0, "[center]")
 			if effect.fragile: effect_descriptions[effect.name] += "\n[center][color=efd10e]Fragile[/color]"
 			effect_descriptions[effect.name] += "\n" + " ".join(effect.type)
-			for type: Effect.Type in effect_type_colors:
+			for type: EffectData.Type in effect_type_colors:
 				effect_descriptions[effect.name] = effect_descriptions[effect.name] \
 						.replace(type, "[color=%s][%s][/color]" % [effect_type_colors[type], type])
 		else:

@@ -27,5 +27,13 @@ const RARITY_COLORS: Dictionary = {
 	Rarity.NONE: "#555555"
 }
 
-# ========== File Paths ==========
+#region File Paths
 const PIECE_TILESET_PATH := "res://Piece/piece_tileset.tres"
+const EFFECTS_FOLDER_PATH := "res://Piece/Effect/Effects/"
+#endregion
+
+
+#region Tunable Settings
+const SCREENSHAKE_MIN_DAMAGE: int = 3 ## Minimum damage dealt to cause screenshake
+const SCREENSHAKE_MAX_DAMAGE: int = 8 ## Max damage that screenshake will scale with, any more and the screenshake will be the same
+#endregion

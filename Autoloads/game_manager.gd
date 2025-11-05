@@ -31,6 +31,8 @@ var loaded_scenes: Dictionary[StringName, Node] = {}
 var board_height := 22 # two hidden rows above for pieces to spawn
 var board_width := 10
 
+func _init() -> void:
+	settings = Settings.load_settings()
 
 func _ready() -> void:
 	#Effect.register_effects()
@@ -74,13 +76,6 @@ func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:
 	SignalBus.changed_scenes.emit(old_scene, active_scene)
 
 
-func _on_enemy_killed() -> void:
-	level_num += 1
-	player.get_tree().call_group("cell", "unexhaust")
-	player.set_block(0)
-	change_scene("Shop", false)
-	
-	
 func next_combat() -> void:
 	# Choose Enemy
 	var pool: Array[PackedScene]
@@ -100,3 +95,10 @@ func next_combat() -> void:
 	get_tree().get_first_node_in_group("enemy_position").add_child(enemy)
 	GameManager.enemy = enemy
 	SignalBus.start_combat.emit()
+
+
+func _on_enemy_killed() -> void:
+	level_num += 1
+	player.get_tree().call_group("cell", "unexhaust")
+	player.set_block(0)
+	change_scene("Shop", false)
