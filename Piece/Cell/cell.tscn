@@ -6,9 +6,9 @@
 script = ExtResource("1_vc2b4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-z_index = 5
+z_index = 10
 custom_minimum_size = Vector2(16, 16)
-offset_left = 21.0
-offset_top = -28.0
-offset_right = 37.0
-offset_bottom = -12.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0

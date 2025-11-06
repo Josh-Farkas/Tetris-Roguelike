@@ -62,3 +62,10 @@ func add_piece(piece_data: PieceData) -> void:
 func remove_piece(piece_data: PieceData) -> void:
 	full_deck.erase(piece_data)
 	reset()
+
+## Sets the [EffectData] of all cells without an effect to none_data
+func initialize_pieces() -> void:
+	var none_data: EffectData = load("res://Piece/Effect/Effects/None/none_data.tres")
+	EffectData.none = none_data
+	for piece_data: PieceData in full_deck:
+		piece_data.create_cells()

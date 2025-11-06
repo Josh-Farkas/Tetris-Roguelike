@@ -1,6 +1,6 @@
 class_name PieceData extends Resource
 
-const piece_scn = preload("res://Piece/piece.tscn")
+const piece_scn := preload("res://Piece/piece.tscn")
 
 enum Shape {
 	I, O, T, J, L, S, Z
@@ -10,7 +10,7 @@ enum PieceColor {
 	GREEN, BLUE, LIGHT_BLUE, RED, ORANGE, PURPLE, YELLOW
 }
 
-var shape_map: Dictionary = {
+const shape_map: Dictionary = {
 	Shape.I: Shapes.I,
 	Shape.O: Shapes.O,
 	Shape.T: Shapes.T,
@@ -52,11 +52,7 @@ var color: PieceColor
 var display_offset: bool = false
 
 
-func _init() -> void:
-	_create_cells()
-
-
-func _create_cells() -> void:
+func create_cells() -> void:
 	var shape_arr: Array = shape_map[shape]
 	for row: int in range(len(shape_arr)):
 		matrix.append([])
@@ -65,6 +61,7 @@ func _create_cells() -> void:
 		for col: int in range(len(shape_arr[row])):
 			if shape_arr[row][col] == 0: continue
 			var cell_data: CellData = CellData.new()
+			cell_data.effect_data = EffectData.none
 			cell_data.piece_data = self
 			cell_data.offset = Vector2i(col, row)
 			cell_data.base_atlas_coords = color_map[color]
@@ -76,13 +73,15 @@ func create_piece() -> Piece:
 	var piece: Piece = piece_scn.instantiate()
 	piece.data = self
 	
-	for i in len(matrix):
+	for row in len(matrix):
 		var new_row: Array[Cell] = []
-		for j in len(matrix[i]):
-			if matrix[i][j] == null:
+		for col in len(matrix[row]):
+			if matrix[row][col] == null:
 				new_row.append(null)
 			else:
-				var cell: Cell = matrix[i][j].create_cell(piece)
+				var cell: Cell = matrix[row][col].create_cell(piece)
+				cell.offset = Vector2i(col, row)
+				cell.coords = piece.coords + cell.offset
 				new_row.append(cell)
 				piece.cells.append(cell)
 		piece.cell_matrix.append(new_row)

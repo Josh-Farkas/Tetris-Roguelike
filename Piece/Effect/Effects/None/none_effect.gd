@@ -1,1 +1,1 @@
-extends Effect
+class_name NoneEffect extends Effect

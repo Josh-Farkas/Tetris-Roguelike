@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://dhjbwkxwisp0t"]
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://cmvcgd12ereqx"]
 
 [ext_resource type="Script" uid="uid://beyle3obv2br1" path="res://Piece/Effect/Effects/None/none_effect.gd" id="1_d1cr4"]
 [ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="2_slke0"]
@@ -6,6 +6,5 @@
 [resource]
 script = ExtResource("2_slke0")
 name = &"None"
-rarity = 3
 effect_script = ExtResource("1_d1cr4")
 metadata/_custom_type_script = "uid://bacar626wbev1"

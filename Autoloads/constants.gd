@@ -27,6 +27,8 @@ const RARITY_COLORS: Dictionary = {
 	Rarity.NONE: "#555555"
 }
 
+const NEIGHBORS: Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
+
 #region File Paths
 const PIECE_TILESET_PATH := "res://Piece/piece_tileset.tres"
 const EFFECTS_FOLDER_PATH := "res://Piece/Effect/Effects/"

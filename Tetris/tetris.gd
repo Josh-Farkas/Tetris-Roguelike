@@ -4,7 +4,6 @@ const WIDTH: int = 10
 const HEIGHT: int = 22
 const WALLKICKS = preload("res://Tetris/wallkicks.gd").WALLKICKS
 const WALLKICKS_I = preload("res://Tetris/wallkicks.gd").WALLKICKS_I
-const NEIGHBORS: Array[Vector2i] = [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]
 
 # Lines cleared -> damage dealt
 const DAMAGE_AMTS := {
@@ -31,7 +30,6 @@ const DAMAGE_AMTS := {
 var enemy: Enemy = null
 
 var active_piece: Piece = null
-var preview_size: int = 3 ## number of pieces displayed up next
 var pieces_placed: int = 0
 var type_counts: Dictionary = { ## Count of each type of [Effect] placed
 	EffectData.Type.MELEE: 0,
@@ -58,7 +56,6 @@ func _ready() -> void:
 func _on_start_combat() -> void:
 	enemy = GameManager.enemy
 	tick_timer.wait_time = enemy.base_tick_rate
-	await get_tree().process_frame
 	spawn_piece()
 
 
@@ -105,14 +102,15 @@ func set_cell(cell: Cell) -> void:
 	if cell == null: return
 	base_layer.set_cell(cell.get_coords(), 0, cell.data.base_atlas_coords)
 	effect_layer.set_cell(cell.get_coords(), 1, cell.effect.data.atlas_coords)
-
+	cell.position = base_layer.to_global(base_layer.map_to_local(cell.coords))
+	add_child(cell)
 
 ## Removes [param cell] without triggering its [Effect].
 func erase_cell(cell: Cell) -> void:
 	if cell == null: return
 	base_layer.erase_cell(cell.get_coords())
 	effect_layer.erase_cell(cell.get_coords())
-
+	remove_child(cell)
 
 ## Draws the shadow of [param cell].
 func set_cell_shadow(cell: Cell) -> void:
@@ -164,15 +162,16 @@ func _remove_shadow(piece: Piece = active_piece) -> void:
 
 ## Draws the [Piece]s upcoming in the preview
 func _draw_preview() -> void:
+	const START_Y := 3
 	# Clear preview
 	for x in range(11, 15):
-		for y in range(2, 5 * (preview_size - 1) + 2):
+		for y in range(START_Y, 5 * (player.preview_size - 1) + START_Y):
 			erase_cell(get_cell(Vector2i(x, y)))
 	
 	# Draw preview
-	for n: int in preview_size:
+	for n: int in player.preview_size:
 		var piece: Piece = player.deck.peek(n).create_piece()
-		piece.coords = Vector2i(11, 5 * n + 2)
+		piece.coords = Vector2i(11, 5 * n + START_Y)
 		_draw_piece(piece, false)
 
 #endregion Draw Functions
@@ -186,7 +185,7 @@ func _move_piece(piece: Piece, dir: Vector2i, collision_enabled: bool = true) ->
 	if collision_enabled and check_collision(piece, dir):
 		if dir.y >= 1: place_piece(piece)
 		return false
-	_remove_piece(piece, false)
+	_remove_piece(piece, true)
 	piece.move(dir)
 	_draw_piece(piece)
 	return true
@@ -302,11 +301,12 @@ func clear_lines() -> void:
 
 ## Lowers all [Cell]s in the rows above [param start_row].
 func _lower_rows_above(start_row: int) -> void:
-	var cpy := Cell.cell_coords.duplicate()
-	for cell: Cell in cpy.values():
-		if cell.coords.y < start_row:
+	for col in WIDTH:
+		for row in range(start_row, 0, -1):
+			var cell: Cell = get_cell(Vector2i(col, row))
+			if cell == null: continue
 			erase_cell(cell)
-			cell.coords += Vector2i.DOWN
+			cell.move(Vector2i.DOWN)
 			set_cell(cell)
 
 

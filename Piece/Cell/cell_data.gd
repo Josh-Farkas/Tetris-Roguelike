@@ -1,6 +1,6 @@
 class_name CellData extends Resource
 
-@export var effect_data: EffectData = preload("res://Piece/Effect/Effects/None/none_data.tres") as EffectData
+@export var effect_data: EffectData
 @export var piece_data: PieceData
 @export var offset: Vector2i
 @export var base_atlas_coords: Vector2i

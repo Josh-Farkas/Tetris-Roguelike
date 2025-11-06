@@ -18,8 +18,9 @@ enum Type {
 }
 
 static var effect_map: Dictionary[StringName, EffectData] = {}
+static var none: EffectData
 
-@export_category("Info")
+@export_group("Info")
 @export var name: StringName:
 	set(value):
 		name = value
@@ -29,7 +30,7 @@ static var effect_map: Dictionary[StringName, EffectData] = {}
 @export var types: Array[EffectData.Type]
 @export var fragile: bool = false
 
-@export_category("Data")
+@export_group("Data")
 @export var effect_script: GDScript
 @export var atlas_coords: Vector2i
 

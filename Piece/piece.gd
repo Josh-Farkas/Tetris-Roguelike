@@ -9,7 +9,7 @@ var coords: Vector2i:
 			cell.coords += value - coords
 		coords = value
 var rotation: int = 0
-var cell_matrix: Array = []
+var cell_matrix: Array[Array] = []
 var shadow_offset: Vector2i = Vector2i(0, coords.y)
 var display_offset: bool = false
 var active := false
@@ -18,6 +18,7 @@ var active := false
 
 func move(dir: Vector2i) -> void:
 	coords += dir
+
 
 func rotate(rot: int = 1) -> void:
 	if rot == 0: return
@@ -48,17 +49,17 @@ func _rotate_array(arr: Array[Array]) -> Array[Array]:
 	if arr == []:
 		push_error("Failed to Rotate Array.")
 	for i: int in range(len(arr[0])):
-		var row: Array[CellData] = []
+		var row: Array[Cell] = []
 		for j: int in range(len(arr)):
 			row.append(arr[len(arr) - j - 1][i])
 		new_arr.append(row)
 	return new_arr
 
 
-func _rotate_array_inv(arr: Array) -> Array:
-	var new_arr: Array = []
+func _rotate_array_inv(arr: Array) -> Array[Array]:
+	var new_arr: Array[Array] = []
 	for i: int in range(len(arr[0]) - 1, -1, -1):
-		var row: Array = []
+		var row: Array[Cell] = []
 		for j: int in range(len(arr)):
 			row.append(arr[j][i])
 		new_arr.append(row)
