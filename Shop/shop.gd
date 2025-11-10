@@ -64,7 +64,7 @@ func _generate_items() -> void:
 	_generate_pieces()
 	_generate_relics()
 
-
+## Chooses and spawns the [Effect]s to put in the shop.
 func _generate_effects() -> void:
 	return
 	#Slots 1-3 are common, slots 4 and 5 are uncommon, and slot 6 is rare
@@ -72,11 +72,11 @@ func _generate_effects() -> void:
 	for n in range(shop_data.num_effects):
 		if shop_data.effect_coords[n] in bought_effects: continue
 		if n in range(0, 3):
-			rarity_pool = shop_data.effects.common
+			rarity_pool = shop_data.effects[Constants.Rarity.COMMON]
 		elif n in range(3, 5):
-			rarity_pool = shop_data.effects.uncommon
+			rarity_pool = shop_data.effects[Constants.Rarity.UNCOMMON]
 		else:
-			rarity_pool = shop_data.effects.rare
+			rarity_pool = shop_data.effects[Constants.Rarity.RARE]
 		var effect: String = rarity_pool.pick_random()
 		
 		effect_layer.set_cell(shop_data.effect_coords[n], 1, _get_effect_tilemap_coords(effect))

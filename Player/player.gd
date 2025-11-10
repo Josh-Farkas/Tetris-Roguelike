@@ -34,6 +34,7 @@ signal block_changed
 
 func _ready() -> void:
 	deck.initialize_pieces()
+	Effect.player = self
 
 
 ## Reduces [member health] by [param amount].[br]You die if [member health] < 0.

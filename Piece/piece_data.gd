@@ -61,7 +61,8 @@ func create_cells() -> void:
 		for col: int in range(len(shape_arr[row])):
 			if shape_arr[row][col] == 0: continue
 			var cell_data: CellData = CellData.new()
-			cell_data.effect_data = EffectData.none
+			var effects: Array[EffectData] = [EffectData.none, EffectData.none, EffectData.none, EffectData.none, EffectData.none, load("res://Piece/Effect/Effects/Sword/sword_data.tres"), load("res://Piece/Effect/Effects/Shield/shield_data.tres")]
+			cell_data.effect_data = effects.pick_random()
 			cell_data.piece_data = self
 			cell_data.offset = Vector2i(col, row)
 			cell_data.base_atlas_coords = color_map[color]

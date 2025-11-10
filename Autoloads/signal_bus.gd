@@ -7,3 +7,4 @@ signal changed_scenes(from: Node, to: Node)
 signal start_combat
 signal piece_placed(amount_placed: int)
 signal enemy_killed
+signal player_set(player: Player)

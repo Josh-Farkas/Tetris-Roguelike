@@ -20,7 +20,10 @@ const scenes: Dictionary[StringName, PackedScene] = {
 var settings: Settings
 
 # Game Variables
-@onready var player: Player = preload("res://Player/player.tscn").instantiate()
+@onready var player: Player = preload("res://Player/player.tscn").instantiate():
+	set(value):
+		player = value
+		SignalBus.player_set.emit(player)
 var main: Node
 var enemy: Enemy
 var active_scene: Node
@@ -47,6 +50,10 @@ func _ready() -> void:
 		change_scene("Shop")
 	else:
 		push_error("Failed to load main scene")
+
+
+func get_player() -> Player:
+	return player
 
 
 func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:

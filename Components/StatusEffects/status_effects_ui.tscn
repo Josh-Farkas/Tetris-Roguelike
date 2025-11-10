@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://b26nxkve7vliu"]
 
 [ext_resource type="Script" uid="uid://cuqmsw0r1fdj5" path="res://Components/StatusEffects/status_effects_ui.gd" id="1_xhgcg"]
-[ext_resource type="Texture2D" uid="uid://bjoua2423c3hu" path="res://Piece/Sprites/effects_spritesheet.png" id="3_j4sc0"]
-[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Assets/ui_theme.tres" id="3_jd4bx"]
+[ext_resource type="Texture2D" uid="uid://cxgns3d5s4kc8" path="res://Piece/Sprites/effects_spritesheet.png" id="3_j4sc0"]
+[ext_resource type="Theme" uid="uid://bjhbdxnegran2" path="res://Resources/ui_theme.tres" id="3_jd4bx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nc38l"]
 region = Rect2(0, 0, 8, 8)
@@ -161,6 +161,7 @@ theme_type_variation = &"SmallTextLabel"
 text = "0"
 
 [node name="Tranquility" type="HBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0

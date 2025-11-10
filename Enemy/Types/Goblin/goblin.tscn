@@ -14,7 +14,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_n5y13")
 attack_list = Array[ExtResource("2_hul14")]([ExtResource("3_xp7mt"), ExtResource("4_kounr")])
-max_health = 50.0
+max_health = 10.0
 
 [node name="EnemyBase" parent="." instance=ExtResource("1_psk8t")]
 layout_mode = 2

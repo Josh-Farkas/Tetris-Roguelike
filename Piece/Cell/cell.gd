@@ -8,7 +8,10 @@ var data: CellData
 var piece: Piece
 var effect: Effect
 var offset: Vector2i # offset from piece position
-var coords: Vector2i
+var coords: Vector2i:
+	set(value):
+		coords = value
+		position = coords * 16 + Vector2i(24, -24)
 var active: bool = false
 
 
@@ -37,9 +40,7 @@ func get_shadow_coords() -> Vector2i:
 
 
 func move(dir: Vector2i) -> void:
-	#cell_coords.erase(coords)
 	coords += dir
-	#cell_coords[coords] = self
 
 
 func place(trigger_effect: bool = true) -> void:

@@ -161,11 +161,14 @@ func _remove_shadow(piece: Piece = active_piece) -> void:
 
 ## Draws the [Piece]s upcoming in the preview
 func _draw_preview() -> void:
-	const START_Y: int = 3
+	const START_Y: int = 2
 	# Clear preview
 	for x in range(11, 15):
-		for y in range(START_Y, 5 * (player.preview_size - 1) + START_Y):
+		for y in range(START_Y, 15):
 			erase_cell(get_cell(Vector2i(x, y)))
+			base_layer.erase_cell(Vector2i(x, y))
+			effect_layer.erase_cell(Vector2i(x, y))
+			
 	
 	# Draw preview
 	for n: int in player.preview_size:

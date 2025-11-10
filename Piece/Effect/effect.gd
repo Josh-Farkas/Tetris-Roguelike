@@ -7,7 +7,6 @@ class_name Effect extends Resource
 const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH)
 static var effect_map: Dictionary[StringName, EffectData] = {}
 static var player: Player
-static var enemy: Enemy
 
 var data: EffectData
 var cell: Cell
@@ -19,9 +18,8 @@ static func get_effect(effect_name: StringName) -> Effect:
 	return effect_map.get(effect_name)
 
 #region Helper Functions
-# Functions for Effects to call
 func deal_damage(damage: float) -> void:
-	enemy.take_damage(damage + player.status_effects.get_status_effect("strength"))
+	GameManager.enemy.take_damage(damage + GameManager.get_player().status_effects.get_status_effect("strength"))
 	if damage >= 3:
 		GameManager.camera.screenshake(5 * min(damage, 8), .5)
 

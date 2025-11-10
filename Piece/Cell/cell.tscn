@@ -6,6 +6,8 @@
 script = ExtResource("1_vc2b4")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.5019608)
 z_index = 10
 custom_minimum_size = Vector2(16, 16)
 offset_left = -8.0
