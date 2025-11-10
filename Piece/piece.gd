@@ -5,19 +5,22 @@ var cells: Array[Cell] = []
 var coords: Vector2i:
 	set(value):
 		# move all cells when this moves
-		for cell: Cell in cells:
-			cell.coords += value - coords
+		_update_cell_coords(coords, value)
 		coords = value
 var rotation: int = 0
 var cell_matrix: Array[Array] = []
 var shadow_offset: Vector2i = Vector2i(0, coords.y)
 var display_offset: bool = false
-var active := false
 
 
 
 func move(dir: Vector2i) -> void:
 	coords += dir
+
+
+func _update_cell_coords(old_coords: Vector2i, new_coords: Vector2i) -> void:
+	for cell: Cell in cells:
+		cell.move(new_coords - old_coords)
 
 
 func rotate(rot: int = 1) -> void:
@@ -35,10 +38,8 @@ func rotate(rot: int = 1) -> void:
 			var cell: Cell = cell_matrix[row][col]
 			if cell == null: continue
 			# move cell coords based on change in offset
-			cell.coords -= cell.offset
+			cell.move(-cell.offset + Vector2i(col, row))
 			cell.offset = Vector2i(col, row)
-			cell.coords += cell.offset
-
 
 func set_rotation(rot: int) -> void:
 	rotate(rot - rotation)

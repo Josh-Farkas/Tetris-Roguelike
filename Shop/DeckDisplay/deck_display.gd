@@ -28,7 +28,6 @@ func display_deck() -> void:
 		var piece: Piece = piece_data.create_piece()
 		piece.coords = coords
 		for cell: Cell in piece.cells:
-			Cell.cell_coords[coords + cell.offset] = cell
 			base_layer.set_cell(coords + cell.offset, 0, cell.base_atlas_coords)
 			effect_layer.set_cell(coords + cell.offset, 1, cell.effect_atlas_coords)
 		counts[piece_data.shape] += 1

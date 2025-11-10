@@ -5,8 +5,8 @@ const HEIGHT: int = 22
 const WALLKICKS = preload("res://Tetris/wallkicks.gd").WALLKICKS
 const WALLKICKS_I = preload("res://Tetris/wallkicks.gd").WALLKICKS_I
 
-# Lines cleared -> damage dealt
-const DAMAGE_AMTS := {
+## Lines cleared: damage dealt
+const DAMAGE_AMTS: Dictionary[int, int] = {
 	1: 1,
 	2: 3,
 	3: 6,
@@ -45,7 +45,6 @@ var type_counts: Dictionary = { ## Count of each type of [Effect] placed
 	EffectData.Type.MUSIC: 0,
 	EffectData.Type.MISC: 0,
 }
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -93,7 +92,7 @@ func tick() -> void:
 
 ## Returns the cell at [param coords]
 func get_cell(coords: Vector2i) -> Cell:
-	return Cell.cell_coords.get(coords)
+	return Cell.get_cell_at(coords)
 
 
 ## Set cell without triggering its [Effect] or [EnemyAttack].[br]
@@ -102,15 +101,15 @@ func set_cell(cell: Cell) -> void:
 	if cell == null: return
 	base_layer.set_cell(cell.get_coords(), 0, cell.data.base_atlas_coords)
 	effect_layer.set_cell(cell.get_coords(), 1, cell.effect.data.atlas_coords)
-	cell.position = base_layer.to_global(base_layer.map_to_local(cell.coords))
-	add_child(cell)
+	#cell.position = base_layer.to_global(base_layer.map_to_local(cell.coords))
+
 
 ## Removes [param cell] without triggering its [Effect].
 func erase_cell(cell: Cell) -> void:
 	if cell == null: return
 	base_layer.erase_cell(cell.get_coords())
 	effect_layer.erase_cell(cell.get_coords())
-	remove_child(cell)
+
 
 ## Draws the shadow of [param cell].
 func set_cell_shadow(cell: Cell) -> void:
@@ -162,7 +161,7 @@ func _remove_shadow(piece: Piece = active_piece) -> void:
 
 ## Draws the [Piece]s upcoming in the preview
 func _draw_preview() -> void:
-	const START_Y := 3
+	const START_Y: int = 3
 	# Clear preview
 	for x in range(11, 15):
 		for y in range(START_Y, 5 * (player.preview_size - 1) + START_Y):
@@ -240,6 +239,7 @@ func place_piece(piece: Piece) -> void:
 ## Place [param cell] and trigger its [Effect] and any [EnemyAttack] on that tile.
 func place_cell(cell: Cell) -> void:
 	set_cell(cell)
+	
 	cell.place()
 	
 	# Enemy Attacks
@@ -258,9 +258,11 @@ func clear_cell(cell: Cell) -> void:
 	cell.clear()
 
 
+## Spawns the next [Piece] in the [member deck].
 func spawn_piece() -> void:
 	var piece: Piece = player.deck.draw().create_piece()
-	piece.active = true
+	for cell: Cell in piece.cells:
+		cell.active = true
 	_draw_preview()
 	active_piece = piece
 	piece.coords = Vector2i(4, 1)
@@ -270,6 +272,8 @@ func spawn_piece() -> void:
 			lose()
 			return
 	_draw_piece(piece, true)
+	for cell: Cell in piece.cells:
+		add_child(cell)
 
 
 ## Returns [code]true[/code] if [param row] is a full line, otherwise [code]false[/code].
@@ -278,6 +282,7 @@ func check_line(row: int) -> bool:
 		if base_layer.get_cell_tile_data(Vector2i(col, row)) == null:
 			return false
 	return true
+
 
 ## Clears all full lines.
 func clear_lines() -> void:
@@ -288,34 +293,32 @@ func clear_lines() -> void:
 	if rows.is_empty(): return
 	
 	var num_cleared := len(rows)
-	var base_damage: int = DAMAGE_AMTS[num_cleared]
-	# TODO: make enemy take base damage
-	var damage: int = base_damage
+	var damage: int = DAMAGE_AMTS[num_cleared]
 	for row: int in rows: # goes top down
 		for col: int in WIDTH:
 			var cell: Cell = get_cell(Vector2i(col, row))
 			clear_cell(cell)
 	for row: int in rows:
 		_lower_rows_above(row)
+	deal_damage(damage)
 
 
 ## Lowers all [Cell]s in the rows above [param start_row].
 func _lower_rows_above(start_row: int) -> void:
-	for col in WIDTH:
-		for row in range(start_row, 0, -1):
-			var cell: Cell = get_cell(Vector2i(col, row))
-			if cell == null: continue
+	for cell: Cell in Cell.cells:
+		if cell.get_parent() == null: continue
+		if cell.get_coords().y < start_row:
 			erase_cell(cell)
 			cell.move(Vector2i.DOWN)
 			set_cell(cell)
 
-
+## Deals [param damage] to the [member enemy].
 func deal_damage(damage: float) -> void:
 	enemy.take_damage(damage + player.status_effects.get_status_effect("strength"))
 	if damage >= 3:
 		GameManager.camera.screenshake(5 * min(damage, 8), .5)
 
-
+## Loses the game
 func lose() -> void:
 	print("YOU LOST")
 	return
