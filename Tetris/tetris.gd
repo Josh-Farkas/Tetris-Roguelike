@@ -107,14 +107,14 @@ func get_cell(coords: Vector2i) -> Cell:
 func set_cell(cell: Cell) -> void:
 	if cell == null: return
 	base_layer.set_cell(cell.coords, 0, cell.data.atlas_coords)	
-	#effect_layer.set_cell(cell.get_coords(), 1, cell.effect.data.atlas_coords)
+	effect_layer.set_cell(cell.coords, 1, cell.effect.data.atlas_coords)
 
 
 ## Removes [param cell] without triggering its [Effect].
 func erase_cell(cell: Cell) -> void:
 	if cell == null: return
-	base_layer.erase_cell(cell.get_coords())
-	effect_layer.erase_cell(cell.get_coords())
+	base_layer.erase_cell(cell.coords)
+	effect_layer.erase_cell(cell.coords)
 
 
 ## Draws the shadow of [param cell].
@@ -224,7 +224,7 @@ func check_collision(piece: Piece, dir: Vector2i = Vector2i.ZERO, rot: int = 0, 
 	
 	var collided: bool = false
 	for cell: Cell in piece.cells:
-		if layer.get_cell_tile_data(cell.get_coords() + dir) != null:
+		if layer.get_cell_tile_data(cell.coords + dir) != null:
 			collided = true
 			break
 			
@@ -323,7 +323,7 @@ func _lower_rows_above(start_row: int) -> void:
 	var moved: Array[Cell] = []
 	for cell: Cell in Cell.cells:
 		if cell.get_parent() == null or not cell.active: continue
-		if cell.get_coords().y < start_row: # less than is up
+		if cell.coords.y < start_row: # less than is up
 			erase_cell(cell)
 			cell.move(Vector2i.DOWN)
 			moved.append(cell)
