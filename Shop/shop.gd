@@ -165,11 +165,11 @@ func _draw_piece(piece: Piece, offset: bool = false) -> void:
 		var coords: Vector2i = piece.coords + cell.offset
 		if offset:
 			cell_offset_coords[coords] = cell
-			base_offset_layer.set_cell(coords, 0, cell.base_atlas_coords)
+			base_offset_layer.set_cell(coords, 0, cell.atlas_coords)
 			effect_offset_layer.set_cell(coords, 1, cell.effect_atlas_coords)
 		else:
 			cell_coords[coords] = cell
-			base_layer.set_cell(coords, 0, cell.base_atlas_coords)
+			base_layer.set_cell(coords, 0, cell.atlas_coords)
 			effect_layer.set_cell(coords, 1, cell.effect_atlas_coords)
 
 

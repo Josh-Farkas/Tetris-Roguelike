@@ -4,10 +4,10 @@ class_name Cell extends Node2D
 
 static var cells: Array[Cell] = []
 
-var data: CellData
-var piece: Piece
-var effect: Effect
-var offset: Vector2i # offset from piece position
+var data: CellData ## This cell's [CellData].
+var piece: Piece ## The [Piece] this cell is part of.
+var effect: Effect ## The [Effect] this cell has.
+var offset: Vector2i ## Offset from piece position
 var coords: Vector2i:
 	set(value):
 		coords = value

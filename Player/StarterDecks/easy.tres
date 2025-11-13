@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Deck" load_steps=6 format=3 uid="uid://d7qt4fqe7h1w"]
+
+[ext_resource type="Script" uid="uid://dwax30uat0vv0" path="res://Player/deck.gd" id="1_dnq4c"]
+[ext_resource type="Script" uid="uid://d048r70b2jqmh" path="res://Piece/piece_data.gd" id="1_hgld5"]
+[ext_resource type="Script" uid="uid://cct4guv1m3ivr" path="res://Piece/Cell/cell_data.gd" id="2_tv7so"]
+
+[sub_resource type="Resource" id="Resource_8qiu3"]
+script = ExtResource("1_hgld5")
+metadata/_custom_type_script = "uid://d048r70b2jqmh"
+
+[sub_resource type="Resource" id="Resource_jllub"]
+script = ExtResource("1_hgld5")
+shape = 1
+metadata/_custom_type_script = "uid://d048r70b2jqmh"
+
+[resource]
+script = ExtResource("1_dnq4c")
+full_deck = Array[ExtResource("1_hgld5")]([SubResource("Resource_8qiu3"), SubResource("Resource_jllub")])
+metadata/_custom_type_script = "uid://dwax30uat0vv0"

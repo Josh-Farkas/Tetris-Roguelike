@@ -60,7 +60,14 @@ func _on_start_combat() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click"):
-		print(get_cell(base_layer.local_to_map(base_layer.get_local_mouse_position())))
+		var cell := get_cell(base_layer.local_to_map(base_layer.get_local_mouse_position()))
+		if cell == null:
+			print("NULL")
+		else:
+			print(cell.coords)
+	
+	if Constants.DEBUG and event.is_action_pressed("debug_action"):
+		_lower_rows_above(20)
 	
 	if event.is_action_pressed("reset"):
 		get_tree().reload_current_scene()
@@ -99,9 +106,8 @@ func get_cell(coords: Vector2i) -> Cell:
 ## Used while cells are falling or for display purposes
 func set_cell(cell: Cell) -> void:
 	if cell == null: return
-	base_layer.set_cell(cell.get_coords(), 0, cell.data.base_atlas_coords)
-	effect_layer.set_cell(cell.get_coords(), 1, cell.effect.data.atlas_coords)
-	#cell.position = base_layer.to_global(base_layer.map_to_local(cell.coords))
+	base_layer.set_cell(cell.coords, 0, cell.data.atlas_coords)	
+	#effect_layer.set_cell(cell.get_coords(), 1, cell.effect.data.atlas_coords)
 
 
 ## Removes [param cell] without triggering its [Effect].
@@ -113,7 +119,7 @@ func erase_cell(cell: Cell) -> void:
 
 ## Draws the shadow of [param cell].
 func set_cell_shadow(cell: Cell) -> void:
-	base_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.data.base_atlas_coords)
+	base_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.data.atlas_coords)
 	effect_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.effect.data.atlas_coords)
 
 
@@ -233,7 +239,7 @@ func place_piece(piece: Piece) -> void:
 		place_cell(cell)
 	
 	_remove_shadow(piece)
-	clear_lines()
+	_clear_full_lines()
 	spawn_piece()
 	pieces_placed += 1
 	SignalBus.piece_placed.emit(pieces_placed)
@@ -286,21 +292,27 @@ func check_line(row: int) -> bool:
 			return false
 	return true
 
+## Clears the given [param row].
+func _clear_line(row: int) -> void:
+	for col: int in WIDTH:
+		var cell: Cell = get_cell(Vector2i(col, row))
+		clear_cell(cell)
 
 ## Clears all full lines.
-func clear_lines() -> void:
+func _clear_full_lines() -> void:
 	var rows := []
 	for row in HEIGHT:
 		if check_line(row):
 			rows.append(row)
 	if rows.is_empty(): return
+	print("Clearing Lines...")
 	
 	var num_cleared := len(rows)
 	var damage: int = DAMAGE_AMTS[num_cleared]
-	for row: int in rows: # goes top down
-		for col: int in WIDTH:
-			var cell: Cell = get_cell(Vector2i(col, row))
-			clear_cell(cell)
+	# goes top down so clearing one won't move it below 
+	# another cleared line. 0 -> 22
+	for row: int in rows:
+		_clear_line(row)
 	for row: int in rows:
 		_lower_rows_above(row)
 	deal_damage(damage)
@@ -308,12 +320,16 @@ func clear_lines() -> void:
 
 ## Lowers all [Cell]s in the rows above [param start_row].
 func _lower_rows_above(start_row: int) -> void:
+	var moved: Array[Cell] = []
 	for cell: Cell in Cell.cells:
-		if cell.get_parent() == null: continue
-		if cell.get_coords().y < start_row:
+		if cell.get_parent() == null or not cell.active: continue
+		if cell.get_coords().y < start_row: # less than is up
 			erase_cell(cell)
 			cell.move(Vector2i.DOWN)
-			set_cell(cell)
+			moved.append(cell)
+	for cell: Cell in moved:
+		set_cell(cell)
+
 
 ## Deals [param damage] to the [member enemy].
 func deal_damage(damage: float) -> void:

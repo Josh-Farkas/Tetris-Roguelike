@@ -1,10 +1,13 @@
 class_name CellData extends Resource
+## Holds the data of a [Cell] that doesn't change during gameplay,
+## such as the [PieceData] and [EffectData] of the cell.\n
+## This can create a [Cell] based on its data to use during gameplay.
 
-@export var effect_data: EffectData
-@export var piece_data: PieceData
-@export var offset: Vector2i
-@export var base_atlas_coords: Vector2i
-@export var exhausted: bool = false
+
+@export var effect_data: EffectData ## Data for the [Effect] of this cell.
+@export var piece_data: PieceData ## The data for the [Piece] that this cell is a part of.
+@export var atlas_coords: Vector2i ## Atlas coords for the color of this cell.
+@export var exhausted: bool = false ## Whether or not this cell has been placed before for exhaustable cells.
 
 
 ## Creates a [Cell] based on this [CellData] with its [member piece] set to [param piece].

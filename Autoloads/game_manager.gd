@@ -86,6 +86,7 @@ func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:
 func next_combat() -> void:
 	# Choose Enemy
 	var pool: Array[PackedScene]
+	
 	if level_num in [1, 2]:
 		pool = easy_pool
 	elif level_num in [3, 4]:

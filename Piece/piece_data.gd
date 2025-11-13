@@ -64,8 +64,7 @@ func create_cells() -> void:
 			var effects: Array[EffectData] = [EffectData.none, EffectData.none, EffectData.none, EffectData.none, EffectData.none, load("res://Piece/Effect/Effects/Sword/sword_data.tres"), load("res://Piece/Effect/Effects/Shield/shield_data.tres")]
 			cell_data.effect_data = effects.pick_random()
 			cell_data.piece_data = self
-			cell_data.offset = Vector2i(col, row)
-			cell_data.base_atlas_coords = color_map[color]
+			cell_data.atlas_coords = color_map[color]
 			cells.append(cell_data)
 			matrix[row][col] = cell_data
 

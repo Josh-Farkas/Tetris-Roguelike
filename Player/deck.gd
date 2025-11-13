@@ -3,7 +3,6 @@ class_name Deck extends Resource
 ## Provies functions to make managing the deck simpler
 
 const N_POPULATE: int = 20 # copies of full deck
-
 @export var full_deck: Array[PieceData] = []: # full deck of pieces
 	set(value):
 		full_deck = value
