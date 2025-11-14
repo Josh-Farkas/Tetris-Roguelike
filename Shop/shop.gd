@@ -27,7 +27,7 @@ var cell_offset_coords: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#shop_data.generate_rarity_pools()
+	shop_data.generate_rarity_pools()
 	#_generate_items()
 	pass
 
@@ -69,10 +69,10 @@ func _generate_items() -> void:
 
 ## Chooses and spawns the [Effect]s to put in the shop.
 func _generate_effects() -> void:
-	#Slots 1-3 are common, slots 4 and 5 are uncommon, and slot 6 is rare
-	var rarity_pool: Array[EffectData]
+	# Slots 1-3 are common, slots 4 and 5 are uncommon, and slot 6 is rare
+	var rarity_pool: Array
 	for n in range(shop_data.num_effects):
-		if shop_data.effect_coords[n] in bought_effects: continue
+		if shop_data.effect_spawn_coords[n] in bought_effects: continue
 		if n in range(0, 3):
 			rarity_pool = shop_data.rarity_pools[Constants.Rarity.COMMON]
 		elif n in range(3, 5):
@@ -80,8 +80,10 @@ func _generate_effects() -> void:
 		else:
 			rarity_pool = shop_data.rarity_pools[Constants.Rarity.RARE]
 		var effect_data: EffectData = rarity_pool.pick_random()
-		
-		effect_layer.set_cell(shop_data.effect_coords[n], 1, effect_data.atlas_coords)
+		if effect_data == null:
+			#effect_data = load("res://Piece/Effect/Effects/Sword/sword_data.tres")
+			push_error("Pool Empty")
+		effect_layer.set_cell(shop_data.effect_spawn_coords[n], 1, effect_data.atlas_coords)
 
 
 func _generate_pieces() -> void:

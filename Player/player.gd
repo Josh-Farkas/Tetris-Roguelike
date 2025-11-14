@@ -29,7 +29,6 @@ signal block_changed
 		block_changed.emit()
 
 @export_range(0, 1) var base_crit_chance: float = .01
-
 @onready var status_effects: StatusEffectsComponent = $StatusEffectsComponent
 
 func _ready() -> void:

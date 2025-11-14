@@ -1,15 +1,18 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://dg1aoxqb72r4p"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://dg1aoxqb72r4p"]
 
-[ext_resource type="Texture2D" uid="uid://b44un27d5iyc6" path="res://Tetris/pieces_spritesheet.png" id="1_mxn88"]
-[ext_resource type="Resource" uid="uid://cdyuoyhspyyg2" path="res://Piece/Effect/Effects/Sword/sword_data.tres" id="2_mf37d"]
-[ext_resource type="Texture2D" uid="uid://herq6ckya4ky" path="res://Tetris/effects_spritesheet.png" id="3_s8ocw"]
-[ext_resource type="Texture2D" uid="uid://dmcj2kvtshycl" path="res://Tetris/numbers_spritesheet.png" id="4_8bghq"]
+[ext_resource type="Texture2D" uid="uid://b44un27d5iyc6" path="res://Tetris/pieces_spritesheet.png" id="1_12bfn"]
+[ext_resource type="Resource" uid="uid://cdyuoyhspyyg2" path="res://Piece/Effect/Effects/Sword/sword_data.tres" id="2_4ks46"]
+[ext_resource type="Resource" uid="uid://d12sdwfrhtywi" path="res://Piece/Effect/Effects/Shield/shield_data.tres" id="2_8bghq"]
+[ext_resource type="Texture2D" uid="uid://herq6ckya4ky" path="res://Tetris/effects_spritesheet.png" id="3_lsxhp"]
+[ext_resource type="Resource" uid="uid://b0ncgyrufcp25" path="res://Piece/Effect/Effects/SwordAndShield/sword_and_shield_data.tres" id="3_s8ocw"]
+[ext_resource type="Resource" uid="uid://4r8jtfvfuapi" path="res://Piece/Effect/Effects/Bubbles/bubbles_data.tres" id="4_8bghq"]
+[ext_resource type="Texture2D" uid="uid://dmcj2kvtshycl" path="res://Tetris/numbers_spritesheet.png" id="4_fmgae"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_exv1j"]
 tile_data = PackedInt32Array(0, 262144, 1, 65536, 262144, 1, 131072, 262144, 1, 196608, 262144, 1, 1, 262144, 1, 65537, 262144, 1, 131073, 262144, 1, 196609, 262144, 1, 2, 262144, 1, 65538, 262144, 1, 131074, 262144, 1, 196610, 262144, 1, 3, 262144, 1, 65539, 262144, 1, 131075, 262144, 1, 196611, 262144, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ld0n"]
-texture = ExtResource("1_mxn88")
+texture = ExtResource("1_12bfn")
 1:1/next_alternative_id = 2
 1:1/0 = 0
 1:1/1 = 1
@@ -40,14 +43,15 @@ texture = ExtResource("1_mxn88")
 3:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smmp2"]
-texture = ExtResource("3_s8ocw")
+texture = ExtResource("3_lsxhp")
 0:0/next_alternative_id = 2
 0:0/0 = 0
 1:0/next_alternative_id = 3
 1:0/0 = 0
+1:0/0/custom_data_0 = ExtResource("2_8bghq")
 2:0/next_alternative_id = 2
 2:0/0 = 0
-2:0/0/custom_data_0 = ExtResource("2_mf37d")
+2:0/0/custom_data_0 = ExtResource("2_4ks46")
 3:0/next_alternative_id = 2
 3:0/0 = 0
 4:0/next_alternative_id = 2
@@ -78,6 +82,7 @@ texture = ExtResource("3_s8ocw")
 4:2/0 = 0
 5:2/0 = 0
 6:2/0 = 0
+6:2/0/custom_data_0 = ExtResource("4_8bghq")
 7:2/0 = 0
 0:3/0 = 0
 3:3/0 = 0
@@ -87,6 +92,7 @@ texture = ExtResource("3_s8ocw")
 7:3/0 = 0
 0:4/0 = 0
 3:4/0 = 0
+3:4/0/custom_data_0 = ExtResource("3_s8ocw")
 4:4/0 = 0
 5:4/0 = 0
 6:4/0 = 0
@@ -121,7 +127,7 @@ texture = ExtResource("3_s8ocw")
 9:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4m8e"]
-texture = ExtResource("4_8bghq")
+texture = ExtResource("4_fmgae")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0

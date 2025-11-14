@@ -9,4 +9,5 @@ name = &"Shield"
 description = "On Clear: Gain 3 Block"
 types = Array[int]([1])
 effect_script = ExtResource("1_042yu")
+atlas_coords = Vector2i(1, 0)
 metadata/_custom_type_script = "uid://bacar626wbev1"

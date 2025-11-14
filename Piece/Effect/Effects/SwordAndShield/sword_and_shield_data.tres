@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://b0ncgyrufcp25"]
+
+[ext_resource type="Script" uid="uid://chx67aknxurkd" path="res://Piece/Effect/Effects/SwordAndShield/sword_and_shield_effect.gd" id="1_8gt35"]
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_v758g"]
+
+[resource]
+script = ExtResource("1_v758g")
+name = &"Sword and Shield"
+description = "block + damage"
+rarity = 1
+types = Array[int]([0, 1])
+effect_script = ExtResource("1_8gt35")
+atlas_coords = Vector2i(3, 4)
+metadata/_custom_type_script = "uid://bacar626wbev1"

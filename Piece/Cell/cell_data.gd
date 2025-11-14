@@ -12,7 +12,7 @@ class_name CellData extends Resource
 
 ## Creates a [Cell] based on this [CellData] with its [member piece] set to [param piece].
 func create_cell(piece: Piece = null) -> Cell:
-	var cell: Cell = preload("res://Piece/Cell/cell.tscn").instantiate()
+	var cell: Cell = load("res://Piece/Cell/cell.tscn").instantiate()
 	cell.data = self
 	cell.piece = piece
 	cell.effect = effect_data.create_effect(cell)

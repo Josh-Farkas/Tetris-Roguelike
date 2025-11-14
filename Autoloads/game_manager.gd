@@ -38,7 +38,7 @@ func _init() -> void:
 	settings = Settings.load_settings()
 
 func _ready() -> void:
-	#Effect.register_effects()
+	EffectData.register_effects()
 	
 	# Signals
 	SignalBus.enemy_killed.connect(_on_enemy_killed)

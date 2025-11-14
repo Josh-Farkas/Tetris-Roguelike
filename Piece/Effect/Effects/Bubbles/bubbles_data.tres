@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://4r8jtfvfuapi"]
+
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_kyls8"]
+[ext_resource type="Script" uid="uid://y3eubdw2xwmt" path="res://Piece/Effect/Effects/Bubbles/bubbles_effect.gd" id="1_xatmv"]
+
+[resource]
+script = ExtResource("1_kyls8")
+name = &"Bubbles"
+description = "TBD"
+rarity = 2
+types = Array[int]([11])
+fragile = true
+effect_script = ExtResource("1_xatmv")
+atlas_coords = Vector2i(6, 2)
+metadata/_custom_type_script = "uid://bacar626wbev1"

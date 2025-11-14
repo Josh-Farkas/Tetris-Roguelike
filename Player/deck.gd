@@ -8,8 +8,7 @@ const N_POPULATE: int = 20 # copies of full deck
 		full_deck = value
 		reset()
 var deck: Array[PieceData] = [] # many copies of full deck to draw in game
-var idx: int = 0 # index into deck
-
+var idx: int = 0 ## Index into deck
 
 ## Populates [member deck] with [param n] copies of your shuffled [member full_deck].
 func repopulate(n: int = N_POPULATE) -> void:
@@ -23,7 +22,7 @@ func repopulate(n: int = N_POPULATE) -> void:
 
 ## Returns the next piece in the deck
 func draw() -> PieceData:
-	if idx + GameManager.player.preview_size >= len(deck) - 1:
+	if idx + GameManager.get_player().preview_size >= len(deck) - 1:
 		repopulate()
 	var piece_data: PieceData = deck[idx]
 	idx += 1

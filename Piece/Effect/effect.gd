@@ -6,8 +6,6 @@ class_name Effect extends Resource
 ## Also has all the functions related to the effect.
 
 
-const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH) ## The [TileSet] with all [EffectData]s.
-#static var effect_map: Dictionary[StringName, EffectData] = {}
 static var player: Player ## The [member player].
 
 var data: EffectData ## The [EffectData] of this [Effect], has the functions to actually use it.

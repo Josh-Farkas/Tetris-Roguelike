@@ -1,9 +1,6 @@
 class_name ShopData extends Resource
 ## Data for things in the shop. Handles things like prices, rarity, and more.
 ## Only one will be created, mostly used just for @export convenience.
-
-
-const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH) ## The [TileSet] with all [EffectData]s.
 		
 
 @export_category("Effects")
@@ -51,7 +48,7 @@ const piece_coords: Array[Vector2i] = [Vector2i(1, 9), Vector2i(6, 9)] ## Coordi
 
 ## Map from [Constants.Rarity] to [Array] of [EffectData]. 
 ## Each pool will contain all effects with that rarity.
-const rarity_pools: Dictionary[Constants.Rarity, Array]= {
+var rarity_pools: Dictionary[Constants.Rarity, Array] = {
 	Constants.Rarity.NONE: [],
 	Constants.Rarity.COMMON: [],
 	Constants.Rarity.UNCOMMON: [],
@@ -59,17 +56,7 @@ const rarity_pools: Dictionary[Constants.Rarity, Array]= {
 }
 
 
-#static func _init() -> void:
-	#_generate_rarity_pools()
-
-
-## Fills [member rarity_pools].
-static func generate_rarity_pools() -> void:
-	#var tileset := load(Constants.PIECE_TILESET_PATH)
-	var source: TileSetAtlasSource = tileset.get_source(1)
-	for tile_index in source.get_tiles_count():
-		var coords: Vector2i = source.get_tile_id(tile_index)
-		var tile_data := source.get_tile_data(coords, 0)
-		var effect_data: EffectData = tile_data.get_custom_data("effect") as EffectData
-		if effect_data == null or effect_data.name == "None": continue
+## Fills [member rarity_pools] with [EffectData] based on their [EffectData.Rarity].
+func generate_rarity_pools() -> void:
+	for effect_data: EffectData in EffectData.all_effects:
 		rarity_pools[effect_data.rarity].append(effect_data)
