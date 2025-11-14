@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_v758g")
 name = &"Sword and Shield"
-description = "block + damage"
+description = "On Clear: Gain 2 block and deal 2 damage"
 rarity = 1
 types = Array[int]([0, 1])
 effect_script = ExtResource("1_8gt35")

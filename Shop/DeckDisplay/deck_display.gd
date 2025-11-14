@@ -28,7 +28,7 @@ func display_deck() -> void:
 		
 	# Loop through all pieces and display them.
 	var num_rows: int = 0
-	for piece_data: PieceData in GameManager.player.full_deck:
+	for piece_data: PieceData in GameManager.player.deck.full_deck:
 		var row: int = counts[piece_data.shape] * 5 + 1
 		var col: int = piece_data.shape as int * 5 + 1
 		var coords: Vector2i = Vector2i(col, row)
@@ -44,8 +44,8 @@ func display_deck() -> void:
 		# Draw cells
 		for cell: Cell in piece.cells:
 			add_child(cell)
-			base_layer.set_cell(cell.coords, 0, cell.atlas_coords)
-			effect_layer.set_cell(cell.coords, 1, cell.effect_atlas_coords)
+			base_layer.set_cell(cell.coords, 0, cell.data.atlas_coords)
+			effect_layer.set_cell(cell.coords, 1, cell.effect.data.atlas_coords)
 
 
 ## Fills in the background of the given [param row] with black cells 

@@ -23,14 +23,14 @@ enum Type {
 static var none: EffectData
 static var all_effects: Array[EffectData] = []
 
-@export_group("Info")
-@export var name: StringName
+@export_category("Info")
+@export var name: StringName ## The name of this effect.
 @export var description: String ## Description of what this effect does.
 @export var rarity: Constants.Rarity ## Rarity of this effect.
 @export var types: Array[EffectData.Type] ## What effect types this has.[br]Ex: [code][EffectData.Type.MELEE, EffectData.Type.SHIELD][/code]
 @export var fragile: bool = false ## Whether or not this effect is fragile. Fragile effects can only be placed once per combat.
 
-@export_group("Data")
+@export_category("Data")
 @export var effect_script: GDScript ## Script of this effect type.
 @export var atlas_coords: Vector2i ## Atlas coords of this effect type.
 
@@ -58,9 +58,13 @@ func create_effect(cell: Cell = null) -> Effect:
 	effect.cell = cell
 	return effect
 
+func get_formatted_name() -> StringName:
+	return "[center][color=%s]%s[/color]" % [Constants.RARITY_COLORS[rarity], name.capitalize()]
+
+
 ## Returns the [member description] formatted with bbcode and types.
 func get_formatted_description() -> String:
-	var formatted: String = description \
+	var formatted: String = "[center]" + description \
 		.replace("On Clear", "[u]On Clear[/u]") \
 		.replace("On Place", "[u]On Place[/u]") \
 		.replace("When you take self damage", "[u]When you take self damage[/u]") \
@@ -68,7 +72,7 @@ func get_formatted_description() -> String:
 		.replace("When an adjacent piece is placed", "[u]When an adjacent piece is placed[/u]") \
 		.replace("When an adjacent piece is cleared", "[u]When an adjacent piece is cleared[/u]")
 	
-	formatted += "\n"
+	formatted += "\n[center]"
 	# turns types array into "[TYPE1] [TYPE2]" with the correct color.
 	formatted += " ".join(types.map(func(t: Type) -> String: return "[color=%s][%s][/color]" % [Constants.TYPE_COLORS[t], Type.keys()[t]]))
 	return formatted

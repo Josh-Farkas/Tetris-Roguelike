@@ -28,8 +28,7 @@ var cell_offset_coords: Dictionary = {}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	shop_data.generate_rarity_pools()
-	#_generate_items()
-	pass
+	_generate_items()
 
 
 func _input(event: InputEvent) -> void:
@@ -67,33 +66,36 @@ func _generate_items() -> void:
 	_generate_pieces()
 	_generate_relics()
 
+
+## Returns a random [EffectData] of the given [Constants.Rarity].
+func get_random_effect(rarity: Constants.Rarity) -> EffectData:
+	var rarity_pool: Array = shop_data.rarity_pools[rarity]
+	return rarity_pool.pick_random()
+
+
 ## Chooses and spawns the [Effect]s to put in the shop.
 func _generate_effects() -> void:
 	# Slots 1-3 are common, slots 4 and 5 are uncommon, and slot 6 is rare
-	var rarity_pool: Array
+	var rarity: Constants.Rarity
 	for n in range(shop_data.num_effects):
 		if shop_data.effect_spawn_coords[n] in bought_effects: continue
 		if n in range(0, 3):
-			rarity_pool = shop_data.rarity_pools[Constants.Rarity.COMMON]
+			rarity = Constants.Rarity.COMMON
 		elif n in range(3, 5):
-			rarity_pool = shop_data.rarity_pools[Constants.Rarity.UNCOMMON]
+			rarity = Constants.Rarity.UNCOMMON
 		else:
-			rarity_pool = shop_data.rarity_pools[Constants.Rarity.RARE]
-		var effect_data: EffectData = rarity_pool.pick_random()
-		if effect_data == null:
-			#effect_data = load("res://Piece/Effect/Effects/Sword/sword_data.tres")
-			push_error("Pool Empty")
+			rarity = Constants.Rarity.RARE
+		var effect_data: EffectData = get_random_effect(rarity)
 		effect_layer.set_cell(shop_data.effect_spawn_coords[n], 1, effect_data.atlas_coords)
 
 
 func _generate_pieces() -> void:
-	return
 	for n in range(shop_data.num_pieces):
 		if n in bought_pieces: continue
 		var piece_data: PieceData = load("res://Piece/piece_data.gd").new()
 		# Select piece shape
 		var rand: float = randf()
-		var shape_pool: Array[PieceData.Shape]
+		var shape_pool: Array
 		if rand <= shop_data.piece_shape_common_odds:
 			shape_pool = shop_data.piece_shape_rarities[Constants.Rarity.COMMON]
 		elif rand <= shop_data.piece_shape_uncommon_odds:
@@ -102,29 +104,30 @@ func _generate_pieces() -> void:
 			shape_pool = shop_data.piece_shape_rarities[Constants.Rarity.RARE]
 			
 		piece_data.shape = shape_pool.pick_random()
-		piece_data.coords = shop_data.piece_coords[n]
-		# shift O right to center
-		if piece_data.shape == PieceData.Shape.O:
-			piece_data.spawn_coords += Vector2i.RIGHT
-		
+		piece_data.create_cells()
 		# Apply effects
 		for cell_data: CellData in piece_data.cells:
-			var rarity_pool: Array
+			var rarity: Constants.Rarity
 			rand = randf()
-			if rand <= shop_data.piece_common_odds:
-				rarity_pool = shop_data.effects.common
-			elif rand <= shop_data.piece_uncommon_odds:
-				rarity_pool = shop_data.effects.uncommon
-			elif rand <= shop_data.piece_rare_odds:
-				rarity_pool = shop_data.effects.rare
+			if rand <= shop_data.piece_effect_common_odds:
+				rarity = Constants.Rarity.COMMON
+			elif rand <= shop_data.piece_effect_uncommon_odds:
+				rarity = Constants.Rarity.UNCOMMON
+			elif rand <= shop_data.piece_effect_rare_odds:
+				rarity = Constants.Rarity.RARE
 			else:
 				continue # No Effect
 			
-			var effect_data: EffectData = rarity_pool.pick_random()
-			cell_data.effect_atlas_coords = effect_data.atlas_coords
+			var effect_data: EffectData = get_random_effect(rarity)
+			cell_data.effect_data = effect_data
 		
 		var piece: Piece = piece_data.create_piece()
+		add_child(piece)
+		piece.coords = shop_data.piece_coords[n]
+		if piece_data.shape == PieceData.Shape.O:
+			piece.move(Vector2i.RIGHT)
 		pieces.append(piece)
+		print(piece)
 		_draw_piece(piece, piece.display_offset)
 
 
@@ -157,12 +160,12 @@ func _draw_piece(piece: Piece, offset: bool = false) -> void:
 		var coords: Vector2i = piece.coords + cell.offset
 		if offset:
 			cell_offset_coords[coords] = cell
-			base_offset_layer.set_cell(coords, 0, cell.atlas_coords)
-			effect_offset_layer.set_cell(coords, 1, cell.effect_atlas_coords)
+			base_offset_layer.set_cell(coords, 0, cell.data.atlas_coords)
+			effect_offset_layer.set_cell(coords, 1, cell.effect.data.atlas_coords)
 		else:
 			cell_coords[coords] = cell
-			base_layer.set_cell(coords, 0, cell.atlas_coords)
-			effect_layer.set_cell(coords, 1, cell.effect_atlas_coords)
+			base_layer.set_cell(coords, 0, cell.data.atlas_coords)
+			effect_layer.set_cell(coords, 1, cell.effect.data.atlas_coords)
 
 
 func _buy_effect(coords: Vector2i) -> void:

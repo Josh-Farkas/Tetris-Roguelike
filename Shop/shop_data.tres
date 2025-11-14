@@ -4,6 +4,5 @@
 
 [resource]
 script = ExtResource("1_4yx10")
-prices = Dictionary[int, int]({})
 piece_effect_uncommon_odds = 0.15
 piece_shape_uncommon_odds = 0.85

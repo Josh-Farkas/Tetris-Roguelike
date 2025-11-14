@@ -7,7 +7,9 @@
 script = ExtResource("2_k8svf")
 name = &"Shield"
 description = "On Clear: Gain 3 Block"
+rarity = null
 types = Array[int]([1])
+fragile = null
 effect_script = ExtResource("1_042yu")
 atlas_coords = Vector2i(1, 0)
 metadata/_custom_type_script = "uid://bacar626wbev1"
