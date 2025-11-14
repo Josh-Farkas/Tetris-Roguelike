@@ -1,6 +1,6 @@
 class_name CellData extends Resource
 ## Holds the data of a [Cell] that doesn't change during gameplay,
-## such as the [PieceData] and [EffectData] of the cell.\n
+## such as the [PieceData] and [EffectData] of the cell.[br]
 ## This can create a [Cell] based on its data to use during gameplay.
 
 

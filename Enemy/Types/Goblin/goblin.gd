@@ -9,8 +9,8 @@ func attack() -> void:
 		_place_attack_randomly(attacks.get("Goblin Steal"))
 
 
-func _on_piece_placed(pieces_placed: int) -> void:
-	super(pieces_placed)
+func _on_piece_placed() -> void:
+	super()
 	attack()
 
 func die() -> void:

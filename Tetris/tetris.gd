@@ -5,14 +5,6 @@ const HEIGHT: int = 22
 const WALLKICKS = preload("res://Tetris/wallkicks.gd").WALLKICKS
 const WALLKICKS_I = preload("res://Tetris/wallkicks.gd").WALLKICKS_I
 
-## Lines cleared: damage dealt
-const DAMAGE_AMTS: Dictionary[int, int] = {
-	1: 1,
-	2: 3,
-	3: 6,
-	4: 10
-}
-
 # Tilemap Layers
 @onready var background_layer: TileMapLayer = $Background
 @onready var attack_layer: TileMapLayer = $Attack
@@ -308,7 +300,7 @@ func _clear_full_lines() -> void:
 	print("Clearing Lines...")
 	
 	var num_cleared := len(rows)
-	var damage: int = DAMAGE_AMTS[num_cleared]
+	var damage: int = Constants.LINE_CLEAR_DAMAGE_AMOUNTS[num_cleared]
 	# goes top down so clearing one won't move it below 
 	# another cleared line. 0 -> 22
 	for row: int in rows:

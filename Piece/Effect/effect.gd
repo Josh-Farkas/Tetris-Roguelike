@@ -3,19 +3,21 @@ class_name Effect extends Resource
 ## Abstract class that will be inherited by specific effects, Ex: [SwordEffect], [ShieldEffect].[br]
 ## Instance of an Effect, created based on an [EffectData].[br]
 ## Handles runtime variables like [member coords] and [member cell].
-
-const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH)
-static var effect_map: Dictionary[StringName, EffectData] = {}
-static var player: Player
-
-var data: EffectData
-var cell: Cell
+## Also has all the functions related to the effect.
 
 
-static func get_effect(effect_name: StringName) -> Effect:
-	if effect_name not in effect_map:
-		printerr("Effect ", effect_name, " is not valid.")
-	return effect_map.get(effect_name)
+const tileset: TileSet = preload(Constants.PIECE_TILESET_PATH) ## The [TileSet] with all [EffectData]s.
+#static var effect_map: Dictionary[StringName, EffectData] = {}
+static var player: Player ## The [member player].
+
+var data: EffectData ## The [EffectData] of this [Effect], has the functions to actually use it.
+var cell: Cell ## The [Cell] this [Effect] is on.
+
+
+#static func get_effect(effect_name: StringName) -> Effect:
+	#if effect_name not in effect_map:
+		#printerr("Effect ", effect_name, " is not valid.")
+	#return effect_map.get(effect_name)
 
 #region Helper Functions
 func deal_damage(damage: float) -> void:
@@ -29,29 +31,40 @@ func gain_block(block: int) -> void:
 #endregion
 
 #region Triggers
-# Base Triggers
-## Called when this [Effect] is placed
+## Called when this [Effect] is placed.
+## Updates data and then calls the [code]on_place[/code] virtual method.
+
 func base_on_place() -> void:
 	data.count += 1
 	on_place()
 
-## Called when this [Effect] is cleared
+## Called when this [Effect] is cleared.
+## Updates data and then calls the [code]on_clear[/code] virtual method.
 func base_on_clear() -> void:
 	data.count -= 1
 	on_clear()
 	
+## Called when a [Cell] is placed adjacent to this. 
+## [param direction] is the direction it was placed relative to this.
+## This just calls the [code]on_adjacent_cell_placed[/code] virtual method.
 func base_on_adjacent_cell_placed(direction: Vector2i) -> void:
 	on_adjacent_cell_placed(direction)
 	
+## Called when a [Cell] is cleared adjacent to this. 
+## [param direction] is the direction it was cleared relative to this.
+## This just calls the [code]on_adjacent_cell_cleared[/code] virtual method.
 func base_on_adjacent_cell_cleared(direction: Vector2i) -> void:
 	on_adjacent_cell_cleared(direction)
 	
 
 # Triggers
 @warning_ignore_start("unused_parameter")
+## Called when this
+## Should be overridden by inherited class.
 func on_place() -> void:
 	pass
 
+## Should be overridden by inherited class.
 func on_clear() -> void:
 	pass
 
