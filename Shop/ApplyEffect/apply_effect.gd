@@ -26,7 +26,7 @@ func _overlay_effect() -> void:
 	if coords != selected_effect_coords: # over new cell
 		# prevents bug where empty cell is set to None on first frames
 		if effect_layer.get_cell_tile_data(selected_effect_coords) != null:
-			effect_layer.set_cell(selected_effect_coords, 1, Constants.EFFECT_COORDS.NONE)
+			effect_layer.set_cell(selected_effect_coords, 1, Vector2i.ZERO)
 		var data := effect_layer.get_cell_tile_data(coords)
 		if data != null and data.get_custom_data("effect") == null:
 			can_place = true
@@ -40,7 +40,7 @@ func _overlay_effect() -> void:
 func _place_effect() -> void:
 	var coords: Vector2i = effect_layer.local_to_map(effect_layer.get_local_mouse_position())
 	if effect_layer.get_cell_tile_data(coords) == null: return
-	var cell: Cell = deck_display.cell_coords[coords]
+	var cell: Cell = Cell.get_cell_at(coords)
 	cell.data.set_effect(selected_effect)
 	selected_effect = null
 	

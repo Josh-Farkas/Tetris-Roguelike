@@ -234,7 +234,7 @@ func place_piece(piece: Piece) -> void:
 	_clear_full_lines()
 	spawn_piece()
 	pieces_placed += 1
-	SignalBus.piece_placed.emit(pieces_placed)
+	SignalBus.piece_placed.emit()
 
 
 ## Place [param cell] and trigger its [Effect] and any [EnemyAttack] on that tile.

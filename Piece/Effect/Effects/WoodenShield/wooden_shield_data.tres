@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=2 format=3 uid="uid://yb06vj37usmp"]
+
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_oeaqg"]
+
+[resource]
+script = ExtResource("1_oeaqg")
+rarity = 3
+metadata/_custom_type_script = "uid://bacar626wbev1"
