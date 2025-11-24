@@ -6,7 +6,6 @@ const easy_pool: Array[PackedScene] = [
 	#preload("res://Enemy/Types/Minotaur/minotaur.tscn"),
 ]
 const hard_pool: Array[PackedScene] = []
-
 const elite_pool: Array[PackedScene] = []
 const boss_pool: Array[PackedScene] = []
 
@@ -16,7 +15,7 @@ const scenes: Dictionary[StringName, PackedScene] = {
 	"ApplyEffectMenu": preload("res://Shop/ApplyEffect/apply_effect.tscn"),
 }
 
-# Settings/Save data
+## User [Settings] object. Loaded from save file.
 var settings: Settings
 
 # Game Variables
@@ -56,7 +55,10 @@ func get_player() -> Player:
 	return player
 
 
+
+
 func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:
+	$SceneTransition.animation_player.play('dissolve')	
 	if active_scene != null:
 		if keep_loaded:
 			active_scene.hide()
@@ -76,11 +78,14 @@ func change_scene(new_scene: StringName, keep_loaded: bool = true) -> void:
 		active_scene = scenes[new_scene].instantiate()
 		loaded_scenes[new_scene] = active_scene
 		main.add_child(active_scene)
+	$SceneTransition.animation_player.play_backwards('dissolve')
 	main.move_child(active_scene, 0)
 	get_tree().call_group("camera", "disable")
 	camera = active_scene.get_tree().get_first_node_in_group("camera")
 	if camera != null: camera.enable()
 	SignalBus.changed_scenes.emit(old_scene, active_scene)
+
+
 
 
 func next_combat() -> void:

@@ -17,7 +17,10 @@ const WALLKICKS_I = preload("res://Tetris/wallkicks.gd").WALLKICKS_I
 
 #@onready var target_enemy: Enemy = get_tree().get_first_node_in_group("enemy") as Enemy
 @onready var player: Player = GameManager.player
-@onready var crit_chance: float = player.base_crit_chance
+
+@export_category("Sound Effects")
+@export var place_sfx: AudioStream
+@export var line_clear_sfx: AudioStream
 
 var enemy: Enemy = null
 
@@ -112,7 +115,7 @@ func erase_cell(cell: Cell) -> void:
 ## Draws the shadow of [param cell].
 func set_cell_shadow(cell: Cell) -> void:
 	base_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.data.atlas_coords)
-	effect_ghost_layer.set_cell(cell.get_shadow_coords(), 0, cell.effect.data.atlas_coords)
+	effect_ghost_layer.set_cell(cell.get_shadow_coords(), 1, cell.effect.data.atlas_coords)
 
 
 ## Erases the shadow of [param cell]
@@ -235,6 +238,7 @@ func place_piece(piece: Piece) -> void:
 	spawn_piece()
 	pieces_placed += 1
 	SignalBus.piece_placed.emit()
+	AudioManager.play_SFX(place_sfx)
 
 
 ## Place [param cell] and trigger its [Effect] and any [EnemyAttack] on that tile.

@@ -189,7 +189,7 @@ func _buy_piece(piece_num: int) -> void:
 	player.gold -= shop_data.piece_price
 	bought_pieces.append(piece_num)
 	$Pieces.remove_child(piece)
-	player.add_piece(piece)
+	player.deck.add_piece(piece.data)
 	_clear_piece(piece_num)
 
 

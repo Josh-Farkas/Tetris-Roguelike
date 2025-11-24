@@ -16,9 +16,10 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 [autoload]
 
-Constants="*res://Autoloads/constants.gd"
-GameManager="*res://Autoloads/game_manager.gd"
-SignalBus="*res://Autoloads/signal_bus.gd"
+Constants="*res://Globals/constants.gd"
+SignalBus="*res://Globals/signal_bus.gd"
+AudioManager="*res://Globals/audio_manager.tscn"
+GameManager="*res://Globals/game_manager.tscn"
 
 [debug]
 

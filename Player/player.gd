@@ -29,6 +29,9 @@ signal block_changed
 		block_changed.emit()
 
 @export_range(0, 1) var base_crit_chance: float = .01
+@export_category("SFX")
+@export var hurt_sfx: AudioStream
+
 @onready var status_effects: StatusEffectsComponent = $StatusEffectsComponent
 
 func _ready() -> void:
@@ -42,7 +45,7 @@ func take_damage(amount: int) -> void:
 	var health_dmg: int = amount - blocked_dmg
 	block -= blocked_dmg
 	health -= health_dmg
-	print("Player took %s damage" % health_dmg)
+	AudioManager.play_SFX(hurt_sfx)
 	if health < 0:
 		die()
 

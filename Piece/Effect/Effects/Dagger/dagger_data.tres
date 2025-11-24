@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://bxe6amer6fpcn"]
+
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_5s4yf"]
+[ext_resource type="Script" uid="uid://daasrb8u24bax" path="res://Piece/Effect/Effects/Dagger/dagger_effect.gd" id="1_lb044"]
+
+[resource]
+script = ExtResource("1_5s4yf")
+name = &"Dagger"
+description = "When an adjacent piece is cleared: Deal 1 damage"
+types = Array[int]([0])
+effect_script = ExtResource("1_lb044")
+atlas_coords = Vector2i(3, 0)
+metadata/_custom_type_script = "uid://bacar626wbev1"

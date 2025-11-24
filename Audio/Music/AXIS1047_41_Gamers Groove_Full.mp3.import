@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://colis7jt4wdf0"
+path="res://.godot/imported/AXIS1047_41_Gamers Groove_Full.mp3-6bcdd2177fb367c3f88367b80f6d90c4.mp3str"
+
+[deps]
+
+source_file="res://Audio/Music/AXIS1047_41_Gamers Groove_Full.mp3"
+dest_files=["res://.godot/imported/AXIS1047_41_Gamers Groove_Full.mp3-6bcdd2177fb367c3f88367b80f6d90c4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

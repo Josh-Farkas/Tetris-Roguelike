@@ -1,8 +1,14 @@
-[gd_resource type="Resource" script_class="EffectData" load_steps=2 format=3 uid="uid://yb06vj37usmp"]
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://yb06vj37usmp"]
 
 [ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_oeaqg"]
+[ext_resource type="Script" uid="uid://dp1p6ifyaxsci" path="res://Piece/Effect/Effects/WoodenShield/wooden_shield_effect.gd" id="1_wmy77"]
 
 [resource]
 script = ExtResource("1_oeaqg")
-rarity = 3
+name = &"Wooden Shield"
+description = "On Clear: Deal 0.2 damage for every block you have"
+rarity = 1
+types = Array[int]([1])
+effect_script = ExtResource("1_wmy77")
+atlas_coords = Vector2i(2, 4)
 metadata/_custom_type_script = "uid://bacar626wbev1"
