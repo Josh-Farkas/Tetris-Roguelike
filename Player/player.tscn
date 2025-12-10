@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://c7ok5rrx2yw6l"]
 
 [ext_resource type="Script" uid="uid://ba2dldqlhtn8e" path="res://Player/player.gd" id="1_7yjx8"]
-[ext_resource type="Resource" uid="uid://d7qt4fqe7h1w" path="res://Player/StarterDecks/easy.tres" id="2_btcbx"]
+[ext_resource type="Resource" uid="uid://cygka3h6hdywe" path="res://Player/StarterDecks/starter_deck.tres" id="2_gwnis"]
 [ext_resource type="AudioStream" uid="uid://c4gdimgtp7q22" path="res://Audio/SFX/hurt_sfx.wav" id="3_gwnis"]
 [ext_resource type="PackedScene" uid="uid://dbgaur6dn3lu3" path="res://Components/StatusEffects/status_effects_component.tscn" id="3_x2uet"]
 
 [node name="Player" type="Node"]
 script = ExtResource("1_7yjx8")
-deck = ExtResource("2_btcbx")
+deck = ExtResource("2_gwnis")
 gold = 1000
 hurt_sfx = ExtResource("3_gwnis")
 

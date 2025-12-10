@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_kyls8")
 name = &"Bubbles"
-description = "TBD"
+description = "On Clear: Deal 1 Damage for each row above this"
 rarity = 2
 types = Array[int]([11])
 fragile = true
