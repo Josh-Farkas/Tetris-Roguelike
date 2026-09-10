@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BasicAttack" format=3 uid="uid://bkktyt3gicset"]
+
+[ext_resource type="Script" uid="uid://dbpcyowhb7a5l" path="res://Enemy/Attacks/basic_attack.gd" id="1_wuymg"]
+
+[resource]
+script = ExtResource("1_wuymg")
+damage = 2
+name = &"Worm Attack"
+description = "A simple attack that does 2 damage"
+metadata/_custom_type_script = "uid://dbpcyowhb7a5l"

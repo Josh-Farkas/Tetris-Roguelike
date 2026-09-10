@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectData" format=3 uid="uid://cddxngyfcpnx2"]
+
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_tmv73"]
+
+[resource]
+script = ExtResource("1_tmv73")
+name = &"Target"
+description = "Your arrows deal +1 damage"
+rarity = 1
+types = Array[int]([4])
+metadata/_custom_type_script = "uid://bacar626wbev1"

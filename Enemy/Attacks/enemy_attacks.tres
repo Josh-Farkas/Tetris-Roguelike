@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bows8v7c6n8sm"]
+[gd_resource type="TileSet" format=3 uid="uid://bows8v7c6n8sm"]
 
 [ext_resource type="Texture2D" uid="uid://cro4yfgh0wcxx" path="res://Enemy/Attacks/enemy_attack_spritesheet.png" id="1_m2sg6"]
 

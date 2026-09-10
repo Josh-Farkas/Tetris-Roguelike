@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://dg1aoxqb72r4p"]
+[gd_resource type="TileSet" format=3 uid="uid://dg1aoxqb72r4p"]
 
 [ext_resource type="Texture2D" uid="uid://b44un27d5iyc6" path="res://Tetris/pieces_spritesheet.png" id="1_12bfn"]
 [ext_resource type="Resource" uid="uid://cdyuoyhspyyg2" path="res://Piece/Effect/Effects/Sword/sword_data.tres" id="2_4ks46"]

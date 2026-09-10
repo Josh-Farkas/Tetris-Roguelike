@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Deck" load_steps=11 format=3 uid="uid://cygka3h6hdywe"]
+[gd_resource type="Resource" script_class="Deck" format=3 uid="uid://cygka3h6hdywe"]
 
 [ext_resource type="Script" uid="uid://d048r70b2jqmh" path="res://Piece/piece_data.gd" id="1_sbgp1"]
 [ext_resource type="Script" uid="uid://cct4guv1m3ivr" path="res://Piece/Cell/cell_data.gd" id="2_cvcno"]

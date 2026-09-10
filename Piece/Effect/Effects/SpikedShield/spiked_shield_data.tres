@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EffectData" format=3 uid="uid://d32duewgkq7k0"]
+
+[ext_resource type="Script" uid="uid://w1ha0kg4ujq5" path="res://Piece/Effect/Effects/SpikedShield/spiked_shield_effect.gd" id="1_dogo5"]
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_pu1k5"]
+
+[resource]
+script = ExtResource("1_pu1k5")
+name = &"Spiked Shield"
+description = "On Clear: Lose 3 health then gain 15 block"
+types = Array[int]([1, 0])
+effect_script = ExtResource("1_dogo5")
+metadata/_custom_type_script = "uid://bacar626wbev1"

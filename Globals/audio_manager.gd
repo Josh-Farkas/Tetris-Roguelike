@@ -22,10 +22,12 @@ func _play_music(music: AudioStream, volume: float = GameManager.settings.volume
 
 ## Play the music for combat.
 func play_level_music() -> void:
+	return
 	_play_music(level_music, GameManager.settings.music_volume)
 	
 ## Play the music for the shop.
 func play_shop_music() -> void:
+	return
 	_play_music(shop_music, GameManager.settings.music_volume)
 
 ## Plays the given sound [param sfx]. [param volume] is an offset from the default volume in dbs.

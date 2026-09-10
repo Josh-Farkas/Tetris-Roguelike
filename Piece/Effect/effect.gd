@@ -81,6 +81,7 @@ func on_adjacent_cell_cleared(direction: Vector2i) -> void:
 "spiked shield": "On Clear: Lose 3 health then gain 15 block",
 "dagger": "[u]When an adjacent cell is cleared[/u]: deals 3 damage",
 "target": "Your arrows deal +1 damage",
+
 "bomb": "On Clear: Destroys a 3x3 area, deals 3 self damage",
 "grenade": "On Clear: Deals 8 damage, deals 2 self damage",
 "landmine": "[u]When a cell is placed on top of this[/u]: Destroy it and this",

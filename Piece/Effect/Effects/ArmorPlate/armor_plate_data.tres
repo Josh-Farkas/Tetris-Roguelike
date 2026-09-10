@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://bo2qo0050hyvv"]
+
+[ext_resource type="Script" uid="uid://g6yecak20ajv" path="res://Piece/Effect/Effects/ArmorPlate/armor_plate_effect.gd" id="1_of6f4"]
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_rch7p"]
+
+[resource]
+script = ExtResource("1_rch7p")
+name = &"Armor Plate"
+description = "On Place: Gain 7 block\\nOn Clear: Lose 7 block"
+types = Array[int]([1])
+effect_script = ExtResource("1_of6f4")
+atlas_coords = Vector2i(3, 2)
+metadata/_custom_type_script = "uid://bacar626wbev1"

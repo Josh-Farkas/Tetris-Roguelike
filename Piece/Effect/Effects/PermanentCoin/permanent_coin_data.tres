@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EffectData" load_steps=3 format=3 uid="uid://pkfvdetatsrd"]
+
+[ext_resource type="Script" uid="uid://bacar626wbev1" path="res://Piece/Effect/effect_data.gd" id="1_40kpu"]
+[ext_resource type="Script" uid="uid://daw07mrr3aj2d" path="res://Piece/Effect/Effects/PermanentCoin/permanent_coin_effect.gd" id="1_gfj3j"]
+
+[resource]
+script = ExtResource("1_40kpu")
+name = &"Permanent Coin"
+description = "On Clear: Gain 1 Gold"
+types = Array[int]([7])
+fragile = true
+effect_script = ExtResource("1_gfj3j")
+atlas_coords = Vector2i(0, 2)
+metadata/_custom_type_script = "uid://bacar626wbev1"

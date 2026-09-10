@@ -35,6 +35,8 @@ var attacks: Dictionary[StringName, EnemyAttack]
 # Tilemap vars
 var attack_layer: TileMapLayer
 var base_layer: TileMapLayer
+var effect_layer: TileMapLayer
+
 	
 func _ready() -> void:
 	# Signals
@@ -54,6 +56,7 @@ func _ready() -> void:
 func _start_combat() -> void:
 	attack_layer = get_tree().get_first_node_in_group("attack_layer")
 	base_layer = get_tree().get_first_node_in_group("base_layer")
+	effect_layer = get_tree().get_first_node_in_group("effect_layer")
 
 ## Lowers [member health] by [param amount]. Dies if [member health] <= 0.
 func take_damage(amount: float) -> void:

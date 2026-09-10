@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_38ete")
 name = &"Sword"
-description = "On Place: Deal 2 damage"
+description = "On Clear: Deal 2 damage"
 types = Array[int]([0])
 fragile = null
 effect_script = ExtResource("1_w4uwo")
